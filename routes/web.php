@@ -27,26 +27,26 @@ Route::get('/getETA', 'getBusInfoController@getETA');
 Route::get('/updateLocation', 'getBusInfoController@updateLocation');
 
 
-Route::post('/Ian_updateLocation','UserController@Ian_updateLocation');
-Route::post('/calculateETATest','UserController@calculateETATest');
-Route::post('/calculateETA','UserController@calculateETA');
-Route::post('/viewETATable','UserController@viewETATable');
-Route::post('/convertBustoptoNearestPolyLine','UserController@convertBustoptoNearestPolyLine');
+Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
+Route::post('/calculateETATest','userController@calculateETATest');
+Route::post('/calculateETA','userController@calculateETA');
+Route::post('/viewETATable','userController@viewETATable');
+Route::post('/convertBustoptoNearestPolyLine','userController@convertBustoptoNearestPolyLine');
 Route::post('/getData','userController@getData');
-Route::post('/getKM','UserController@getKM');
-Route::post('/testgetKM','UserController@testgetKM');
-Route::post('/testCal','UserController@testCal');
-Route::post('/getBusRoute','UserController@getBusRoute');
-Route::post('/checkClosePointExist','UserController@checkClosePointExist');
-Route::post('/calculateETAWin','UserController@calculateETAWin');
-Route::post('/calculateHistoricDataAverage','UserController@calculateHistoricDataAverage');
+Route::post('/getKM','userController@getKM');
+Route::post('/testgetKM','userController@testgetKM');
+Route::post('/testCal','userController@testCal');
+Route::post('/getBusRoute','userController@getBusRoute');
+Route::post('/checkClosePointExist','userController@checkClosePointExist');
+Route::post('/calculateETAWin','userController@calculateETAWin');
+Route::post('/calculateHistoricDataAverage','userController@calculateHistoricDataAverage');
 
 
-Route::post('/calculateHistoricData','UserController@calculateHistoricData');
-Route::post('/ianTest','UserController@ianTest');
+Route::post('/calculateHistoricData','userController@calculateHistoricData');
+Route::post('/ianTest','userController@ianTest');
 
 
-Route::post('/pushCurrentData','UserController@pushCurrentData');
-Route::post('/getETA','UserController@getETA');
-Route::post('/getBusStopServices','UserController@getBusStopServices');
+Route::post('/pushCurrentData','userController@pushCurrentData');
+Route::post('/getETA','userController@getETA');
+Route::post('/getBusStopServices','userController@getBusStopServices');
 
