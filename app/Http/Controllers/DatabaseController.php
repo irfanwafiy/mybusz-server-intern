@@ -482,9 +482,8 @@ class DatabaseController
 		{
 			return null;
 		}
-		var_dump($data);
-		die();
-		return$data[0];
+		
+		return $data;
 	}
 	
 	public function getRouteID($bus_id)
