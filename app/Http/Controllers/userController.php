@@ -706,6 +706,7 @@ class userController extends Controller
                              $dist = rad2deg($dist);
                              $km = ($dist * 60 * 1.1515) * 1.609344;
                              print($dist);
+							 print($km);
 							 
                     }
                     
