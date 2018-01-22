@@ -13,7 +13,23 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+		'/Ian_updateLocation',
+		'/calculateETATest',
+		'/calculateETA',
 		'/viewETATable',
-		'/getData'
+		'/convertBustoptoNearestPolyLine',
+		'/getData',
+		'/getKM',
+		'/testgetKM',
+		'/testCal',
+		'/pushCurrentData',
+		'/getETA',
+		'/getBusStopServices',
+		'/getBusRoute',
+		'/checkClosePointExist',
+		'/calculateETAWin',
+		'/calculateHistoricDataAverage',
+		'/calculateHistoricData',
+		'/ianTest'
     ];
 }
