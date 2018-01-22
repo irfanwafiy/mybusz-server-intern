@@ -32,7 +32,7 @@ Route::post('/calculateETATest','UserController@calculateETATest');
 Route::post('/calculateETA','UserController@calculateETA');
 Route::post('/viewETATable','UserController@viewETATable');
 Route::post('/convertBustoptoNearestPolyLine','UserController@convertBustoptoNearestPolyLine');
-Route::post('/getData','UserController@getData');
+Route::post('/getData','userController@getData');
 Route::post('/getKM','UserController@getKM');
 Route::post('/testgetKM','UserController@testgetKM');
 Route::post('/testCal','UserController@testCal');
