@@ -6,11 +6,11 @@ $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 	$password = 'Skyrelia07';
 	$database = 'mybusz'; */
 	
-	 $url = 'mysql://b403f2059e68af:32d50d7f@us-cdbr-iron-east-05.cleardb.net/heroku_18e38c8c3c682ae?reconnect=true';
+	 $url = 'mysql://b21fb22053657c:b5826f74@us-cdbr-iron-east-05.cleardb.net/heroku_b44dfea05dd9713?reconnect=true';
 	$host = 'us-cdbr-iron-east-05.cleardb.net';
-	$username = 'b403f2059e68af';
-	$password = '32d50d7f';
-	$database = 'heroku_18e38c8c3c682ae';
+	$username = 'b21fb22053657c';
+	$password = '20b247592fb7e55';
+	$database = 'heroku_b44dfea05dd9713';
 	
 
 return [
