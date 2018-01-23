@@ -352,7 +352,7 @@ class userController extends Controller
                                                                     $continue =1;
                                                                     $uploadedlocation = -1;
                                                                     $caltotaldistance = 0;
-                                                                    var_dump($distances)
+                                                                    var_dump($distances);
                                                                     if(array_values($distances)[0] < 0.06) 
                                                                     {
 																		var_dump("success");
