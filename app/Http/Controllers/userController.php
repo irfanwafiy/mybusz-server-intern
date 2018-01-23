@@ -257,8 +257,7 @@ class userController extends Controller
                                                                                                                                                             if ($counter < 4)
                                                                                                                                                             {
 																																									
-																																									 $caltotaldistance = $caltotaldistance_old + (float)$busstopKM[$a];
-                                                                                                                                                                     $caltotaldistance = $test;
+																																									 $caltotaldistance = $caltotaldistance + (float)$busstopKM[$a];
 																																									 $hi = $a+$routeID+1;
                                                                                                                                                                      $time = $caltotaldistance / $speed;
                                                                                                                                                                      $time = $time * 3600;
