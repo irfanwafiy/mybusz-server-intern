@@ -343,7 +343,7 @@ class userController extends Controller
                                                  $data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
                                                  
                                                 // print_r($data);
-                                                  
+                                                  var_dump($data);
                                                  if (!empty($data))
                                                  {
                                                           if($data->flag == 0 && $data->bus_service_no > 0)
@@ -751,7 +751,7 @@ class userController extends Controller
                              while (!feof($myfile) ) 
                              {
                                        $data = fgets($myfile);
-                                       var_dump($data);
+                                       
                                        if (!empty($data))
                                        {
                                                  array_push($busstop,$data);
