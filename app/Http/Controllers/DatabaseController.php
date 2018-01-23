@@ -90,7 +90,7 @@ class DatabaseController
 		$routeno = 1;
 		$time = '2015-09-06 15:33:53'; */
 		
-		$currTime = date('Y/m/d h:i:s', time());
+		$currTime = self::getTime();
 		$speed = 0;
 		
 		$getLastRecord_subQuery = DB::table('bus_route as br')

@@ -352,9 +352,10 @@ class userController extends Controller
                                                                     $continue =1;
                                                                     $uploadedlocation = -1;
                                                                     $caltotaldistance = 0;
-                                                                    
+                                                                    var_dump($distances)
                                                                     if(array_values($distances)[0] < 0.06) 
                                                                     {
+																		var_dump("success");
                                                                               for ($i=0; $i<sizeof($busroutecoords); $i++)
                                                                               {
                                                                                
@@ -391,7 +392,7 @@ class userController extends Controller
                                                                                                                      
                                                                                                                      for ($a = $x; $a<sizeof($busstopKM); $a++)
                                                                                                                      {
-                                                                                                                              $caltotaldistance = $caltotaldistance+ $busstopKM[$a];
+                                                                                                                              $caltotaldistance = $caltotaldistance+ (float)$busstopKM[$a];
                                                                                                                               $hi = $a+$routeID+1;
                                                                                                                               $time = $caltotaldistance / $speed;
                                                                                                                               $time = $time * 3600;
