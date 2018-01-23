@@ -793,7 +793,7 @@ class userController extends Controller
                                                           $furthestLatLongID =$j;
                                                  }
                                        }
-                                       var_dump($furthestLatLongID)
+                                       var_dump($furthestLatLongID);
 									   die();
                                        return $a[$furthestLatLongID];
                              }
