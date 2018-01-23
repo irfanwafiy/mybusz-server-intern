@@ -142,7 +142,7 @@ class userController extends Controller
 
 	public function calculateETATest()
 	{
-		//date_default_timezone_set('Asia/Singapore'); // CDT
+		
 		$getDatabaseClass = self::getDatabaseClass();
 		$totalbus = $getDatabaseClass->getTotalBus();
 		
@@ -158,7 +158,7 @@ class userController extends Controller
 				
 				if(!empty($data))
 				{
-					//var_dump($data);
+					
 					$filecontent = file_get_contents('../data/'.$data->bus_service_no.'.json');
 					$json1 = json_decode($filecontent, true);
 					$busroutecoords = $json1[$routeNo[$g]]['route'];
@@ -192,12 +192,12 @@ class userController extends Controller
                                                                                                            asort($distances); 
                                                                                                            
                                                                                                            
-                                                                                                           //print("aaaaa \t".sizeof($busroutecoords));
+                                                                                                           
                                                                                                            for ($i=0; $i<sizeof($busroutecoords); $i++)
                                                                                                            {
                                                                                                                     if (trim($busroutecoords[key($distances)]) == trim($busroutecoords[$i]))
                                                                                                                     {
-                                                                                                                               //print("aaa");
+                                                                                                                               
                                                                                                                                $uploadedlocation = $i;
                                                                                                                     }
                                                                                                            }
@@ -218,9 +218,7 @@ class userController extends Controller
                                                                                                                                         if(trim($busstop[$x])==trim($busroutecoords[$z]))
                                                                                                                                         {
                                                                                                                                                   $continue = 0;
-                                                                                                                                                 // print("***BUS STOP ID***:" .$x. "\r\n");
-                                                                                                                                                  //print("***total distance***:" .$caltotaldistance. "\r\n");
-                                                                                                                                                  
+                                                                                                                                                 
                                                                                                                                                   if ($speed == -2) 
                                                                                                                                                   {
                                                                                                                                                             break;
@@ -239,7 +237,6 @@ class userController extends Controller
                                                                                                                                                             
                                                                                                                                                             $time = date("Y-m-d H:i:s", $time +strtotime("-15 seconds"));
                                                                                                                                                             $hi1=$x+$routeID;
-                                                                                                                                                            //var_dump("uploadETAV2_1");
                                                                                                                                                             $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                   }
                                                                                                                                                   
@@ -258,7 +255,6 @@ class userController extends Controller
                                                                                                                                                                      $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
-                                                                                                                                                                     //var_dump("uploadETAV2_2");
                                                                                                                                                                      $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi,$ETA,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                             }
                                                                                                                                                             
@@ -289,12 +285,12 @@ class userController extends Controller
                                                                                                                               $time = $time * 3600;
                                                                                                                               $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                               $hi1=$routeID+sizeof($busstopKM);
-                                                                                                                              //var_dump("uploadETAV2_3");
+                                                                                                                              
                                                                                                                               $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      }
                                                                                                            }
                                                                                                  }
-                                                                                                 //var_dump("updateFlagV2");
+                                                                                                 
                                                                                                  $getDatabaseClass->updateFlagV2(1,$data->bus_id,$data->route_id,$data->time);
 				}
 				
@@ -786,7 +782,8 @@ class userController extends Controller
                                        for ($j=0; $j < sizeof($a); $j++)
                                        {
                                                  $g = array_search(trim($a[$j]->latitude.",".$a[$j]->longitude),$busroutecoords);
-                                                var_dump(trim($a[$j]->latitude.",".$a[$j]->longitude));
+                                                var_dump("Heloooooooooo");
+												var_dump(trim($a[$j]->latitude.",".$a[$j]->longitude));
 var_dump($busroutecoords);
 var_dump($g);
                                                  if($furthestID < $g)
