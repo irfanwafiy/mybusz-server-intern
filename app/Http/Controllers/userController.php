@@ -307,6 +307,24 @@ class userController extends Controller
 			}
 		}
 	}
+					public function getETA_schedule(Request $request)
+					{
+						$bus_id = $request->input('bus_id');
+						$getETAschedule_Query = DB::table('eta')
+											->where('bus_id',$bus)
+                                                                            ->get();
+                             
+                             $i = 0;
+                             
+                             foreach($viewETATable_Query as $singleset)
+                             {
+                                       
+									   print_r("Bus ID : ".$singleset->bus_id." Bus Stop ID : ".$singleset->bus_stop_id." ETA : ".$singleset->eta."\n");
+                                       $i++;
+                             }
+                             
+                             print("Total Records : ".$i);
+					}
                     public function calculateETA()
                     {
                              //date_default_timezone_set('Asia/Singapore');

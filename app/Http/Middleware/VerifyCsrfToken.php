@@ -30,6 +30,7 @@ class VerifyCsrfToken extends Middleware
 		'/calculateETAWin',
 		'/calculateHistoricDataAverage',
 		'/calculateHistoricData',
-		'/ianTest'
+		'/ianTest',
+		'/getETA_schedule'
     ];
 }
