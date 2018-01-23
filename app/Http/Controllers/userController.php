@@ -259,7 +259,7 @@ class userController extends Controller
 																																									
 																																									 $caltotaldistance_old = $caltotaldistance;
                                                                                                                                                                      var_dump($caltotaldistance_old);
-																																									 var_dump($busstopKM[$a]);
+																																									 var_dump($busstopKM);
 																																									 $test = $caltotaldistance_old + $busstopKM[$a];
 																																									 //$caltotaldistance = $caltotaldistance_old + $busstopKM[$a];
                                                                                                                                                                      $caltotaldistance = $test;
