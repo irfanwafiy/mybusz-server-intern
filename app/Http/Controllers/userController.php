@@ -786,19 +786,18 @@ class userController extends Controller
                                        for ($j=0; $j < sizeof($a); $j++)
                                        {
                                                  $g = array_search(trim($a[$j]->latitude.",".$a[$j]->longitude),$busroutecoords);
-                                                
+                                                var_dump(trim($a[$j]->latitude.",".$a[$j]->longitude);
+var_dump($busroutecoords);
+var_dump($g);
                                                  if($furthestID < $g)
                                                  {
                                                           $furthestID = $g;
                                                           $furthestLatLongID =$j;
                                                  var_dump($furthestID);
 												 }
-												  var_dump($g);
-												  var_dump($furthestID);
-												  die();
+												 
                                        }
-                                       var_dump($furthestLatLongID);
-									   die();
+                                       
                                        return $a[$furthestLatLongID];
                              }
 							 
