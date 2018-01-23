@@ -158,7 +158,7 @@ class userController extends Controller
 				
 				if(!empty($data))
 				{
-					var_dump($data);
+					//var_dump($data);
 					$filecontent = file_get_contents('../data/'.$data->bus_service_no.'.json');
 					$json1 = json_decode($filecontent, true);
 					$busroutecoords = $json1[$routeNo[$g]]['route'];
@@ -239,7 +239,7 @@ class userController extends Controller
                                                                                                                                                             
                                                                                                                                                             $time = date("Y-m-d H:i:s", $time +strtotime("-15 seconds"));
                                                                                                                                                             $hi1=$x+$routeID;
-                                                                                                                                                            var_dump("uploadETAV2_1");
+                                                                                                                                                            //var_dump("uploadETAV2_1");
                                                                                                                                                             $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                   }
                                                                                                                                                   
@@ -258,7 +258,7 @@ class userController extends Controller
                                                                                                                                                                      $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
-                                                                                                                                                                     var_dump("uploadETAV2_2");
+                                                                                                                                                                     //var_dump("uploadETAV2_2");
                                                                                                                                                                      $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi,$ETA,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                             }
                                                                                                                                                             
@@ -289,12 +289,12 @@ class userController extends Controller
                                                                                                                               $time = $time * 3600;
                                                                                                                               $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                               $hi1=$routeID+sizeof($busstopKM);
-                                                                                                                              var_dump("uploadETAV2_3");
+                                                                                                                              //var_dump("uploadETAV2_3");
                                                                                                                               $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      }
                                                                                                            }
                                                                                                  }
-                                                                                                 var_dump("updateFlagV2");
+                                                                                                 //var_dump("updateFlagV2");
                                                                                                  $getDatabaseClass->updateFlagV2(1,$data->bus_id,$data->route_id,$data->time);
 				}
 				
