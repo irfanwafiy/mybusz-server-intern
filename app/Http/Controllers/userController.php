@@ -316,7 +316,7 @@ class userController extends Controller
                              
                              $i = 0;
                              
-                             foreach($viewETATable_Query as $singleset)
+                             foreach($getETAschedule_Query as $singleset)
                              {
                                        
 									   print_r("Bus ID : ".$singleset->bus_id." Bus Stop ID : ".$singleset->bus_stop_id." ETA : ".$singleset->eta."\n");
