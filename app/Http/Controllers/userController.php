@@ -319,7 +319,7 @@ class userController extends Controller
                                                //  print(sizeof($routeNo));
                                                  $data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
                                                  
-                                                 print_r($data);
+                                                // print_r($data);
                                                   
                                                  if (!empty($data))
                                                  {
