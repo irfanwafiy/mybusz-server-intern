@@ -311,7 +311,7 @@ class userController extends Controller
 					{
 						$bus_id = $request->input('bus_id');
 						$getETAschedule_Query = DB::table('eta')
-											->where('bus_id',$bus)
+											->where('bus_id',$bus_id)
                                                                             ->get();
                              
                              $i = 0;
