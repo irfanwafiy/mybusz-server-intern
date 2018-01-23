@@ -747,11 +747,11 @@ class userController extends Controller
                              {
                                        $myfile = fopen("../data/busstopPolylinePositions/".$routeno." to KM.txt", "r") or die("Unable to open file!");
                              }
-                             var_dump($myfile);
+                             
                              while (!feof($myfile) ) 
                              {
                                        $data = fgets($myfile);
-                                       
+                                       var_dump($data);
                                        if (!empty($data))
                                        {
                                                  array_push($busstop,$data);
