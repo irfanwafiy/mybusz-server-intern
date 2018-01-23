@@ -192,12 +192,12 @@ class userController extends Controller
                                                                                                            asort($distances); 
                                                                                                            
                                                                                                            
-                                                                                                           print("aaaaa \t".sizeof($busroutecoords));
+                                                                                                           //print("aaaaa \t".sizeof($busroutecoords));
                                                                                                            for ($i=0; $i<sizeof($busroutecoords); $i++)
                                                                                                            {
                                                                                                                     if (trim($busroutecoords[key($distances)]) == trim($busroutecoords[$i]))
                                                                                                                     {
-                                                                                                                               print("aaa");
+                                                                                                                               //print("aaa");
                                                                                                                                $uploadedlocation = $i;
                                                                                                                     }
                                                                                                            }
@@ -218,8 +218,8 @@ class userController extends Controller
                                                                                                                                         if(trim($busstop[$x])==trim($busroutecoords[$z]))
                                                                                                                                         {
                                                                                                                                                   $continue = 0;
-                                                                                                                                                  print("***BUS STOP ID***:" .$x. "\r\n");
-                                                                                                                                                  print("***total distance***:" .$caltotaldistance. "\r\n");
+                                                                                                                                                 // print("***BUS STOP ID***:" .$x. "\r\n");
+                                                                                                                                                  //print("***total distance***:" .$caltotaldistance. "\r\n");
                                                                                                                                                   
                                                                                                                                                   if ($speed == -2) 
                                                                                                                                                   {
@@ -316,7 +316,7 @@ class userController extends Controller
                                        for ($g = 0;  $g <sizeof($routeNo); $g++)
                                        {
                                                  $routeID = $getDatabaseClass->getFirstBusstopIDFromRoute($totalbus[$q],$routeNo[$g]);
-                                                 print(sizeof($routeNo));
+                                               //  print(sizeof($routeNo));
                                                  $data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
                                                  
                                                  print_r($data);
