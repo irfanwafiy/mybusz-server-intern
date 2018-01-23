@@ -782,12 +782,12 @@ class userController extends Controller
                                        $busroutecoords = $json1[$a[0]->route_id]['route'];
                                        $furthestID = -1;
                                        $furthestLatLongID;
-                                       var_dump($a);
-									   die();
+                                       
                                        for ($j=0; $j < sizeof($a); $j++)
                                        {
                                                  $g = array_search(trim($a[$j]->latitude.",".$a[$j]->longitude),$busroutecoords);
-                                                 
+                                                 var_dump($g);
+									   die();
                                                  if($furthestID < $g)
                                                  {
                                                           $furthestID = $g;
