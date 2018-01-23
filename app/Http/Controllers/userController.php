@@ -797,7 +797,8 @@ var_dump($g);
 												 }
 												 
                                        }
-                                       
+                                       var_dump($a[$furthestLatLongID]);
+									   die();
                                        return $a[$furthestLatLongID];
                              }
 							 
