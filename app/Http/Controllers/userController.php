@@ -258,8 +258,12 @@ class userController extends Controller
                                                                                                                                                             {
 																																									
 																																									 $caltotaldistance_old = $caltotaldistance;
-                                                                                                                                                                     $caltotaldistance = $caltotaldistance_old + $busstopKM[$a];
-                                                                                                                                                                     $hi = $a+$routeID+1;
+                                                                                                                                                                     var_dump($caltotaldistance_old);
+																																									 var_dump($busstopKM[$a]);
+																																									 $test = $caltotaldistance_old + $busstopKM[$a];
+																																									 //$caltotaldistance = $caltotaldistance_old + $busstopKM[$a];
+                                                                                                                                                                     $caltotaldistance = $test;
+																																									 $hi = $a+$routeID+1;
                                                                                                                                                                      $time = $caltotaldistance / $speed;
                                                                                                                                                                      $time = $time * 3600;
                                                                                                                                                                      $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
