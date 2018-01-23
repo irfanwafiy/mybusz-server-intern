@@ -140,8 +140,16 @@ class userController extends Controller
 		}
 	}
 
-	public function calculateETATest()
+	public function calculateETATest(Request $request)
 	{
+		if(($request->input('pi_speed')) != null)
+		{
+			$pi_speed = $request->input('pi_speed');
+		}
+		else
+		{
+			$pi_speed = -1;
+		}
 		
 		$getDatabaseClass = self::getDatabaseClass();
 		$totalbus = $getDatabaseClass->getTotalBus();
@@ -174,7 +182,7 @@ class userController extends Controller
                                                                                                  {
                                                                                                            $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
-                                                                                                           $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
+                                                                                                           $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data, $pi_speed);
                                                                                                            
                                                                                                            $totaldistance = array();
                                                                                                            
@@ -782,20 +790,16 @@ class userController extends Controller
                                        for ($j=0; $j < sizeof($a); $j++)
                                        {
                                                  $g = array_search(trim($a[$j]->latitude.",".$a[$j]->longitude),$busroutecoords);
-                                                var_dump("Heloooooooooo");
-												var_dump(trim($a[$j]->latitude.",".$a[$j]->longitude));
-var_dump($busroutecoords);
-var_dump($g);
+                                               
                                                  if($furthestID < $g)
                                                  {
                                                           $furthestID = $g;
                                                           $furthestLatLongID =$j;
-                                                 var_dump($furthestID);
+                                                 
 												 }
 												 
                                        }
-                                       var_dump($a[$furthestLatLongID]);
-									   die();
+                                       
                                        return $a[$furthestLatLongID];
                              }
 							 
@@ -1187,9 +1191,16 @@ var_dump($g);
                              }
                     }
                     
-                    public function calculateAverageSpeed($serviceno, $routeno, $location_data)
+                    public function calculateAverageSpeed($serviceno, $routeno, $location_data,$pi_speed)
                     {
 						
+							
+							if($pi_speed > 0)
+							{
+
+								$avgSpeed = $pi_speed;
+								return $avgSpeed;
+							}
 							
                             $point1 = array($location_data[0]->latitude, $location_data[0]->longitude);
                             $lastPos = end($location_data);
@@ -1207,9 +1218,7 @@ var_dump($g);
                             $distance = self::Ian_distancebetweenpointsonroute($serviceno, $routeno,$point1,$point2);
                             
                             $timediff = strtotime($lastPos->time) - strtotime($location_data[0]->time);
-                            var_dump($location_data);
-							var_dump($timediff);
-							var_dump($lastPos);
+                            
 							
                             if ($timediff < 240 && $lastPos->speed <= 5) 
                              {
@@ -1257,9 +1266,9 @@ var_dump($g);
                              if ($timediff > 120 && $location_data[0]->speed >= 4) 
                              {
                                        print("NORMAL OPERATION_1 \r\n");
-									   var_dump($distance);
+									   
                                        $avgSpeed = $distance / ($timediff / 3600);	
-									   var_dump($avgSpeed);
+									  
 							 }
                              
                              else if ($timediff > 120 && $location_data[$half_size]->speed >= 4) 
