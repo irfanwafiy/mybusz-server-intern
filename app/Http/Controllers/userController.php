@@ -580,6 +580,7 @@ class userController extends Controller
 							 {
                              print($speed."\n");
                              print("insert success \n");
+							 $newlocation = explode(',',$newlocation);
 							 print($newlocation);
                              $insertlocation_datav2_Query = DB::table('location_datav2')
                                                                                         ->insert([
