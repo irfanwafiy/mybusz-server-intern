@@ -42,6 +42,9 @@ class DatabaseController
 								'time'=>$time]);
 	
 	}
+	
+	
+	
 	public function uploadETA($bus_id,$route_id,$bus_stop_id,$eta,$time,$avgspeed)
 	//tested
 	//public function uploadETA(Request $request)

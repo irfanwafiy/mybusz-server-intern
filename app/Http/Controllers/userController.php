@@ -142,14 +142,7 @@ class userController extends Controller
 
 	public function calculateETATest(Request $request)
 	{
-		if(($request->input('pi_speed')) != null)
-		{
-			$pi_speed = $request->input('pi_speed');
-		}
-		else
-		{
-			$pi_speed = -1;
-		}
+		
 		
 		$getDatabaseClass = self::getDatabaseClass();
 		$totalbus = $getDatabaseClass->getTotalBus();
@@ -182,7 +175,7 @@ class userController extends Controller
                                                                                                  {
                                                                                                            $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
-                                                                                                           $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data, $pi_speed);
+                                                                                                           $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
                                                                                                            
                                                                                                            $totaldistance = array();
                                                                                                            
@@ -309,9 +302,16 @@ class userController extends Controller
 	}
 					public function getETA_schedule(Request $request)
 					{
+						$getDatabaseClass = self::getDatabaseClass();
 						$bus_id = $request->input('bus_id');
+						$route_id = $request->input('route_id');
+						$bus_stop_id = $request->input('bus_stop_id');
+						$currtime = $getDatabaseClass->getTime();
 						$getETAschedule_Query = DB::table('eta')
 											->where('bus_id',$bus_id)
+											->where('route_id',$route_id)
+											->where('bus_stop_id',$bus_stop_id)
+											->where('eta', '>', $currtime)
                                                                             ->get();
                              
                              $i = 0;
@@ -560,6 +560,53 @@ class userController extends Controller
                                                                                                  'time' => $time
                                                                                         ]);
                              
+                             
+                    }
+                    
+					public function simulator_insertlocation(Request $request)
+                    {
+                             $bus_id = $request->input('bus_id');
+                             $route_id = $request->input('route_id');
+                             $imei = $request->input('imei');
+                             $latlong = explode(',', $request->input('latlong'));
+                             $speed = $request->input('speed');
+							 $time = $request->input('date');
+							 $getDatabaseClass = self::getDatabaseClass();
+		
+							 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+                             $busradius = self::setRadius()['busradius'];
+							 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
+							 if($newlocation != null)
+							 {
+                             print($speed."\n");
+                             print("insert success \n");
+							 print($newlocation);
+                             $insertlocation_datav2_Query = DB::table('location_datav2')
+                                                                                        ->insert([
+                                                                                                 'bus_id' => $bus_id,
+                                                                                                 'route_id' => $route_id,
+                                                                                                 'imei' => $imei,
+                                                                                                 'latitude' => $newlocation[0],
+                                                                                                 'longitude' => $newlocation[1] ,
+                                                                                                 'speed' => $speed ,
+                                                                                                 'time' => $time
+                                                                                        ]);
+                             
+                             $insertlocation_datav_Query = DB::table('location_data')
+                                                                                        ->insert([
+                                                                                                 'bus_id' => $bus_id,
+                                                                                                 'route_id' => $route_id,
+                                                                                                 'imei' => $imei,
+                                                                                                 'latitude' => $newlocation[0],
+                                                                                                 'longitude' => $newlocation[1] ,
+                                                                                                 'speed' => $speed ,
+                                                                                                 'time' => $time
+                                                                                        ]);
+                             }
+							 else
+							 {
+								 print("Too far from route");
+							 }
                              
                     }
                     
@@ -1211,16 +1258,10 @@ class userController extends Controller
                              }
                     }
                     
-                    public function calculateAverageSpeed($serviceno, $routeno, $location_data,$pi_speed)
+                    public function calculateAverageSpeed($serviceno, $routeno, $location_data)
                     {
 						
 							
-							if($pi_speed > 0)
-							{
-
-								$avgSpeed = $pi_speed;
-								return $avgSpeed;
-							}
 							
                             $point1 = array($location_data[0]->latitude, $location_data[0]->longitude);
                             $lastPos = end($location_data);
