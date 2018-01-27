@@ -31,6 +31,7 @@ class VerifyCsrfToken extends Middleware
 		'/calculateHistoricDataAverage',
 		'/calculateHistoricData',
 		'/ianTest',
-		'/getETA_schedule'
+		'/getETA_schedule',
+		'/simulator_insertlocation'
     ];
 }
