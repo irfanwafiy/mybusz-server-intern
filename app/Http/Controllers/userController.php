@@ -581,7 +581,7 @@ class userController extends Controller
                              print($speed."\n");
                              print("insert success \n");
 							 $newlocation = explode(',',$newlocation);
-							 print($newlocation);
+							 print($newlocation[0].",".$newlocation[1]);
                              $insertlocation_datav2_Query = DB::table('location_datav2')
                                                                                         ->insert([
                                                                                                  'bus_id' => $bus_id,
