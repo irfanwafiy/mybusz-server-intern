@@ -14,9 +14,8 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['namespace' => 'API', 'middleware' => 'cors'], function () {
-	
-	Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
+
+Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
 Route::post('/calculateETATest','userController@calculateETATest');
 Route::post('/calculateETA','userController@calculateETA');
 Route::post('/viewETATable','userController@viewETATable');
@@ -40,4 +39,4 @@ Route::post('/simulator_insertlocation','userController@simulator_insertlocation
 Route::post('/pushCurrentData','userController@pushCurrentData');
 Route::post('/getETA','userController@getETA');
 Route::post('/getBusStopServices','userController@getBusStopServices');
-});
+
