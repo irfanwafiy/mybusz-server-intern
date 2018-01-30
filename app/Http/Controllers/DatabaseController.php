@@ -471,7 +471,7 @@ class DatabaseController
 										->limit(1)
 										->get();
 		
-		print($getBusIDByBeacon_Query[0]);
+		print($getBusIDByBeacon_Query[0]->bus_id);
 		return $getBusIDByBeacon_Query;
 	}
 	
