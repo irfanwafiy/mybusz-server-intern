@@ -471,8 +471,14 @@ class DatabaseController
 										->limit(1)
 										->first();
 		
-		
-		return $getBusIDByBeacon_Query->bus_id;
+		if($getBusIDByBeacon_Query != null)
+		{
+			return $getBusIDByBeacon_Query->bus_id;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 	public function getBusServiceNo($route_id,$bus_id)
