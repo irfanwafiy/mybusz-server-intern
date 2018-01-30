@@ -715,7 +715,7 @@ class userController extends Controller
 								 print("no route found");
 							 }
 							 
-							 print($bus_service_no." of route : ".route_id."detected"." at : ".$time);
+							 print($bus_service_no." of route : ".$route_id."detected"." at : ".$time);
 						}
 						else
 						{
