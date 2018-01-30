@@ -531,9 +531,9 @@ class userController extends Controller
 								'newlocation' => $result
 								];
 								
-								$dataset_pi_getBusRouteNo_newlocation->push($dataset_singleset);
+								//$dataset_pi_getBusRouteNo_newlocation->push($dataset_singleset);
 							
-								return $dataset_pi_getBusRouteNo_newlocation;
+								return $dataset_singleset;
 							}
 						}
 						
