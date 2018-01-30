@@ -667,9 +667,9 @@ class userController extends Controller
 							 
 							 if($getpi_getBusRouteNo_newlocation != null)
 							 {
-								 $route_id = $getpi_getBusRouteNo_newlocation->'route_id';
+								 $route_id = $getpi_getBusRouteNo_newlocation->route_id;
 								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-								 $newlocation = $getpi_getBusRouteNo_newlocation->'newlocation';
+								 $newlocation = $getpi_getBusRouteNo_newlocation->newlocation;
 								 $newlocation = explode(',',$newlocation);
                              print("insert success \n");
 							 
