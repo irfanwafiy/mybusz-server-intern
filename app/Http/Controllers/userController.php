@@ -654,8 +654,8 @@ class userController extends Controller
 							 $bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
 							 $routeID = $getDatabaseClass->getRouteID($bus_id);
 							 $getlatlong = $getDatabaseClass->getlatlongByPi($pi_id);
-							 $lat = $getlatlong->'latitude';
-							 $long = $getlatlong->'longitude';
+							 $lat = $getlatlong->latitude;
+							 $long = $getlatlong->longitude;
 							 $latlong = $lat.','.$long;
 							 $getpi_getBusRouteNo_newlocation = self::pi_getBusRouteNo_newlocation($bus_id,$routeID,$latlong);
 							 $speed = 10.0;
