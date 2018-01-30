@@ -708,7 +708,7 @@ class userController extends Controller
 						}
 						else
 						{
-							print("No Bus Found")
+							print("No Bus Found");
 						}
                              
                     }
