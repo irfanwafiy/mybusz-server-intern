@@ -649,9 +649,18 @@ class userController extends Controller
                     
 					public function pi_insertlocation(Request $request)
                     {
+						
 						$beacon_mac = $request->input('beacon_mac');
 						$getDatabaseClass = self::getDatabaseClass();
-						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+						
+						if($beacon_mac != null)
+						{
+							$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+						}
+						else
+						{
+							$bus_id = null;
+						}
 						
 						if($bus_id != null)
 						{
