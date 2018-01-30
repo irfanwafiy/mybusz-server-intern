@@ -519,7 +519,7 @@ class userController extends Controller
 						foreach($routeID as $route_id)
 						{
 							$busserviceno = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-							var_dump("Bus no".$busserviceno);
+							var_dump("Radius ".$radius);
 							var_dump("Route : ".$route_id);
 							var_dump("LatLong : ".$point);
 							$result = self::Ian_closepointonroute($busserviceno,$route_id,$point,$radius);
