@@ -708,7 +708,7 @@ class userController extends Controller
 						$getDatabaseClass = self::getDatabaseClass();
 						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
 						
-						return response()->json_encode($bus_id);
+						return response()->json($bus_id);
 					}
 					
                     public function convertBustoptoNearestPolyLine(Request $request)
