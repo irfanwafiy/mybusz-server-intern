@@ -511,6 +511,34 @@ class userController extends Controller
                              }
                     }
                     
+					public function pi_getBusRouteNo_newlocation($bus_id,$routeID,$point)
+					{
+						$dataset_pi_getBusRouteNo_newlocation = new Collection;
+						$radius = self::setRadius()['busradius'];
+						$getDatabaseClass = self::getDatabaseClass();
+						foreach($routeID as $route_id)
+						{
+							$busserviceno = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+							$result = self::Ian_closepointonroute($busserviceno,$route_id,$point,$radius)
+							
+
+							
+							if($result !=null)
+							{
+									$dataset_singleset = [
+								'route_id' => $route_id,
+								'newlocation' => $result
+								];
+								
+								$dataset_pi_getBusRouteNo_newlocation->push($dataset_singleset);
+							
+								return $dataset_pi_getBusRouteNo_newlocation;
+							}
+						}
+						
+						return null;
+					}
+					
                     public function viewETATable()
                     {
                              $viewETATable_Query = DB::table('eta')
@@ -563,7 +591,7 @@ class userController extends Controller
                              
                     }
                     
-					public function simulator_insertlocation(Request $request)
+					public function bus_insertlocation(Request $request)
                     {
                              $bus_id = $request->input('bus_id');
                              $route_id = $request->input('route_id');
@@ -572,13 +600,20 @@ class userController extends Controller
                              $speed = $request->input('speed');
 							 $time = $request->input('date');
 							 $getDatabaseClass = self::getDatabaseClass();
+							 //if use simulator
+							 if($time == null)
+							 {
+								$time = $getDatabaseClass->getTime();
+							 }
+							 
+							 
 		
 							 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
                              $busradius = self::setRadius()['busradius'];
 							 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
 							 if($newlocation != null)
 							 {
-                             print($speed."\n");
+                             print($speed.'\n');
                              print("insert success \n");
 							 $newlocation = explode(',',$newlocation);
 							 print($newlocation[0].",".$newlocation[1]);
@@ -588,7 +623,7 @@ class userController extends Controller
                                                                                                  'route_id' => $route_id,
                                                                                                  'imei' => $imei,
                                                                                                  'latitude' => $newlocation[0],
-                                                                                                 'longitude' => $newlocation[1] ,
+                                                                                                 'longitude' => $newlocation[1],
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
@@ -599,7 +634,7 @@ class userController extends Controller
                                                                                                  'route_id' => $route_id,
                                                                                                  'imei' => $imei,
                                                                                                  'latitude' => $newlocation[0],
-                                                                                                 'longitude' => $newlocation[1] ,
+                                                                                                 'longitude' => $newlocation[1],
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
@@ -611,6 +646,78 @@ class userController extends Controller
                              
                     }
                     
+					public function pi_insertlocation(Request $request)
+                    {
+                             $beacon_mac = $request->input('beacon_mac');
+                             $pi_id = $request->input('pi_id');
+							 $getDatabaseClass = self::getDatabaseClass();
+							 $bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+							 $routeID = $getDatabaseClass->getRouteID($bus_id);
+							 $getlatlong = $getDatabaseClass->getlatlongByPi($pi_id);
+							 $lat = $getlatlong->'latitude';
+							 $long = $getlatlong->'longitude';
+							 $latlong = $lat.','.$long;
+							 $getpi_getBusRouteNo_newlocation = self::pi_getBusRouteNo_newlocation($bus_id,$routeID,$latlong);
+							 $speed = 10.0;
+							 $time = $getDatabaseClass->getTime();
+							 
+							 
+							 
+		
+							 
+							 if($getpi_getBusRouteNo_newlocation != null)
+							 {
+								 $route_id = $getpi_getBusRouteNo_newlocation->'route_id';
+								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+								 $newlocation = $getpi_getBusRouteNo_newlocation->'newlocation';
+								 $newlocation = explode(',',$newlocation);
+                             print("insert success \n");
+							 
+                             $insertlocation_datav2_Query = DB::table('location_datav2')
+                                                                                        ->insert([
+                                                                                                 'bus_id' => $bus_id,
+                                                                                                 'route_id' => $route_id,
+                                                                                                 'imei' => $beacon_mac,
+                                                                                                 'latitude' => $newlocation[0],
+                                                                                                 'longitude' => $newlocation[1],
+                                                                                                 'speed' => $speed ,
+                                                                                                 'time' => $time
+                                                                                        ]);
+                             
+                             $insertlocation_datav_Query = DB::table('location_data')
+                                                                                        ->insert([
+                                                                                                 'bus_id' => $bus_id,
+                                                                                                 'route_id' => $route_id,
+                                                                                                 'imei' => $beacon_mac,
+                                                                                                 'latitude' => $newlocation[0],
+                                                                                                 'longitude' => $newlocation[1],
+                                                                                                 'speed' => $speed ,
+                                                                                                 'time' => $time
+                                                                                        ]);
+                             }
+							 else
+							 {
+								 print("no route found");
+							 }
+                             
+                    }
+                    
+					public function checkBeaconRegistered(Request $request)
+					{
+						$beacon_mac = $request->input('beacon_mac');
+						$getDatabaseClass = self::getDatabaseClass();
+						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+						
+						if($bus_id != null)
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+					
                     public function convertBustoptoNearestPolyLine(Request $request)
                     {
                              $routeno = $request->input('routeno');
@@ -916,7 +1023,7 @@ class userController extends Controller
                              
                              return $nearestBusStopID + $routeID.",".$userPosition;
                     }
-                    
+                    /*
                     public function pushCurrentData(Request $request)
                     {
                              $busid = $request->input('busid');
@@ -967,14 +1074,14 @@ class userController extends Controller
                              $newlocation = explode(',',$newlocation);
                              
                              //need changes
-                             /* $this->load->model('User_model');
-                             $result = $this->User_model->pushCurrentData($busid,$busserviceno,$routeno,$newlocation[0],$newlocation[1],$newlocation[2],$speedkmhr,$currenttime);
-                              */
+                             // $this->load->model('User_model');
+                             //$result = $this->User_model->pushCurrentData($busid,$busserviceno,$routeno,$newlocation[0],$newlocation[1],$newlocation[2],$speedkmhr,$currenttime);
+                              
 							  $result = 'true';
                              return response($result,200);
                     }
-                    
-                    public function getETA(Request $request)
+                    */
+                    /*public function getETA(Request $request)
                     {
                              $busstopno = $request->input('busstopno');
                              $busserviceno = $request->input('busserviceno');
@@ -996,7 +1103,7 @@ class userController extends Controller
                                        return response($data,200);
                              }
                     }
-                    
+                    */
                     public function getBusServiceRouteNo($busstopno,$busserviceno)
                     {
                              $filecontent = file_get_contents('../data/'.$busserviceno.'.json');
@@ -1025,7 +1132,7 @@ class userController extends Controller
                              return $routeno;
                     }
                     
-                    public function getNextBusTiming($busstopno,$busserviceno)
+                    /* public function getNextBusTiming($busstopno,$busserviceno)
                     {
                              $postdata = null;
                              $routeno = self::getBusServiceRouteNo($busstopno,$busserviceno);
@@ -1051,9 +1158,9 @@ class userController extends Controller
                              }
                              
                              //need changes
-                            /*  $this->load->model('User_model');
-                             $nextbuses = $this->User_model->getBusRecordsByServiceNo($busserviceno,$routeno,explode(',',$busstopcoords)[2]);
-                              */
+                            //  $this->load->model('User_model');
+                             //$nextbuses = $this->User_model->getBusRecordsByServiceNo($busserviceno,$routeno,explode(',',$busstopcoords)[2]);
+                              
 							  $nextbuses = null;
                              if($nextbuses == null)
                              {
@@ -1096,8 +1203,8 @@ class userController extends Controller
                                                 return $postdata;
                              }
                     }
-                    
-                    public function getBusStopServices(Request $request)
+                     */
+                    /* public function getBusStopServices(Request $request)
                     {
                              $busstopno = $request->input('busstopno');
                              
@@ -1107,9 +1214,9 @@ class userController extends Controller
                              }
                              
                              //need changes
-                             /* $this->load->model('User_model');
-                             $busservices = $this->User_model->getBusStopServices($busstopno);
-                              */
+                             // $this->load->model('User_model');
+                             //$busservices = $this->User_model->getBusStopServices($busstopno);
+                              
 							  
                              $filecontent = file_get_contents('../data/bus-stop.json');
                              $json = json_decode($filecontent, true);
@@ -1126,8 +1233,8 @@ class userController extends Controller
                              return response($postdata,200);
                              
                     }
-                    
-                    public function getCoordsViaId(Request $request)
+                     */
+                    /* public function getCoordsViaId(Request $request)
                     {
                              $busid = $request->input('busid');
                              
@@ -1137,7 +1244,7 @@ class userController extends Controller
                              return response(json_encode($buscoords),200);
                              
                     }
-                    
+                     */
                     public function getBusRoute(Request $request)
                     {
                              $busserviceno = $request->input('busserviceno');
@@ -1169,7 +1276,7 @@ class userController extends Controller
                              return $km;
                     }
                     
-                    public function distancebetweenpointsonroute($busserviceno,$routeno,$point1,$point2)
+                    /*public function distancebetweenpointsonroute($busserviceno,$routeno,$point1,$point2)
                     {
                              $busradius = self::setRadius()['busradius'];
 							 $pointA = self::closepointonroute($busserviceno,$routeno,$point1,$busradius);
@@ -1206,7 +1313,7 @@ class userController extends Controller
                              
                              return $totaldistance;
                     }
-                    
+                    */
                     public function checkClosePointExist(Request $request)
                     {
                             $routeno = $request->input('routeno');
@@ -1358,7 +1465,7 @@ class userController extends Controller
                              return ($avgSpeed); 
                     }
                     
-                    public function calculateETAWin()
+                   /* public function calculateETAWin()
                     {
                              //date_default_timezone_set('Asia/Singapore');
                              $getDatabaseClass = self::getDatabaseClass();
@@ -1475,7 +1582,7 @@ class userController extends Controller
 									   }
                              }
                     }
-                    
+                    */
                     public function calculateHistoricDataAverage(Request $request)
                     {
                              //date_default_timezone_set('Asia/Singapore');

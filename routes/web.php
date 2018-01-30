@@ -45,7 +45,9 @@ Route::post('/calculateHistoricDataAverage','userController@calculateHistoricDat
 Route::post('/calculateHistoricData','userController@calculateHistoricData');
 Route::post('/ianTest','userController@ianTest');
 Route::post('/getETA_schedule','userController@getETA_schedule');
-Route::post('/simulator_insertlocation','userController@simulator_insertlocation');
+Route::post('/bus_insertlocation','userController@bus_insertlocation');
+Route::post('/pi_insertlocation','userController@pi_insertlocation');
+Route::post('/checkBeaconRegistered','userController@checkBeaconRegistered');
 
 
 Route::post('/pushCurrentData','userController@pushCurrentData');

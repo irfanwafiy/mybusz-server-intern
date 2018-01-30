@@ -122,6 +122,7 @@ class DatabaseController
 		
 		return $data;
 	}
+
 	
 	public function getLastRecordV2($bus_id,$routeno,$time)
 	//tested
@@ -460,6 +461,19 @@ class DatabaseController
 		return $totalbus;
 	}
 	
+	
+	
+	public function getBusIDByBeacon($beacon_mac)
+	{
+		$getBusIDByBeacon_Query = DB::table('bus')
+										->select('bus_id')
+										->where('beacon_mac',$beacon_mac)
+										->limit(1)
+										->get();
+		
+		return $getBusIDByBeacon_Query;
+	}
+	
 	public function getBusServiceNo($route_id,$bus_id)
 	//tested
 	//public function getBusServiceNo()
@@ -487,6 +501,16 @@ class DatabaseController
 		}
 		
 		return $data;
+	}
+	
+	public function getlatlongByPi($pi_id)
+	{
+		$getlatlongByPi_Query = DB::table('pi_info')
+										->where('pi_id',$pi_id)
+										limit(1)
+										->get();
+		
+		return $getlatlongByPi_Query;
 	}
 	
 	public function getRouteID($bus_id)
