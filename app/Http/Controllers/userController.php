@@ -613,8 +613,8 @@ class userController extends Controller
 							 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
 							 if($newlocation != null)
 							 {
-                             print($speed.'\n');
-                             print("insert success \n");
+                             print($speed."\r\n");
+                             print("insert success \r\n");
 							 $newlocation = explode(',',$newlocation);
 							 print($newlocation[0].",".$newlocation[1]);
                              $insertlocation_datav2_Query = DB::table('location_datav2')
