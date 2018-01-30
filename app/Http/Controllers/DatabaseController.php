@@ -469,9 +469,9 @@ class DatabaseController
 										->select('bus_id')
 										->where('beacon_mac',$beacon_mac)
 										->limit(1)
-										->get();
+										->first();
 		
-		print($getBusIDByBeacon_Query[0]->bus_id);
+		print($getBusIDByBeacon_Query);
 		return $getBusIDByBeacon_Query;
 	}
 	
