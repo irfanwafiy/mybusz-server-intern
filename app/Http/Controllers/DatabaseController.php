@@ -507,7 +507,7 @@ class DatabaseController
 	{
 		$getlatlongByPi_Query = DB::table('pi_info')
 										->where('pi_id',$pi_id)
-										limit(1)
+										->limit(1)
 										->get();
 		
 		return $getlatlongByPi_Query;
