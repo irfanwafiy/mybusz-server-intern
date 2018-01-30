@@ -709,13 +709,15 @@ class userController extends Controller
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
+																						
+							 print("Bus No : ".$bus_service_no." of route : ".$route_id." detected"." at : ".$time);
+						
                              }
 							 else
 							 {
 								 print("no route found");
 							 }
 							 
-							 print($bus_service_no." of route : ".$route_id."detected"." at : ".$time);
 						}
 						else
 						{
