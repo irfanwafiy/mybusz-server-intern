@@ -713,7 +713,7 @@ class userController extends Controller
 						}
 						else
 						{
-						return null
+						return null;
 						}
 					}
 					
