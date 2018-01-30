@@ -513,7 +513,7 @@ class userController extends Controller
                     
 					public function pi_getBusRouteNo_newlocation($bus_id,$routeID,$point)
 					{
-						$dataset_pi_getBusRouteNo_newlocation = new Collection;
+						
 						$radius = self::setRadius()['busradius'];
 						$getDatabaseClass = self::getDatabaseClass();
 						foreach($routeID as $route_id)
@@ -526,14 +526,14 @@ class userController extends Controller
 							
 							if($result !=null)
 							{
-									$dataset_singleset = [
+									$dataset_pi_getBusRouteNo_newlocation = [
 								'route_id' => $route_id,
 								'newlocation' => $result
 								];
 								
-								//$dataset_pi_getBusRouteNo_newlocation->push($dataset_singleset);
+								
 							
-								return $dataset_singleset;
+								return $dataset_pi_getBusRouteNo_newlocation;
 							}
 						}
 						
@@ -668,15 +668,14 @@ class userController extends Controller
 							 $time = $getDatabaseClass->getTime();
 							 
 							 
-							 var_dump($getpi_getBusRouteNo_newlocation);
-							 die();
+							 
 		
 							 
 							 if($getpi_getBusRouteNo_newlocation != null)
 							 {
-								 //$route_id = $getpi_getBusRouteNo_newlocation['route_id'];
+								 $route_id = $getpi_getBusRouteNo_newlocation['route_id'];
 								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-								// $newlocation = $getpi_getBusRouteNo_newlocation->['newlocation'];
+								 $newlocation = $getpi_getBusRouteNo_newlocation['newlocation'];
 								 $newlocation = explode(',',$newlocation);
                              print("insert success \n");
 							 
