@@ -648,10 +648,14 @@ class userController extends Controller
                     
 					public function pi_insertlocation(Request $request)
                     {
+						$getDatabaseClass = self::getDatabaseClass();
+						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+						
+						if($bus_id != null)
+						{
                              $beacon_mac = $request->input('beacon_mac');
                              $pi_id = $request->input('pi_id');
-							 $getDatabaseClass = self::getDatabaseClass();
-							 $bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+							 
 							 $routeID = $getDatabaseClass->getRouteID($bus_id);
 							 $getlatlong = $getDatabaseClass->getlatlongByPi($pi_id);
 							 $lat = $getlatlong->latitude;
@@ -699,19 +703,26 @@ class userController extends Controller
 							 {
 								 print("no route found");
 							 }
+							 
+							 print($bus_service_no." of route : ".routeID."detected"." at : ".$time);
+						}
+						else
+						{
+							print("No Bus Found")
+						}
                              
                     }
                     
-					public function checkBeaconRegistered(Request $request)
+					/* public function checkBeaconRegistered($beacon_mac)
 					{
-						$beacon_mac = $request->input('beacon_mac');
+						
 						$getDatabaseClass = self::getDatabaseClass();
 						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
 						
 						return $bus_id;
 						
 					}
-					
+					 */
                     public function convertBustoptoNearestPolyLine(Request $request)
                     {
                              $routeno = $request->input('routeno');
