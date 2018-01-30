@@ -654,7 +654,7 @@ class userController extends Controller
 						
 						if($bus_id != null)
 						{
-                             
+                             var_dump($bus_id);
                              $pi_id = $request->input('pi_id');
 							 
 							 $routeID = $getDatabaseClass->getRouteID($bus_id);
