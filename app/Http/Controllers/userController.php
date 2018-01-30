@@ -668,7 +668,8 @@ class userController extends Controller
 							 $time = $getDatabaseClass->getTime();
 							 
 							 
-							 
+							 var_dump($getpi_getBusRouteNo_newlocation);
+							 die();
 		
 							 
 							 if($getpi_getBusRouteNo_newlocation != null)
