@@ -519,11 +519,9 @@ class userController extends Controller
 						foreach($routeID as $route_id)
 						{
 							$busserviceno = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-							var_dump("Radius ".$radius);
-							var_dump("Route : ".$route_id);
-							var_dump("LatLong : ".$point);
-							$result = self::Ian_closepointonroute($busserviceno,$route_id,$point,$radius);
-							var_dump("Result".$result);
+							$latlong = explode(',', $point);
+							$result = self::Ian_closepointonroute($busserviceno,$route_id,$latlong,$radius);
+							
 
 							
 							if($result !=null)
@@ -669,7 +667,7 @@ class userController extends Controller
 							 $speed = 10.0;
 							 $time = $getDatabaseClass->getTime();
 							 
-							 var_dump($getpi_getBusRouteNo_newlocation);
+							 
 							 
 		
 							 
