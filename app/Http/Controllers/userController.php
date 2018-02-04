@@ -869,7 +869,7 @@ class userController extends Controller
                                                  {
                                                           $caltotaldistance = 0 ;
                                                           
-                                                          for ($z = $busCMP1 ; $z<$g-1; $z++)
+                                                          for ($z = $busCMP1 ; $z<$g; $z++)
                                                           {
                                                                     $busstop1 = explode(",", trim($busroutecoords[$z]));
                                                                     $busstop2 = explode(",", trim($busroutecoords[$z+1]));
@@ -897,7 +897,7 @@ class userController extends Controller
                                        }
                              }
                              
-                             print("Total Dist : ".$totaldistance);
+                             print_r($totaldistance);
 							 print("++++++++++++++++++++++++++++++++");
 							 print("<br>");
                     }
