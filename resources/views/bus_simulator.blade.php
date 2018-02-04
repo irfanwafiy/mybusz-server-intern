@@ -116,26 +116,27 @@ input[type=submit]:hover {
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+				
 				<div>
 				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="post">
   
-				  bus_id:<br>
-				  <input type="text" name="bus_id" value="">
+				  <label for="bus_id">bus_id:</label>
+				  <input id="bus_id" type="text" name="bus_id" value="">
 				  <br><br>
-				  route_id:<br>
-				  <input type="text" name="route_id" value="">
+				  <label for="route_id">route_id:</label>
+				  <input id="route_id" type="text" name="route_id" value="">
 				  <br><br>
-				  imei:<br>
-				  <input type="text" name="imei" value="">
+				  <label for="imei">imei:</label>
+				  <input id="imei" type="text" name="imei" value="">
 				  <br><br>
-				  latlong:<br>
-				  <input type="text" name="latlong" value="">
+				  <label for="latlong">latlong:</label>
+				  <input id="latlong" type="text" name="latlong" value="">
 				  <br><br>
-				  speed:<br>
-				  <input type="text" name="speed" value="">
+				  <label for="speed">speed:</label>
+				  <input id="speed" type="text" name="speed" value="">
 				  <br><br>
-				  date:<br>
-				  <input type="text" name="date" value="">
+				  <label for="date">date:</label>
+				  <input id="date" type="text" name="date" value="">
 				  <br><br>
 				  <input type="submit" value="Submit">
 				</form>
