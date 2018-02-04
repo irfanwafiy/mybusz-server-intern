@@ -87,6 +87,12 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45a049;
 }
+
+div {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
 			
 			
         </style>
@@ -116,7 +122,7 @@ input[type=submit]:hover {
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
-				
+				<br><br>
 				<div>
 				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="post">
   
