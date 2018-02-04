@@ -35,6 +35,6 @@ class VerifyCsrfToken extends Middleware
 		'/pi_insertlocation',
 		'/checkBeaconRegistered',
 		'/bus_insertlocation',
-		'syd_Cal'
+		'/syd_Cal'
     ];
 }
