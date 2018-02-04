@@ -88,7 +88,7 @@ input[type=submit]:hover {
     background-color: #45a049;
 }
 
-div {
+.myForm{
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
@@ -123,7 +123,7 @@ div {
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
 				<br><br>
-				<div>
+				<div class="myForm">
 				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="post">
   
 				  <label for="bus_id">bus_id:</label>
