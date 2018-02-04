@@ -839,6 +839,70 @@ class userController extends Controller
                              print_r($totaldistance);
                     }
                     
+					public function getKM_syd(Request $request)
+                    {
+                             $busserviceno = $request->input('busserviceno');
+                             $routeno = $request->input('routeno');
+                             
+                             $totaldistance = array();
+                             $busstop = self::getRoute($routeno,1);
+                             
+                             $filecontent = file_get_contents('../data/'.$busserviceno.'.json');
+                             $json1 = json_decode($filecontent, true);
+                             $busroutecoords = $json1[$routeno]['route'];
+                             
+                             for ($i =0; $i <sizeof($busstop); $i ++)
+                             {
+                                       if($i == sizeof($busstop)-1)
+                                       {
+                                                 break;
+                                       }
+                                       
+                                       for ($g=0; $g<sizeof($busroutecoords); $g++)
+                                       {
+                                                 if (trim($busstop[$i])==trim($busroutecoords[$g]))
+                                                 {
+                                                          $busCMP1 =$g;
+                                                 }
+                                                 
+                                                 if (trim($busstop[$i+1])==trim($busroutecoords[$g]))
+                                                 {
+                                                          $caltotaldistance = 0 ;
+                                                          
+                                                          for ($z = $busCMP1 ; $z<$g; $z++)
+                                                          {
+                                                                    $busstop1 = explode(",", trim($busroutecoords[$z]));
+                                                                    $busstop2 = explode(",", trim($busroutecoords[$z+1]));
+                                                                    $caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
+                                                          
+														  
+																	print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+																    print("<br>");
+																    print("Dist : ".$caltotaldistance);
+																    print("<br>");
+																	print("--------------------------");
+																	print("<br>");
+														  }
+														  
+                                                          print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+														  print("<br>");
+														  print("Dist : ".$caltotaldistance);
+														  print("<br>");
+														  print("============================");
+												   		  print("<br>");
+														  
+                                                          array_push($totaldistance,$caltotaldistance);
+                                                          break;
+                                                 }
+                                       }
+                             }
+                             
+                             print_r("Total Dist : ".$totaldistance);
+							 print("++++++++++++++++++++++++++++++++");
+							 print("<br>");
+                    }
+                    
+					
                     public function testgetKM(Request $request)
                     {
                              $busserviceno = $request->input('busserviceno');
@@ -867,7 +931,7 @@ class userController extends Controller
                                                 
                                                 $caltotaldistance = 0 ;
                                                 
-                                                for ($z = $busCMP1 ; $z<$g 	-1; $z++)
+                                                for ($z = $busCMP1 ; $z<$g-1; $z++)
                                                 {
                                                           $busstop1 = explode(",", trim($busroutecoords[$z]));
                                                           $busstop2 = explode(",", trim($busroutecoords[$z+1]));
