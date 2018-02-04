@@ -51,6 +51,7 @@ Route::post('/getETA_schedule','userController@getETA_schedule');
 Route::post('/bus_insertlocation','userController@bus_insertlocation');
 Route::post('/pi_insertlocation','userController@pi_insertlocation');
 Route::post('/checkBeaconRegistered','userController@checkBeaconRegistered');
+Route::post('/syd_Cal','userController@syd_Cal');
 
 
 Route::post('/pushCurrentData','userController@pushCurrentData');

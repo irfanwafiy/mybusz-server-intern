@@ -34,6 +34,7 @@ class VerifyCsrfToken extends Middleware
 		'/getETA_schedule',
 		'/pi_insertlocation',
 		'/checkBeaconRegistered',
-		'/bus_insertlocation'
+		'/bus_insertlocation',
+		'syd_Cal'
     ];
 }
