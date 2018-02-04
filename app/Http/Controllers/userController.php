@@ -897,7 +897,7 @@ class userController extends Controller
                                        }
                              }
                              
-                             print_r("Total Dist : ".$totaldistance);
+                             print("Total Dist : ".$totaldistance);
 							 print("++++++++++++++++++++++++++++++++");
 							 print("<br>");
                     }
