@@ -867,12 +867,14 @@ class userController extends Controller
                                                 
                                                 $caltotaldistance = 0 ;
                                                 
-                                                for ($z = $busCMP1 ; $z<$g-1; $z++)
+                                                for ($z = $busCMP1 ; $z<$g 	-1; $z++)
                                                 {
                                                           $busstop1 = explode(",", trim($busroutecoords[$z]));
                                                           $busstop2 = explode(",", trim($busroutecoords[$z+1]));
                                                           $caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
-                                                          print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+                                                          
+														  print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+														  print("<br>");
                                                 }
                                                 
                                                 array_push($totaldistance,$caltotaldistance);
