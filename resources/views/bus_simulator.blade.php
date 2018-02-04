@@ -81,11 +81,20 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
+				 
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+				<div>
 				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="post">
   
 				  bus_id:<br>
 				  <input type="text" name="bus_id" value="">
-				  <br>
+				  <br><br>
 				  route_id:<br>
 				  <input type="text" name="route_id" value="">
 				  <br><br>
@@ -102,14 +111,8 @@
 				  <input type="text" name="date" value="">
 				  <br><br>
 				  <input type="submit" value="Submit">
-				</form> 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+				</form>
+				</div> 
             </div>
         </div>
     </body>
