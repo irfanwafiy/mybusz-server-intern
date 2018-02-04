@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/bus_simulator', function () {
+    return view('bus_simulator');
+});
 
 Route::get('/getBusRoute/{route_id}', 'getBusInfoController@getBusRoute');
 Route::get('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
