@@ -876,6 +876,7 @@ class userController extends Controller
 														  print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
 														  print("<br>");
 														  print("Dist : ".$caltotaldistance);
+														  print("<br>");
                                                 }
                                                 
                                                 array_push($totaldistance,$caltotaldistance);
