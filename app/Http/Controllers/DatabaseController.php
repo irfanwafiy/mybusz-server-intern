@@ -431,7 +431,8 @@ class DatabaseController
 												->join('route_bus_stop', 'route.route_id', '=', 'route_bus_stop.route_id')
 												->where('bus_route.bus_id',$bus_id)
 												->where('bus_route.route_id',$route_id)
-												->min('route_bus_stop.bus_stop_id');
+												->where('route_bus_stop.route_order',1)
+												->first();
 		/* var_dump($getFirstBusstopIDFromRoute_Query);
 		die();
 		$totalbus = array();
