@@ -444,7 +444,7 @@ class DatabaseController
 		} */
 		
 		//return $totalbus[0];
-		return $getFirstBusstopIDFromRoute_Query;
+		return $getFirstBusstopIDFromRoute_Query->bus_stop_id;
 	}
 	//tested
 	public function getTotalBus()
