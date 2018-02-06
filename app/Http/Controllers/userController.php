@@ -906,14 +906,7 @@ class userController extends Controller
 							 print("<br>");
                     }
                     
-					public function syd_testFirstbusstop(Request $request)
-					{
-						 $bus_id = $request->input('bus_id');
-                             $routeno = $request->input('routeno');
-						$getDatabaseClass = self::getDatabaseClass();
-                             
-                        return $getDatabaseClass->getFirstBusstopIDFromRoute($bus_id,$routeno); 
-					}
+					
 					
                     public function testgetKM(Request $request)
                     {

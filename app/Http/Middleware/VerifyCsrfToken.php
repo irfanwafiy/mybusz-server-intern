@@ -36,7 +36,6 @@ class VerifyCsrfToken extends Middleware
 		'/checkBeaconRegistered',
 		'/bus_insertlocation',
 		'/syd_Cal',
-		'/getKM_syd',
-		'/syd_testFirstbusstop'
+		'/getKM_syd'
     ];
 }
