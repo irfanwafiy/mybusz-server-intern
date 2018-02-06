@@ -54,6 +54,8 @@ Route::post('/checkBeaconRegistered','userController@checkBeaconRegistered');
 Route::post('/syd_Cal','userController@syd_Cal');
 Route::post('/getKM_syd','userController@getKM_syd');
 
+Route::post('/syd_testFirstbusstop','userController@syd_testFirstbusstop');
+
 
 Route::post('/pushCurrentData','userController@pushCurrentData');
 Route::post('/getETA','userController@getETA');

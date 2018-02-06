@@ -873,11 +873,7 @@ class userController extends Controller
 														
 														 
 															  $caltotaldistance = 0 ;
-															  print("<br>");
-															  print($busstop[$i+1]."==========".$busroutecoords[$g]);
-															  print("<br>");
-															  print("##############################");
-															   print("<br>");
+															  
 															  for ($z = $busCMP1 ; $z<$g; $z++)
 															  {
 																		$busstop1 = explode(",", trim($busroutecoords[$z]));
@@ -910,6 +906,14 @@ class userController extends Controller
 							 print("<br>");
                     }
                     
+					public function syd_testFirstbusstop(Request $request)
+					{
+						 $bus_id = $request->input('bus_id');
+                             $routeno = $request->input('routeno');
+						$getDatabaseClass = self::getDatabaseClass($bus_id,$routeno);
+                             
+                        return $getDatabaseClass->getFirstBusstopIDFromRoute(5,5); 
+					}
 					
                     public function testgetKM(Request $request)
                     {
