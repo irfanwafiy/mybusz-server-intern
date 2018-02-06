@@ -910,9 +910,9 @@ class userController extends Controller
 					{
 						 $bus_id = $request->input('bus_id');
                              $routeno = $request->input('routeno');
-						$getDatabaseClass = self::getDatabaseClass($bus_id,$routeno);
+						$getDatabaseClass = self::getDatabaseClass();
                              
-                        return $getDatabaseClass->getFirstBusstopIDFromRoute(5,5); 
+                        return $getDatabaseClass->getFirstBusstopIDFromRoute($bus_id,$routeno); 
 					}
 					
                     public function testgetKM(Request $request)
