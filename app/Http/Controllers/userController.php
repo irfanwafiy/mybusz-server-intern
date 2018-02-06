@@ -405,7 +405,17 @@ class userController extends Controller
                                                                                                                      
                                                                                                                      $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                      
+																													 
                                                                                                                      $hi1=$x+$routeID;
+																													 
+																													 print("<br>");
+																													 print("<br>");
+																													 print("<br>");
+																													 print("x : ".$x."          "." hi1 : ".$hi1);
+																													 print("<br>");
+																													 print("<br>");
+																													 print("<br>");
+																													 
                                                                                                                      $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      
                                                                                                                      for ($a = $x; $a<sizeof($busstopKM); $a++)
