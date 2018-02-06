@@ -338,9 +338,10 @@ class userController extends Controller
                                        
                                        for ($g = 0;  $g <sizeof($routeNo); $g++)
                                        {
-                                                 $routeID = $getDatabaseClass->getFirstBusstopIDFromRoute($totalbus[$q],$routeNo[$g]);
+                                                 //$routeID = $getDatabaseClass->getFirstBusstopIDFromRoute($totalbus[$q],$routeNo[$g]);
                                                //  print(sizeof($routeNo));
-                                                 $data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
+                                                 $routeOrder = 1;
+												 $data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
                                                  
                                                 // print_r($data);
                                                   var_dump($data);
@@ -406,27 +407,23 @@ class userController extends Controller
                                                                                                                      $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                      
 																													 
-                                                                                                                     $hi1=$x+$routeID;
+                                                                                                                     //$hi1=$x+$routeID;
+																													 $hi1=$x+$routeOrder;
+																													 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);
 																													 
-																													 print("<br>");
-																													 print("<br>");
-																													 print("<br>");
-																													 print("if        "."x : ".$x."          "." hi1 : ".$hi1);
-																													 print("<br>");
-																													 print("<br>");
-																													 print("<br>");
-																													 
-                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      
                                                                                                                      for ($a = $x; $a<sizeof($busstopKM); $a++)
                                                                                                                      {
                                                                                                                               $caltotaldistance = $caltotaldistance+ (float)$busstopKM[$a];
-                                                                                                                              $hi = $a+$routeID+1;
+                                                                                                                              //$hi = $a+$routeID+1;
+																															  $hi = $a+$routeOrder+1;
+																															  $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi,$routeNo[$g]);
                                                                                                                               $time = $caltotaldistance / $speed;
                                                                                                                               $time = $time * 3600;
                                                                                                                               $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                                               
-                                                                                                                              $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$hi,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                              $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      }
                                                                                                                      
                                                                                                                      break;
@@ -446,15 +443,11 @@ class userController extends Controller
                                                                                                  $time = $caltotaldistance / $speed;
                                                                                                  $time = $time * 3600;
                                                                                                  $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
-                                                                                                 $hi1=$routeID+sizeof($busstopKM);
-                                                                                                 print("<br>");
-																													 print("<br>");
-																													 print("<br>");
-																													 print("else         "."x : ".$x."          "." hi1 : ".$hi1);
-																													 print("<br>");
-																													 print("<br>");
-																													 print("<br>");
-                                                                                                 $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
+																								 
+                                                                                                 //$hi1=$routeID+sizeof($busstopKM);
+																								 $hi1=$routeOrder+sizeof($busstopKM);
+                                                                                                 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);
+                                                                                                 $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                        }
                                                                               }
                                                                     }

@@ -446,6 +446,24 @@ class DatabaseController
 		//return $totalbus[0];
 		return $getFirstBusstopIDFromRoute_Query->bus_stop_id;
 	}
+	
+	public function getbusstopid_byroute_order($route_order,$route_id)
+	//tested
+	//public function getFirstBusstopIDFromRoute()
+	{
+		/* $bus_id = 1;
+		$route_id =1; */
+		$getbusstopid_byroute_order_Query = DB::table('route_bus_stop')
+												->select('bus_stop_id')
+												->where('route_id',$route_id)
+												->where('route_order',$route_order)
+												->first();
+		
+		return $getbusstopid_byroute_order_Query->bus_stop_id;
+	}
+	
+	
+	
 	//tested
 	public function getTotalBus()
 	{
