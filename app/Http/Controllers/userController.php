@@ -411,7 +411,7 @@ class userController extends Controller
 																													 print("<br>");
 																													 print("<br>");
 																													 print("<br>");
-																													 print("x : ".$x."          "." hi1 : ".$hi1);
+																													 print("if        "."x : ".$x."          "." hi1 : ".$hi1);
 																													 print("<br>");
 																													 print("<br>");
 																													 print("<br>");
@@ -447,7 +447,13 @@ class userController extends Controller
                                                                                                  $time = $time * 3600;
                                                                                                  $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
                                                                                                  $hi1=$routeID+sizeof($busstopKM);
-                                                                                                 
+                                                                                                 print("<br>");
+																													 print("<br>");
+																													 print("<br>");
+																													 print("else         "."x : ".$x."          "." hi1 : ".$hi1);
+																													 print("<br>");
+																													 print("<br>");
+																													 print("<br>");
                                                                                                  $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$hi1,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                        }
                                                                               }
