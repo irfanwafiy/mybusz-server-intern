@@ -867,11 +867,21 @@ class userController extends Controller
                                                  
                                                  if (trim($busstop[$i+1])==trim($busroutecoords[$g]))
                                                  {
+													 if($g == 0)
+													 {
+														 print("<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>");
+														  print("<br>");
+														 print($busstop[$i+1]);
+														  print("<br>");
+														  print("<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>");
+													 }
+													 
                                                           $caltotaldistance = 0 ;
 														  print("<br>");
                                                           print($busstop[$i+1]."==========".$busroutecoords[$g]);
 														  print("<br>");
 														  print("##############################");
+														   print("<br>");
                                                           for ($z = $busCMP1 ; $z<$g; $z++)
                                                           {
                                                                     $busstop1 = explode(",", trim($busroutecoords[$z]));
