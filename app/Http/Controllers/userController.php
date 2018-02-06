@@ -864,47 +864,44 @@ class userController extends Controller
                                                  {
                                                           $busCMP1 =$g;
                                                  }
-                                                 
-                                                 if (trim($busstop[$i+1])==trim($busroutecoords[$g]))
-                                                 {
-													 if($g == 0)
-													 {
-														 print("<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>");
-														  print("<br>");
-														 print($busstop[$i+1]);
-														  print("<br>");
-														  print("<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>");
-													 }
+                                                 if($g > 0)
+												 {
 													 
-                                                          $caltotaldistance = 0 ;
-														  print("<br>");
-                                                          print($busstop[$i+1]."==========".$busroutecoords[$g]);
-														  print("<br>");
-														  print("##############################");
-														   print("<br>");
-                                                          for ($z = $busCMP1 ; $z<$g; $z++)
-                                                          {
-                                                                    $busstop1 = explode(",", trim($busroutecoords[$z]));
-                                                                    $busstop2 = explode(",", trim($busroutecoords[$z+1]));
-                                                                    $caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
-                                                          
-														  
-																	print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
-																    print("<br>");
-																    print("Dist : ".$caltotaldistance);
-																    print("<br>");
-																	print("--------------------------");
-																	print("<br>");
-														  }
-														  
-                                                          
-														  print("<br>");
-														  print("============================");
-												   		  print("<br>");
-														  
-                                                          array_push($totaldistance,$caltotaldistance);
-                                                          break;
-                                                 }
+												 
+													 if (trim($busstop[$i+1])==trim($busroutecoords[$g]))
+													 {
+														
+														 
+															  $caltotaldistance = 0 ;
+															  print("<br>");
+															  print($busstop[$i+1]."==========".$busroutecoords[$g]);
+															  print("<br>");
+															  print("##############################");
+															   print("<br>");
+															  for ($z = $busCMP1 ; $z<$g; $z++)
+															  {
+																		$busstop1 = explode(",", trim($busroutecoords[$z]));
+																		$busstop2 = explode(",", trim($busroutecoords[$z+1]));
+																		$caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
+															  
+															  
+																		print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+																		print("<br>");
+																		print("Dist : ".$caltotaldistance);
+																		print("<br>");
+																		print("--------------------------");
+																		print("<br>");
+															  }
+															  
+															  
+															  print("<br>");
+															  print("============================");
+															  print("<br>");
+															  
+															  array_push($totaldistance,$caltotaldistance);
+															  break;
+													 }
+												 }
                                        }
                              }
                              
