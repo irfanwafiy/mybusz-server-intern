@@ -427,6 +427,7 @@ class DatabaseController
 		/* $bus_id = 1;
 		$route_id =1; */
 		$getFirstBusstopIDFromRoute_Query = DB::table('route')
+												->select('route_bus_stop.bus_stop_id')
 												->join('bus_route', 'bus_route.route_id', '=', 'route.route_id')
 												->join('route_bus_stop', 'route.route_id', '=', 'route_bus_stop.route_id')
 												->where('bus_route.bus_id',$bus_id)
