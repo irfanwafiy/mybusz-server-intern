@@ -557,7 +557,7 @@ class userController extends Controller
                                                                                                                                                             $time = $time * 3600;
                                                                                                                                                             
                                                                                                                                                             $time = date("Y-m-d H:i:s", $time +strtotime("-15 seconds"));
-																																							print(strtotime("-15 seconds"));
+																																							
                                                                                                                                                             //$hi1=$x+$routeID;
 																																							$hi1=$x+$routeOrder;
 																																							$bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);
@@ -1736,7 +1736,7 @@ class userController extends Controller
                              if ($timediff > 120 && $location_data[0]->speed >= 4) 
                              {
                                        print("NORMAL OPERATION_1 \r\n");
-									   
+									   print("Distance : ".$distance);
                                        $avgSpeed = $distance / ($timediff / 3600);	
 									  
 							 }
