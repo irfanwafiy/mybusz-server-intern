@@ -325,7 +325,7 @@ class userController extends Controller
                              
                              print("Total Records : ".$i);
 					}
-                    public function calculateETA()
+                    /* public function calculateETA()
                     {
                              //date_default_timezone_set('Asia/Singapore');
                              $getDatabaseClass = self::getDatabaseClass();
@@ -458,7 +458,178 @@ class userController extends Controller
                                        }
                              }
                     }
-                    
+                     */
+	public function calculateETA()
+	{
+		
+		
+		$getDatabaseClass = self::getDatabaseClass();
+		$totalbus = $getDatabaseClass->getTotalBus();
+		
+		for($q = 0; $q <sizeof($totalbus); $q++)
+		{
+			$routeNo = $getDatabaseClass->getRouteID($totalbus[$q]);
+                                                           
+			for($g = 0;  $g <sizeof($routeNo); $g++)
+			{
+				$routeOrder = 1;
+				$data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
+                                                 
+				if(!empty($data))
+				{
+					
+					$filecontent = file_get_contents('../data/'.$data->bus_service_no.'.json');
+					$json1 = json_decode($filecontent, true);
+					$busroutecoords = $json1[$routeNo[$g]]['route'];
+					
+					$busstop = self::getRoute($routeNo[$g],1);
+					$check = false;
+                                        
+                                                                                                 $userUploadData = array_search(trim($data->latitude.",".$data->longitude),$busroutecoords);
+                                                                                                 $fifthBusstop = array_search(trim($busstop[4]),$busroutecoords);
+                                                                                                 $checkHistoryExist = $getDatabaseClass->checkHistoryExist($routeNo[$g],$data->bus_id);
+                                                                                                
+                                                                                                 if($data->flag == 0)
+                                                                                                 {
+                                                                                                           $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
+                                                                                                           $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
+                                                                                                           $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
+                                                                                                           
+                                                                                                           $totaldistance = array();
+                                                                                                           
+                                                                                                           $busstopKM = self::getRoute($routeNo[$g],2);
+                                                                                                           $point[0] = $data->latitude;
+                                                                                                           $point[1] = $data->longitude;
+                                                                                                           $continue = 1;
+                                                                                                           $caltotaldistance = 0;
+                                                                                                            
+                                                                                                           $distances = array_map(function($item) use($point) 
+                                                                                                                                                            {
+                                                                                                                                                                     $item = explode(',',$item);
+                                                                                                                                                                     return self::caldistance($item, $point);
+                                                                                                                                                            }, $busroutecoords);
+                                                                                                           asort($distances); 
+                                                                                                           
+                                                                                                           
+                                                                                                           
+                                                                                                           for ($i=0; $i<sizeof($busroutecoords); $i++)
+                                                                                                           {
+                                                                                                                    if (trim($busroutecoords[key($distances)]) == trim($busroutecoords[$i]))
+                                                                                                                    {
+                                                                                                                               
+                                                                                                                               $uploadedlocation = $i;
+                                                                                                                    }
+                                                                                                           }
+                                                                                                           
+                                                                                                           for ($z=$uploadedlocation; $z<sizeof($busroutecoords); $z++)
+                                                                                                           {
+                                                                                                                    if ($z+1 < sizeof($busroutecoords))
+                                                                                                                    {
+                                                                                                                              $busstop1 = explode(",", trim($busroutecoords[$z]));
+                                                                                                                              $busstop2 = explode(",", trim($busroutecoords[$z+1]));
+                                                                                                                              $caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
+                                                                                                                              
+                                                                                                                              
+                                                                                                                              for ($x = 0;$x<sizeof($busstop); $x++)
+                                                                                                                              {
+                                                                                                                                        $counter =1;
+                                                                                                                                        
+                                                                                                                                        if(trim($busstop[$x])==trim($busroutecoords[$z]))
+                                                                                                                                        {
+                                                                                                                                                  $continue = 0;
+                                                                                                                                                 
+                                                                                                                                                  if ($speed == -2) 
+                                                                                                                                                  {
+                                                                                                                                                            break;
+                                                                                                                                                  }
+                                                                                                                                                  
+                                                                                                                                                  else if ($speed == -1) 
+                                                                                                                                                  {
+																																						   
+																																						   $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($x+$routeOrder-1,$routeNo[$g]);                                                                                                
+                                                                                                                                                           $getDatabaseClass->getHistoryETA($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id, 0);
+                                                                                                                                                           break;
+                                                                                                                                                  }
+                                                                                                                                                  
+                                                                                                                                                  else if ($speed > 4) 
+                                                                                                                                                  {
+                                                                                                                                                            $time = $caltotaldistance / $speed;
+                                                                                                                                                            $time = $time * 3600;
+                                                                                                                                                            
+                                                                                                                                                            $time = date("Y-m-d H:i:s", $time +strtotime("-15 seconds"));
+                                                                                                                                                            //$hi1=$x+$routeID;
+																																							$hi1=$x+$routeOrder;
+																																							$bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);
+																													 
+                                                                                                                                                            $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                  }
+                                                                                                                                                  
+                                                                                                                                                  $keeptime = 0;
+                                                                                                                                                  
+                                                                                                                                                  for ($a = $x; $a<sizeof($busstopKM); $a++)
+                                                                                                                                                  {
+                                                                                                                                                            $counter++;
+                                                                                                                                                            
+                                                                                                                                                            if ($counter < 4)
+                                                                                                                                                            {
+																																									
+																																									 $caltotaldistance = $caltotaldistance + (float)$busstopKM[$a];
+																																									 //$hi = $a+$routeID+1;
+																																									 $hi = $a+$routeOrder+1;
+																																									 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi,$routeNo[$g]);
+                                                                                                                                                                     $time = $caltotaldistance / $speed;
+                                                                                                                                                                     $time = $time * 3600;
+                                                                                                                                                                     $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+                                                                                                                                                                     
+                                                                                                                                                                     $keeptime = $time;
+                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                            }
+                                                                                                                                                            
+                                                                                                                                                            else
+                                                                                                                                                            {
+                                                                                                                                                                     //$hi = $a+$routeID;
+                                                                                                                                                                     $hi = $a+$routeOrder+1;
+																																									 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi,$routeNo[$g]);
+                                                                                                                                                                     
+                                                                                                                                                                     $getDatabaseClass->getHistoryETA($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id,$keeptime);
+                                                                                                                                                                     break;
+                                                                                                                                                            }
+                                                                                                                                                  }
+                                                                                                                                                  
+                                                                                                                                                  break;
+                                                                                                                                        }
+                                                                                                                              }
+                                                                                                                              
+                                                                                                                              if($continue ==0)
+                                                                                                                              {
+                                                                                                                                  break;
+                                                                                                                              }
+                                                                                                                    }
+                                                                                                                    
+                                                                                                                    else
+                                                                                                                     {
+                                                                                                                              $busstop1 = explode(",", trim($busroutecoords[$z]));
+                                                                                                                              $caltotaldistance = $caltotaldistance + self::caldistance($point,$busstop1);
+                                                                                                                              $time = $caltotaldistance / $speed;
+                                                                                                                              $time = $time * 3600;
+                                                                                                                              $time = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+                                                                                                                              //$hi1=$routeID+sizeof($busstopKM);
+                                                                                                                              $hi1=$routeOrder+sizeof($busstopKM);
+																															  $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);                                                                                                 
+                                                                                                                              $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                     }
+                                                                                                           }
+                                                                                                 }
+                                                                                                 
+                                                                                                 $getDatabaseClass->updateFlag(1,$data->bus_id,$data->route_id,$data->time);
+				}
+				
+				
+			}
+		}
+	}
+	
+					 
                     public function Ian_distancebetweenpointsonroute($busserviceno,$routeno,$point1,$point2)
                     {		
 							 $busradius = self::setRadius()['busradius'];
