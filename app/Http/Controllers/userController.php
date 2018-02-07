@@ -624,7 +624,11 @@ class userController extends Controller
 							 if($newlocation != null)
 							 {
                              print($speed."\r\n");
+							 print("<br>");
                              print("insert success \r\n");
+							 print("<br>");
+							 print("time : ".$time);
+							 print("<br>");
 							 $newlocation = explode(',',$newlocation);
 							 print($newlocation[0].",".$newlocation[1]);
                              $insertlocation_datav2_Query = DB::table('location_datav2')
@@ -915,6 +919,7 @@ class userController extends Controller
 							 print("<br>");
                     }
                     
+					
 					
 					
                     public function testgetKM(Request $request)

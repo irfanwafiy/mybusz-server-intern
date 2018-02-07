@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/bus_simulator', function () {
     return view('bus_simulator');
 });
+Route::get('/input_bus_stop_859A', function () {
+    return view('syd_test_bus_stop');
+});
 
 Route::get('/getBusRoute/{route_id}', 'getBusInfoController@getBusRoute');
 Route::get('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
