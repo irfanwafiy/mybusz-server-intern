@@ -1680,7 +1680,7 @@ class userController extends Controller
                             print("point 1 : "."<br>");
 							print_r($point1);
 							print("point 2 : "."<br>");
-							print_r("point 2 : "$point2);
+							print_r($point2);
 							print("<br>");
 							
 							
