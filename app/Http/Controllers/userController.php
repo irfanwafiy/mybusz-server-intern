@@ -1218,10 +1218,11 @@ class userController extends Controller
                     public function getFurthestRecord($bus_id,$route_id)
                     {		
 							$getDatabaseClass = self::getDatabaseClass();
+                             $sim_date = mktime(18, 10, 20, 2, 7, 2018);
+                             //$a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",time() -300));
+							 $a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",$sim_date -300)); 
                              
-                             $a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",time() -300)); 
-                             //$a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("2018-02-07 18:10:20",time() -300)); 
-                             print_r($a);
+							 print_r($a);
                              if (sizeof($a) >0 )
                              {
                                        $filecontent = file_get_contents('../data/'.$a[0]->bus_service_no.'.json');
