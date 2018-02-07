@@ -1221,7 +1221,7 @@ class userController extends Controller
                              
                              //$a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",time() -300)); 
                              $a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("2018-02-07 18:10:20",time() -300)); 
-                             print($a);
+                             print_r($a);
                              if (sizeof($a) >0 )
                              {
                                        $filecontent = file_get_contents('../data/'.$a[0]->bus_service_no.'.json');
