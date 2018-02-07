@@ -572,7 +572,7 @@ class userController extends Controller
                                                                                                                                                             
                                                                                                                                                             if ($counter < 4)
                                                                                                                                                             {
-																																									
+																																									 print("Counter : ".$counter);
 																																									 $caltotaldistance = $caltotaldistance + (float)$busstopKM[$a];
 																																									 //$hi = $a+$routeID+1;
 																																									 $hi = $a+$routeOrder+1;
