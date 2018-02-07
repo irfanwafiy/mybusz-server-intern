@@ -1677,7 +1677,11 @@ class userController extends Controller
                             $point2 = array($lastPos->latitude, $lastPos->longitude);
                             $size_Location_data = count($location_data);
                             $half_size = floor($size_Location_data / 2)-1;
-                            
+                            print_r("point 1 : ".$point1);
+							print_r("point 2 : "$point2);
+							
+							
+							
                             if ($half_size < 0)
                             {
                                       $half_size = 0;
