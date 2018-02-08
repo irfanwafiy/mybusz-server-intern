@@ -581,13 +581,13 @@ class userController extends Controller
 																																									 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi,$routeNo[$g]);
                                                                                                                                                                      $time = $caltotaldistance / $speed;
                                                                                                                                                                      $time = $time * 3600;
-																																									 $sim_date = mktime(18, 10, 20, 2, 7, 2018);
-                                                                                                                                                                     //$ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
-                                                                                                                                                                     $ETA = date("Y-m-d H:i:s", $time +$sim_date);
+																																									// $sim_date = mktime(18, 12, 00, 2, 7, 2018);
+                                                                                                                                                                     $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+                                                                                                                                                                     //$ETA = date("Y-m-d H:i:s", $time +$sim_date);
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
-                                                                                                                                                                     //$getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
-                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
+                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                                     //$getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
                                                                                                                                                             }
                                                                                                                                                             
                                                                                                                                                             else
@@ -1223,9 +1223,9 @@ class userController extends Controller
                     public function getFurthestRecord($bus_id,$route_id)
                     {		
 							$getDatabaseClass = self::getDatabaseClass();
-                             $sim_date = mktime(18, 10, 20, 2, 7, 2018);
-                             //$a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",time() -300));
-							 $a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",$sim_date -300)); 
+                             //$sim_date = mktime(18, 12, 00, 2, 7, 2018);
+                             $a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",time() -300));
+							 //$a = $getDatabaseClass->getLastRecord($bus_id,$route_id,date("Y-m-d H:i:s",$sim_date -300)); 
                              
 							 print_r($a);
                              if (sizeof($a) >0 )
