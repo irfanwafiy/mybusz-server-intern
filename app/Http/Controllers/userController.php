@@ -495,9 +495,7 @@ class userController extends Controller
                                                                                                            $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
                                                                                                            $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
-                                                                                                            print("location data : "."<br>");
-																										   print_r($location_data);
-																										   print("<br>");
+                                                                                                           
                                                                                                            $totaldistance = array();
                                                                                                            
                                                                                                            $busstopKM = self::getRoute($routeNo[$g],2);
@@ -583,10 +581,14 @@ class userController extends Controller
 																																									 $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi,$routeNo[$g]);
                                                                                                                                                                      $time = $caltotaldistance / $speed;
                                                                                                                                                                      $time = $time * 3600;
-                                                                                                                                                                     $ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+																																									 $sim_date = mktime(18, 10, 20, 2, 7, 2018);
+                                                                                                                                                                     
+																																									 //$ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+																																									 $ETA = date("Y-m-d H:i:s", $time +$sim_date("+0 seconds"));
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
-                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                                     //$getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
+																																									 $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
                                                                                                                                                             }
                                                                                                                                                             
                                                                                                                                                             else
