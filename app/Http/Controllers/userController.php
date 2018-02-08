@@ -175,9 +175,7 @@ class userController extends Controller
                                                                                                  {
                                                                                                            $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
-																										   print("location data : "."<br>");
-																										   print_r($location_data);
-																										   print("<br>");
+																										  
                                                                                                            $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
                                                                                                            
                                                                                                            $totaldistance = array();
@@ -497,7 +495,9 @@ class userController extends Controller
                                                                                                            $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
                                                                                                            $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
-                                                                                                           
+                                                                                                            print("location data : "."<br>");
+																										   print_r($location_data);
+																										   print("<br>");
                                                                                                            $totaldistance = array();
                                                                                                            
                                                                                                            $busstopKM = self::getRoute($routeNo[$g],2);
