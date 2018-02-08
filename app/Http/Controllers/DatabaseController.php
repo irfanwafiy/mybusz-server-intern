@@ -260,7 +260,7 @@ class DatabaseController
 	
 	
 	
-	public function retrieveLocationData($routeno,$bus_id,$timehigh,$timelow)
+	public function retrieveLocationDataV2($routeno,$bus_id,$timehigh,$timelow)
 	//tested
 	//public function retrieveLocationData()
 	{
@@ -269,6 +269,36 @@ class DatabaseController
 		$timehigh ='2016-09-07 15:17:58';
 		$timelow ='2016-09-02 11:05:40'; */
 		$retrieveLocationData_Query = DB::table('location_datav2')
+											->select('latitude', 'longitude', 'time', 'speed' )
+											->where('route_id',$routeno)
+											->where('bus_id',$bus_id)
+											->where('time','<=',$timehigh)
+											->where('time','>=',$timelow)
+											->orderBY('time', 'asc')
+											->get();
+		
+		$data = array();	
+		$i = 0;
+		
+		foreach($retrieveLocationData_Query as $singleset)
+		{
+			
+			$data[$i] = $singleset;
+			$i++;
+		}
+		
+		return $data;
+	}
+	
+	public function retrieveLocationData($routeno,$bus_id,$timehigh,$timelow)
+	//tested
+	//public function retrieveLocationData()
+	{
+		/* $routeno = 1;
+		$bus_id = 1;
+		$timehigh ='2016-09-07 15:17:58';
+		$timelow ='2016-09-02 11:05:40'; */
+		$retrieveLocationData_Query = DB::table('location_data')
 											->select('latitude', 'longitude', 'time', 'speed' )
 											->where('route_id',$routeno)
 											->where('bus_id',$bus_id)
