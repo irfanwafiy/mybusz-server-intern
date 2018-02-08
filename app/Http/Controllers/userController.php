@@ -582,13 +582,12 @@ class userController extends Controller
                                                                                                                                                                      $time = $caltotaldistance / $speed;
                                                                                                                                                                      $time = $time * 3600;
 																																									 $sim_date = mktime(18, 10, 20, 2, 7, 2018);
-                                                                                                                                                                     
-																																									 //$ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
-																																									 $ETA = date("Y-m-d H:i:s", $time +$sim_date("+0 seconds"));
+                                                                                                                                                                     //$ETA = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+                                                                                                                                                                     $ETA = date("Y-m-d H:i:s", $time +$sim_date);
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
                                                                                                                                                                      //$getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
-																																									 $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
+                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
                                                                                                                                                             }
                                                                                                                                                             
                                                                                                                                                             else
