@@ -583,8 +583,7 @@ class DatabaseController
 	{
 		$getpi_routeid_Query = DB::table('route_pi')
 									->where('pi_id',$pi_id)
-									->limit(1)
-									->first();
+									->get();
 		
 		return $getpi_routeid_Query;
 	}
