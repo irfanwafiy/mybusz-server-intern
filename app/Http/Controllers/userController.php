@@ -866,7 +866,7 @@ class userController extends Controller
 							 $speed = 10.0;
 							 $time = $getDatabaseClass->getTime();
 							 //$route_id = $getpi_getBusRouteNo_newlocation['route_id'];
-							 $route_id_pi = $getDatabaseClass->getpi_routeid($pi_id)->route_id;
+							 $route_id_pi = $getDatabaseClass->getpi_routeid($pi_id);
 							 $routeID = $getDatabaseClass->getRouteID($bus_id);
 							 $route_id = null;
 							 foreach($routeID as $rid)
