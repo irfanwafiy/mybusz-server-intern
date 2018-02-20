@@ -1,0 +1,6 @@
+#!/bin/bash
+while true
+do
+  curl --data "param1=v1" https://laravelsyd-fypfinalver.herokuapp.com/calculateETA;
+  sleep 30
+done
