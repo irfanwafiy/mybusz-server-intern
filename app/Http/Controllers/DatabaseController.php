@@ -580,14 +580,14 @@ class DatabaseController
 	}
 	
 	public function getpi_routeid($pi_id)
-	(
+	{
 		$getpi_routeid_Query = DB::table('route_pi')
 									->where('pi_id',$pi_id)
 									->limit(1)
 									->first();
 		
 		return $getpi_routeid_Query;
-	)
+	}
 	
 	public function getRouteID($bus_id)
 	//tested
