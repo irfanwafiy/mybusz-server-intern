@@ -871,18 +871,17 @@ class userController extends Controller
 							 
 							 if($route_id != null)
 							 {
-								 var_dump($route_id."       ".$bus_id);
-								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-								 var_dump("<br>".$bus_service_no);
-								 die();
-								 $busradius = self::setRadius()['busradius'];
-								 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
-								 //$newlocation = $getpi_getBusRouteNo_newlocation['newlocation'];
-								 $newlocation = explode(',',$newlocation);
-							 
-                             print("insert success \n");
-							 
-                             $insertlocation_datav2_Query = DB::table('location_datav2')
+								 if($bus_service_no != null)
+								 {
+									 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+								 
+									 $busradius = self::setRadius()['busradius'];
+									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
+									 $newlocation = explode(',',$newlocation);
+									 
+									 print("insert success \n");
+									 
+									 $insertlocation_datav2_Query = DB::table('location_datav2')
                                                                                         ->insert([
                                                                                                  'bus_id' => $bus_id,
                                                                                                  'route_id' => $route_id,
@@ -892,8 +891,8 @@ class userController extends Controller
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
-                             
-                             $insertlocation_datav_Query = DB::table('location_data')
+									 
+									 $insertlocation_datav_Query = DB::table('location_data')
                                                                                         ->insert([
                                                                                                  'bus_id' => $bus_id,
                                                                                                  'route_id' => $route_id,
@@ -903,9 +902,9 @@ class userController extends Controller
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
-																						
-							 print("Bus No : ".$bus_service_no." of route : ".$route_id." detected"." at : ".$time);
-						
+									 
+									 print("Bus No : ".$bus_service_no." of route : ".$route_id." detected"." at : ".$time);
+								 }
                              }
 							 else
 							 {
