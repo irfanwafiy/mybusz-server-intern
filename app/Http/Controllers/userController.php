@@ -879,6 +879,7 @@ class userController extends Controller
 									 
 								 
 									 $busradius = self::setRadius()['busradius'];
+									 var_dump($route_id);
 									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
 									 var_dump($newlocation);
 									 die();
