@@ -862,6 +862,7 @@ class userController extends Controller
 							 $lat = $getlatlong->latitude;
 							 $long = $getlatlong->longitude;
 							 $latlong = $lat.','.$long;
+							 $latlong = explode(',', $latlong);
 							 //$getpi_getBusRouteNo_newlocation = self::pi_getBusRouteNo_newlocation($bus_id,$routeID,$latlong);
 							 $speed = 10.0;
 							 $time = $getDatabaseClass->getTime();
@@ -888,11 +889,9 @@ class userController extends Controller
 									 
 								 
 									 $busradius = self::setRadius()['busradius'];
-									 var_dump($route_id);
-									 var_dump("<br>".$bus_service_no);
-									 var_dump("<br>".$latlong);
+									 
 									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
-									 var_dump($newlocation);
+									 
 									 if($newlocation != null)
 									 {
 										 $newlocation = explode(',',$newlocation);
