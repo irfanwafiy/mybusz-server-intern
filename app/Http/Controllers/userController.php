@@ -856,7 +856,7 @@ class userController extends Controller
                              
                              $pi_id = $request->input('pi_id');
 							 
-							 $routeID = $getDatabaseClass->getRouteID($bus_id);
+							 
 							 $getlatlong = $getDatabaseClass->getlatlongByPi($pi_id);
 							 $lat = $getlatlong->latitude;
 							 $long = $getlatlong->longitude;
@@ -866,7 +866,8 @@ class userController extends Controller
 							 $time = $getDatabaseClass->getTime();
 							 //$route_id = $getpi_getBusRouteNo_newlocation['route_id'];
 							 $route_id = $getDatabaseClass->getpi_routeid($pi_id);
-							 
+							 print($route_id);
+							 print("<br>");
 		
 							 
 							 if($route_id != null)
@@ -877,6 +878,10 @@ class userController extends Controller
 								 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
 								 //$newlocation = $getpi_getBusRouteNo_newlocation['newlocation'];
 								 $newlocation = explode(',',$newlocation);
+							 print($bus_service_no);
+							 print("<br>");
+							 print($newlocation);
+							 print("<br>");
                              print("insert success \n");
 							 
                              $insertlocation_datav2_Query = DB::table('location_datav2')
