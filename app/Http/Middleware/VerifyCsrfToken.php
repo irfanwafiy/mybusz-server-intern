@@ -33,7 +33,7 @@ class VerifyCsrfToken extends Middleware
 		'/ianTest',
 		'/getETA_schedule',
 		'/pi_insertlocation',
-		'/checkBeaconRegistered',
+		'/getAllBeaconInfo',
 		'/bus_insertlocation',
 		'/syd_Cal',
 		'/getKM_syd'

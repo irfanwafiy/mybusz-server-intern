@@ -861,19 +861,21 @@ class userController extends Controller
 							 $lat = $getlatlong->latitude;
 							 $long = $getlatlong->longitude;
 							 $latlong = $lat.','.$long;
-							 $getpi_getBusRouteNo_newlocation = self::pi_getBusRouteNo_newlocation($bus_id,$routeID,$latlong);
+							 //$getpi_getBusRouteNo_newlocation = self::pi_getBusRouteNo_newlocation($bus_id,$routeID,$latlong);
 							 $speed = 10.0;
 							 $time = $getDatabaseClass->getTime();
-							 
-							 
+							 //$route_id = $getpi_getBusRouteNo_newlocation['route_id'];
+							 $route_id = $getDatabaseClass->getpi_routeid($pi_id);
 							 
 		
 							 
-							 if($getpi_getBusRouteNo_newlocation != null)
+							 if($route_id != null)
 							 {
-								 $route_id = $getpi_getBusRouteNo_newlocation['route_id'];
+								 
 								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
-								 $newlocation = $getpi_getBusRouteNo_newlocation['newlocation'];
+								 $busradius = self::setRadius()['busradius'];
+								 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
+								 //$newlocation = $getpi_getBusRouteNo_newlocation['newlocation'];
 								 $newlocation = explode(',',$newlocation);
                              print("insert success \n");
 							 
@@ -915,16 +917,14 @@ class userController extends Controller
                              
                     }
                     
-					/* public function checkBeaconRegistered($beacon_mac)
+					 public function getAllBeaconInfo()
 					{
-						
 						$getDatabaseClass = self::getDatabaseClass();
-						$bus_id = $getDatabaseClass->getBusIDByBeacon($beacon_mac);
+						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon;
 						
-						return $bus_id;
+						return $getAllBeaconInfo;
 						
 					}
-					 */
                     public function convertBustoptoNearestPolyLine(Request $request)
                     {
                              $routeno = $request->input('routeno');
