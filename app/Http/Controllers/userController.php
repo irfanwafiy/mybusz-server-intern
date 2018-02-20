@@ -920,7 +920,7 @@ class userController extends Controller
 					 public function getAllBeaconInfo()
 					{
 						$getDatabaseClass = self::getDatabaseClass();
-						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon;
+						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon();
 						
 						return $getAllBeaconInfo;
 						
