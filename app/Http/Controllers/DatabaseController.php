@@ -584,8 +584,14 @@ class DatabaseController
 		$getpi_routeid_Query = DB::table('route_pi')
 									->where('pi_id',$pi_id)
 									->get();
+		$route_id = array();
 		
-		return $getpi_routeid_Query;
+		foreach($getpi_routeid_Query as $singleset)
+		{
+			array_push($route_id,$singleset->route_id);
+		}
+		
+		return $route_id;
 	}
 	
 	public function getRouteID($bus_id)
