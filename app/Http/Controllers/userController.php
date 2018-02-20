@@ -806,6 +806,7 @@ class userController extends Controller
 							 print("time : ".$time);
 							 print("<br>");
 							 $newlocation = explode(',',$newlocation);
+							 
 							 print($newlocation[0].",".$newlocation[1]);
                              $insertlocation_datav2_Query = DB::table('location_datav2')
                                                                                         ->insert([
@@ -880,7 +881,8 @@ class userController extends Controller
 									 $busradius = self::setRadius()['busradius'];
 									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
 									 $newlocation = explode(',',$newlocation);
-									 
+									 var_dump($newlocation[0].','.$newlocation[1]);
+									 die();
 									 print("insert success \n");
 									 
 									 $insertlocation_datav2_Query = DB::table('location_datav2')
