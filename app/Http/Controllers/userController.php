@@ -879,16 +879,14 @@ class userController extends Controller
 									 
 								 
 									 $busradius = self::setRadius()['busradius'];
-									 var_dump($route_id);
+									 
 									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
-									 var_dump($newlocation);
-									 die();
-									 $newlocation = explode(',',$newlocation);
-									 var_dump($newlocation[0].','.$newlocation[1]);
-									 die();
-									 print("insert success \n");
-									 
-									 $insertlocation_datav2_Query = DB::table('location_datav2')
+									 if($newlocation != null)
+									 {
+										 $newlocation = explode(',',$newlocation);
+										 
+										 print("insert success \n");
+										 $insertlocation_datav2_Query = DB::table('location_datav2')
                                                                                         ->insert([
                                                                                                  'bus_id' => $bus_id,
                                                                                                  'route_id' => $route_id,
@@ -898,8 +896,8 @@ class userController extends Controller
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
-									 
-									 $insertlocation_datav_Query = DB::table('location_data')
+																						
+										 $insertlocation_datav_Query = DB::table('location_data')
                                                                                         ->insert([
                                                                                                  'bus_id' => $bus_id,
                                                                                                  'route_id' => $route_id,
@@ -909,8 +907,9 @@ class userController extends Controller
                                                                                                  'speed' => $speed ,
                                                                                                  'time' => $time
                                                                                         ]);
-									 
-									 print("Bus No : ".$bus_service_no." of route : ".$route_id." detected"." at : ".$time);
+										 
+										 print("Bus No : ".$bus_service_no." of route : ".$route_id." detected"." at : ".$time);
+									 }
 								 }
                              }
 							 else
