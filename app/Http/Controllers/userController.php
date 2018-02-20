@@ -871,9 +871,11 @@ class userController extends Controller
 							 
 							 if($route_id != null)
 							 {
+								 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+								 
 								 if($bus_service_no != null)
 								 {
-									 $bus_service_no = $getDatabaseClass->getBusServiceNo($route_id,$bus_id);
+									 
 								 
 									 $busradius = self::setRadius()['busradius'];
 									 $newlocation = self::Ian_closepointonroute($bus_service_no,$route_id,$latlong,$busradius);
