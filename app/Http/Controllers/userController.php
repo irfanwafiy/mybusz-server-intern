@@ -1405,7 +1405,7 @@ class userController extends Controller
                              return response($result,200);
                     }
                     */
-                    /*public function getETA(Request $request)
+                    public function getETA(Request $request)
                     {
                              $busstopno = $request->input('busstopno');
                              $busserviceno = $request->input('busserviceno');
@@ -1427,7 +1427,7 @@ class userController extends Controller
                                        return response($data,200);
                              }
                     }
-                    */
+                    
                     public function getBusServiceRouteNo($busstopno,$busserviceno)
                     {
                              $filecontent = file_get_contents('../data/'.$busserviceno.'.json');
