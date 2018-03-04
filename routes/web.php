@@ -32,6 +32,9 @@ Route::get('/getBusstopList', 'getBusInfoController@getBusstopList');
 Route::get('/getETA', 'getBusInfoController@getETA');
 Route::get('/updateLocation', 'getBusInfoController@updateLocation');
 
+Route::get('/viewETATableGet', 'userController@viewETATableGet');
+
+
 
 Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
 Route::post('/calculateETATest','userController@calculateETATest');

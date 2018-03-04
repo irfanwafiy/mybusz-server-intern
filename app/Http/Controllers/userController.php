@@ -740,6 +740,22 @@ class userController extends Controller
                              
                              print("Total Records : ".$i);
                     }
+					
+					public function viewETATableGet()
+                    {
+                             $viewETATable_Query = DB::table('eta')
+                                                                            ->get();
+                             
+                             $i = 0;
+                             
+                             foreach($viewETATable_Query as $singleset)
+                             {
+                                       print_r($singleset);
+                                       $i++;
+                             }
+                             
+                             print("Total Records : ".$i);
+                    }
                     
                     public function ianTest(Request $request)
                     {
