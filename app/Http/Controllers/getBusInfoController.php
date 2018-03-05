@@ -273,6 +273,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$dataset_BusService = new Collection;
+		$time = date('Y/m/d h:i:s', time());
 		$currentTime = round(microtime(true));
 		//$currentTime = '2015-12-28 15:41:00';
 		
@@ -284,7 +285,7 @@ class getBusInfoController extends Controller
 								$join->on('bus_route.bus_id', '=', 'e.bus_id')
 									->on('bus_route.route_id','=', 'e.route_id');
 							})->where('e.bus_stop_id',$bus_stop_id)
-							->where('e.eta', '>', $currentTime)
+							->where('e.eta', '>', $time)
 							->where('e.time', '>',function($query)
 											{
 												$query->selectraw('MAX( time ) - INTERVAL 30 SECOND 
