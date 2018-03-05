@@ -245,7 +245,7 @@ class getBusInfoController extends Controller
 		$route_id = $request->input('route_id');
 		$dataset_ETA = new Collection;
 		$time = date('Y/m/d h:i:s', time());
-		$time = '2014/10/29 10:19:48';
+		//$time = '2014/10/29 10:19:48';
 		
 		$getETA_Query = DB::table('bus_route')
 						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
@@ -274,7 +274,7 @@ class getBusInfoController extends Controller
 		$bus_stop_id = $request->input('bus_stop_id');
 		$dataset_BusService = new Collection;
 		$currentTime = round(microtime(true));
-		$currentTime = '2015-12-28 15:41:00';
+		//$currentTime = '2015-12-28 15:41:00';
 		
 		$bus_service_Query = DB::table('etav2 AS e')
 							->select('e.route_id','bus_route.bus_service_no')
