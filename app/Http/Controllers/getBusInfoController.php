@@ -283,7 +283,7 @@ class getBusInfoController extends Controller
 		$dataset_BusService = new Collection;
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
-		$currentTime = round(microtime(true));
+		//$currentTime = round(microtime(true));
 		//$currentTime = '2015-12-28 15:41:00';
 		
 		$bus_service_Query = DB::table('etav2 AS e')
@@ -340,6 +340,7 @@ class getBusInfoController extends Controller
 	function calculateEta($calcETA_Result)
 	{
 		$dataset_calcETA = new Collection;
+		date_default_timezone_set('Asia/Singapore');
 		$currentTime = round(microtime(true));
 		//$currentTime = round(94727184073);
 		//echo $currentTime;
