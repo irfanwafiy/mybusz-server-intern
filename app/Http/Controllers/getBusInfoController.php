@@ -178,7 +178,7 @@ class getBusInfoController extends Controller
 	{
 		$route = $request->input('route');
 		$bus_id = $request->input('bus_id');
-		$time = date('Y/m/d h:i:s', time());
+		$time = date('Y/m/d H:i:s', time());
 		//$time = '2014/12/29 10:19:48';
 		$getBusstopList_Query = DB::table('location_datav2')
 									->select('location_datav2.latitude','location_datav2.longitude')
@@ -244,7 +244,7 @@ class getBusInfoController extends Controller
 		$bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
 		$dataset_ETA = new Collection;
-		$time = date('Y/m/d h:i:s', time());
+		$time = date('Y/m/d H:i:s', time());
 		//$time = '2014/10/29 10:19:48';
 		
 		$getETA_Query = DB::table('bus_route')
@@ -273,7 +273,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$dataset_BusService = new Collection;
-		$time = date('Y/m/d h:i:s', time());
+		$time = date('Y/m/d H:i:s', time());
 		$currentTime = round(microtime(true));
 		//$currentTime = '2015-12-28 15:41:00';
 		
