@@ -443,9 +443,9 @@ class DatabaseController
 		{
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
-			$calcTime = date("Y/m/d h:i:s", $time +strtotime("+0 seconds"));
-			$get_Time = date('Y/m/d h:i:s', time());
-			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
+			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+			$get_Time = date('Y-m-d H:i:s', time());
+			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$ ,$avgspeed);
 			
 		}
 	}
