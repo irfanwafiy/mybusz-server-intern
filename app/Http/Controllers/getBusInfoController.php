@@ -340,9 +340,8 @@ class getBusInfoController extends Controller
 	function calculateEta($calcETA_Result)
 	{
 		$dataset_calcETA = new Collection;
-		
+		date_default_timezone_set('Asia/Singapore');
 		$currentTime = round(microtime(true));
-		$currentTime->setTimezone(new DateTimeZone('Asia/Singapore'));
 		//$currentTime = round(94727184073);
 		//echo $currentTime;
 		//dd(json_encode($getETA_Query));
