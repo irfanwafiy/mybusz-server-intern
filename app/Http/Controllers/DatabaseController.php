@@ -363,7 +363,7 @@ class DatabaseController
 		$eta ='2018-01-12 10:37:32';
 		$time = '2018-01-12 10:33:08';
 		$avgspeed = -1; */
-		
+		var_dump("time : ".$time." eta : ".$eta);
 		$uploadETAV2_Query = DB::table('etaV2')
 						->insert([
 						'bus_id'=>$bus_id,
@@ -374,7 +374,7 @@ class DatabaseController
 						'avgspeed'=>$avgspeed
 						]);
 						
-		var_dump($uploadETAV2_Query);
+		
 	}
 	
 	public function insertLocationDataV2($bus_id, $route_id, $imei, $newlocation, $newlocation1, $speedkmhr)
