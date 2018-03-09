@@ -34,6 +34,7 @@ Route::get('/updateLocation', 'getBusInfoController@updateLocation');
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
+Route::get('/getHistoryETA', 'DatabaseController@getHistoryETA');
 
 
 Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
