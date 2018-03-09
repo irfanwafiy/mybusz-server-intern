@@ -423,7 +423,7 @@ class DatabaseController
 		$route_id =1;
 		$bus_service_no =7;
 		$busstop_id = 1001;
-		$keepTime = 10; 
+		$keepTime = 0; 
 	
 		$getHistoryETA_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
@@ -446,8 +446,10 @@ class DatabaseController
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			
-			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+			//$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
+			$calcTime = $get_Time + $time;
+			
 			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time ,$avgspeed);
 			
 		}
