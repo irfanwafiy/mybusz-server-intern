@@ -546,9 +546,10 @@ class userController extends Controller
                                                                                                                                                   
                                                                                                                                                   else if ($speed == -1) 
                                                                                                                                                   {
-																																							
-																																						   $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($x+$routeOrder+1,$routeNo[$g]);                                                                                                
-                                                                                                                                                           $getDatabaseClass->getHistoryETA($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id, 0);
+																																							$routeNum = $x+$routeOrder+1;
+																																						   $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($routeNum,$routeNo[$g]);                                                                                                
+                                                                                                                                                           print($bus_stop_id);
+																																						   $getDatabaseClass->getHistoryETA($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id, 0);
                                                                                                                                                            break;
                                                                                                                                                   }
                                                                                                                                                   
