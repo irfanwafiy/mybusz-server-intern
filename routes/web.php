@@ -25,7 +25,7 @@ Route::get('/getBusRoute/{route_id}', 'getBusInfoController@getBusRoute');
 Route::get('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
 Route::get('/getBusService', 'getBusInfoController@getBusService');
 Route::get('/getBusStop', 'getBusInfoController@getBusStop');
-Route::get('/getBusstopRoute', 'getBusInfoController@getBusstopRoute');
+Route::post('/getBusstopRoute', 'getBusInfoController@getBusstopRoute');
 Route::get('/getLocationData', 'getBusInfoController@getLocationData');
 Route::get('/getNearbyBusStop', 'getBusInfoController@getNearbyBusStop');
 Route::get('/getBusstopList', 'getBusInfoController@getBusstopList');
