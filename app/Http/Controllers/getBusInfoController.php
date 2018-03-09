@@ -143,8 +143,7 @@ class getBusInfoController extends Controller
 		
 		
 		
-		return response()->json([
-			'dataset_busstopRoute'=>$getBusstopRoute_Query
+		return response()->json([$getBusstopRoute_Query
 			])->setStatusCode(200);
 	}
 
