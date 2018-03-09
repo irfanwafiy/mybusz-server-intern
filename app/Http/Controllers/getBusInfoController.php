@@ -143,8 +143,8 @@ class getBusInfoController extends Controller
 		
 		
 		
-		return response()->json([$getBusstopRoute_Query
-			])->setStatusCode(200);
+		return response()->json($getBusstopRoute_Query
+			)->setStatusCode(200);
 	}
 
 	public function getLocationData()
