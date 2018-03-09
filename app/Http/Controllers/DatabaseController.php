@@ -489,7 +489,7 @@ class DatabaseController
 												->where('route_order',$route_order)
 												->first();
 		
-		var_dump($getbusstopid_byroute_order_Query);
+		var_dump($getbusstopid_byroute_order_Query->bus_stop_id);
 		die();
 		return $getbusstopid_byroute_order_Query->bus_stop_id;
 	}
