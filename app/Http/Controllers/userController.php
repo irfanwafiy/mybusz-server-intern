@@ -549,7 +549,7 @@ class userController extends Controller
 																																							$routeNum = $x+$routeOrder+1;
 																																						   $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($routeNum,$routeNo[$g]);                                                                                                
                                                                                                                                                            print($bus_stop_id);
-																																						   $getDatabaseClass->getHistoryETAV1($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id, 0);
+																																						   $getDatabaseClass->getHistoryETA($data->bus_id,$routeNo[$g],$data->bus_service_no,$bus_stop_id, 0);
                                                                                                                                                            break;
                                                                                                                                                   }
                                                                                                                                                   

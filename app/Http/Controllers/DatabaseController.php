@@ -415,15 +415,15 @@ class DatabaseController
 								->where('time',$time)
 								->update(['flag' => $flag]);
 	}
-	//public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
+	public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
 	//tested
-	public function getHistoryETA()
+	//public function getHistoryETA()
 	{
-		 $bus_id =1;
+		 /* $bus_id =1;
 		$route_id =1;
 		$bus_service_no =7;
 		$busstop_id = 1001;
-		$keepTime = 0; 
+		$keepTime = 0;  */
 	
 		$getHistoryETA_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
