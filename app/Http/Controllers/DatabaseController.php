@@ -421,7 +421,7 @@ class DatabaseController
 		$route_id =1;
 		$bus_service_no =7;
 		$busstop_id = 1001;
-		$keepTime = 0; 
+		$keepTime = 10; 
 	
 		$getHistoryETA_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
