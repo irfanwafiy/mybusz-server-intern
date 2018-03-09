@@ -8,7 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+date_default_timezone_set('Asia/Singapore');
 class DatabaseController
 {
 	public function getTime()
@@ -446,9 +446,9 @@ class DatabaseController
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			
-			//$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
+			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			$calcTime = $get_Time + $time;
+			//$calcTime = $get_Time + $time;
 			
 			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time ,$avgspeed);
 			
