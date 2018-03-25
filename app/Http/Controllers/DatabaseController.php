@@ -461,6 +461,7 @@ class DatabaseController
 									->first();
 			$count_test++;						
 			print($count_test."->");
+			print($bus_stop_id_next->bus_stop_id.">>");
 			print_r($getHistoryETA_Query);
 			print("<br>");
 			$getHistoryETA_Dataset->push($getHistoryETA_Query);
