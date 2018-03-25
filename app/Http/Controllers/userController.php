@@ -1949,6 +1949,7 @@ class userController extends Controller
                              
                              foreach($calculateHistoricDataAverage_Query as $singleset)
                              {
+								 print($singleset);
                                        $data[] = $singleset;
                              }
                              
