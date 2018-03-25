@@ -230,11 +230,14 @@ class DatabaseController
 		$bus_service_no = 7;
 		$busstop_id = 1002;
 		$keepTime = 900; */
+		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
+		$route_order_next = $bus_stop_route_order + 1;
+		$bus_stop_id_next = self:getbusstopid_byroute_order($route_order_next,$route_id); 
 		$getHistoryETAV1_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
-									->where('bus_stop_id_next','>',$busstop_id)
+									->where('bus_stop_id_next',$bus_stop_id_next)
 									->get();
 									
 		if($keepTime != 0)
@@ -419,17 +422,14 @@ class DatabaseController
 	//tested
 	//public function getHistoryETA()
 	{
-		 /* $bus_id =1;
-		$route_id =1;
-		$bus_service_no =7;
-		$busstop_id = 1001;
-		$keepTime = 0;  */
-	
-		$getHistoryETA_Query = DB::table('avg_speed_calculated')
+		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
+		$route_order_next = $bus_stop_route_order + 1;
+		$bus_stop_id_next = self:getbusstopid_byroute_order($route_order_next,$route_id); 
+		$getHistoryETAV1_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
-									->where('bus_stop_id_next','>',$busstop_id)
+									->where('bus_stop_id_next',$bus_stop_id_next)
 									->get();
 									
 		if($keepTime != 0)
@@ -441,18 +441,18 @@ class DatabaseController
 			$time = 0;
 		}
 		
-		foreach($getHistoryETA_Query as $singleset)
+		foreach($getHistoryETAV_Query as $singleset)
 		{
+			
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
-			
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			//$calcTime = $get_Time + $time;
-			
-			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time ,$avgspeed);
+			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
 			
 		}
+		
+		
 	}
 	
 	public function getFirstBusstopIDFromRoute($bus_id,$route_id)
@@ -483,11 +483,8 @@ class DatabaseController
 	}
 	
 	public function getbusstopid_byroute_order($route_order,$route_id)
-	//tested
-	//public function getFirstBusstopIDFromRoute()
 	{
-		/* $bus_id = 1;
-		$route_id =1; */
+		
 		$getbusstopid_byroute_order_Query = DB::table('route_bus_stop')
 												->select('bus_stop_id')
 												->where('route_id',$route_id)
@@ -497,6 +494,19 @@ class DatabaseController
 		
 		return $getbusstopid_byroute_order_Query->bus_stop_id;
 	}
+	public function getroute_order_bybusstopid($bus_stop_id,$route_id)
+	{
+		
+		$getroute_order_bybusstopid_Query = DB::table('route_bus_stop')
+												->select('route_order')
+												->where('route_id',$route_id)
+												->where('bus_stop_id',$bus_stop_id)
+												->first();
+		
+		
+		return $getroute_order_bybusstopid_Query->route_order;
+	}
+	
 	
 	
 	

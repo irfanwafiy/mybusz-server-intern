@@ -488,7 +488,7 @@ class userController extends Controller
                                         
                                                                                                  $userUploadData = array_search(trim($data->latitude.",".$data->longitude),$busroutecoords);
                                                                                                  $fifthBusstop = array_search(trim($busstop[4]),$busroutecoords);
-                                                                                                 $checkHistoryExist = $getDatabaseClass->checkHistoryExist($routeNo[$g],$data->bus_id);
+                                                                                                 $checkHistoryExist = $getDatabaseClass->checkHistoryExistV2($routeNo[$g],$data->bus_id);
                                                                                                 
                                                                                                  if($data->flag == 0)
                                                                                                  {
@@ -564,7 +564,7 @@ class userController extends Controller
 																																							$hi1=$x+$routeOrder;
 																																							$bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);
 																													 
-                                                                                                                                                            $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                            $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                   }
                                                                                                                                                   
                                                                                                                                                   $keeptime = 0;
@@ -587,7 +587,7 @@ class userController extends Controller
                                                                                                                                                                      //$ETA = date("Y-m-d H:i:s", $time +$sim_date);
                                                                                                                                                                      
                                                                                                                                                                      $keeptime = $time;
-                                                                                                                                                                     $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                                                                     $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                                                                      //$getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$ETA,date('Y-m-d H:i:s', $sim_date),$speed);
                                                                                                                                                             }
                                                                                                                                                             
@@ -622,12 +622,12 @@ class userController extends Controller
                                                                                                                               //$hi1=$routeID+sizeof($busstopKM);
                                                                                                                               $hi1=$routeOrder+sizeof($busstopKM);
 																															  $bus_stop_id = $getDatabaseClass->getbusstopid_byroute_order($hi1,$routeNo[$g]);                                                                                                 
-                                                                                                                              $getDatabaseClass->uploadETA($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
+                                                                                                                              $getDatabaseClass->uploadETAV2($data->bus_id,$routeNo[$g],$bus_stop_id,$time,date('Y-m-d H:i:s', time()),$speed);
                                                                                                                      }
                                                                                                            }
                                                                                                  }
                                                                                                  
-                                                                                                 $getDatabaseClass->updateFlag(1,$data->bus_id,$data->route_id,$data->time);
+                                                                                                 $getDatabaseClass->updateFlagV2(1,$data->bus_id,$data->route_id,$data->time);
 				}
 				
 				
@@ -728,7 +728,7 @@ class userController extends Controller
 					
                     public function viewETATable()
                     {
-                             $viewETATable_Query = DB::table('eta')
+                             $viewETATable_Query = DB::table('etav2')
                                                                             ->get();
                              
                              $i = 0;
@@ -744,7 +744,7 @@ class userController extends Controller
 					
 					public function viewETATableGet()
                     {
-                             $viewETATable_Query = DB::table('eta')
+                             $viewETATable_Query = DB::table('etav2')
                                                                             ->get();
                              
                              $i = 0;
