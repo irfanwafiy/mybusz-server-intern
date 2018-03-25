@@ -448,7 +448,7 @@ class DatabaseController
 									->select('bus_stop_id')
 									->where('route_order', '>',$bus_stop_route_order)
 									->get();
-		
+		print("Hello");
 		foreach($route_order_next as $bus_stop_id_next)
 		{
 		
@@ -457,7 +457,7 @@ class DatabaseController
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
 									->where('bus_stop_id_next',$bus_stop_id_next)
-									->get();
+									->first();
 									
 			$getHistoryETA_Dataset_singleset = [
 				'getHistoryETA_Query' => $getHistoryETA_Query
@@ -477,7 +477,7 @@ class DatabaseController
 		
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
-			print($singleset['getHistoryETA_Query']->avg_time);
+			print($singleset);
 			$time = $singleset['getHistoryETA_Query']->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
