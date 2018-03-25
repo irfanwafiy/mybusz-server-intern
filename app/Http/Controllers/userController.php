@@ -1952,7 +1952,7 @@ class userController extends Controller
 								 
                                        $data[] = $singleset;
                              }
-                             print($data[1]);
+                             print($data[1]->bus_stop_id_previous);
                              $calculateHistoricDataAverage_Query3 = DB::table('avg_speed_calculated')
                                                                                                  ->where('route_id', '!=', $routeno)
                                                                                                  ->get();
