@@ -474,7 +474,7 @@ class userController extends Controller
 			for($g = 0;  $g <sizeof($routeNo); $g++)
 			{
 				$routeOrder = 1;
-				$data = self::getFurthestRecord($totalbus[$q],$routeNo[$g]);
+				$data = self::getFurthestRecordV2($totalbus[$q],$routeNo[$g]);
                                                  
 				if(!empty($data))
 				{
@@ -492,7 +492,7 @@ class userController extends Controller
                                                                                                 
                                                                                                  if($data->flag == 0)
                                                                                                  {
-                                                                                                           $location_data = $getDatabaseClass->retrieveLocationData($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
+                                                                                                           $location_data = $getDatabaseClass->retrieveLocationDataV2($routeNo[$g],$data->bus_id,$data->time,date("Y-m-d H:i:s",strtotime("-5 minutes",strtotime($data->time))));
                                                                                                            $bus_service_no = $getDatabaseClass->getBusServiceNo($routeNo[$g],$data->bus_id);
                                                                                                            $speed = self::calculateAverageSpeed($bus_service_no, $routeNo[$g], $location_data);
                                                                                                            
