@@ -430,10 +430,16 @@ class DatabaseController
 								->where('time',$time)
 								->update(['flag' => $flag]);
 	}
-	public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
+	//public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
 	//tested
-	//public function getHistoryETA()
+	public function getHistoryETA()
 	{
+		$bus_id = 5;
+		$route_id = 5;
+		$bus_service_no = "859A";
+		$busstop_id = 1209;
+		$keepTime =0;
+		
 		$getHistoryETA_Dataset = new Collection;
 		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
 		
