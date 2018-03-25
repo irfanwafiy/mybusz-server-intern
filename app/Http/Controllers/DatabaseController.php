@@ -263,11 +263,11 @@ class DatabaseController
 		foreach($getHistoryETAV1_Dataset as $singleset)
 		{
 			
-			$time = $singleset->'getHistoryETAV1_Query'->avg_time + $time;
+			$time = $singleset->getHistoryETAV1_Query->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			self::uploadETA($bus_id,$route_id,$singleset->'getHistoryETA_Query'->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
+			self::uploadETA($bus_id,$route_id,$singleset->getHistoryETAV1_Query->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
 			
 		}
 	}
@@ -471,11 +471,11 @@ class DatabaseController
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
 			
-			$time = $singleset->'getHistoryETA_Query'->avg_time + $time;
+			$time = $singleset->getHistoryETA_Query->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			self::uploadETAV2($bus_id,$route_id,$singleset->'getHistoryETA_Query'->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
+			self::uploadETAV2($bus_id,$route_id,$singleset->getHistoryETA_Query->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
 			
 		}
 		
