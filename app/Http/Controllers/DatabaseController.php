@@ -459,8 +459,8 @@ class DatabaseController
 									->where('bus_service_no',$bus_service_no)
 									->where('bus_stop_id_next',$bus_stop_id_next->bus_stop_id)
 									->first();
-									
-			print($count_test++."->");
+			$count_test++;						
+			print($count_test."->");
 			print_r($getHistoryETA_Query);
 			print("<br>");
 			$getHistoryETA_Dataset->push($getHistoryETA_Query);
