@@ -1981,16 +1981,19 @@ class userController extends Controller
                                        
                                        for($o=0; $o<sizeof($data); $o++)
                                        {
-												print($data[$o]->start);
-												print($busstop[$i]);
+												
                                                  if($data[$o]->start == $busstop[$i])
                                                  {
+													 
+													 print($data[$o]->start);
+												
                                                           $avgSpeed = $avgSpeed + $data[$o]->avg_speed;
                                                           $avgTime = $avgTime + $data[$o]->avg_time;
                                                           $counter = $counter + 1;
                                                           $getDay = $data[$o]->day;
                                                           $busstopid_previous = $data[$o]->bus_stop_id_previous;
                                                           $busstopid_next = $data[$o]->bus_stop_id_next;
+														  print($busstop[$i]);
                                                  }
                                        }
                                        
