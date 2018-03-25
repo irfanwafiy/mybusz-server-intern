@@ -460,7 +460,7 @@ class DatabaseController
 									->first();
 									
 			
-
+			print_r($getHistoryETA_Query);
 			$getHistoryETA_Dataset->push($getHistoryETA_Query);
 		}
 									
@@ -475,7 +475,7 @@ class DatabaseController
 		
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
-			print_r($getHistoryETA_Dataset);
+			
 			die();
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
