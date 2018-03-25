@@ -1983,9 +1983,9 @@ class userController extends Controller
                                        {
 												$compare1 = "".$data[$o]->start;
 												$compare2 = "".$busstop[$i];
-												print($compare1."===========".$compare2);
+												print($compare2."===========".$compare1);
 												print("<br>");
-												print(strcmp($compare1,$compare2));
+												print(strcmp($compare2,$compare1));
 												
                                                  if(strcmp($compare1,$compare2) === 0)
                                                  {
