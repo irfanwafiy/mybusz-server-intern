@@ -1983,8 +1983,9 @@ class userController extends Controller
                                        {
 												$compare1 = $data[$o]->start;
 												$compare2 = $busstop[$i];
-												
-                                                 if($compare1 == $compare2)
+												print($compare1."===========".$compare2);
+												print("<br>")
+                                                 if($compare1 === $compare2)
                                                  {
 													 
 													 print($data[$o]->start);
@@ -1999,8 +2000,7 @@ class userController extends Controller
                                                  }
                                        }
                                        
-									   if($counter > 0)
-									   {
+									   
                                        $avgSpeedFinal = $avgSpeed / $counter;
                                        $avgTimeFinal = $avgTime / $counter;
                                        
@@ -2016,8 +2016,6 @@ class userController extends Controller
                                                                                                                     'avg_time' => $avgTimeFinal,
                                                                                                                     'day' => $getDay
                                                                                                                      ]);
-																													 
-									   }
                                        
                                        
                              }
