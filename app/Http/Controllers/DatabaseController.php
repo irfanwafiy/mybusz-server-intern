@@ -425,7 +425,7 @@ class DatabaseController
 		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
 		$route_order_next = $bus_stop_route_order + 1;
 		$bus_stop_id_next = self::getbusstopid_byroute_order($route_order_next,$route_id); 
-		$getHistoryETAV1_Query = DB::table('avg_speed_calculated')
+		$getHistoryETA_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
@@ -441,7 +441,7 @@ class DatabaseController
 			$time = 0;
 		}
 		
-		foreach($getHistoryETAV_Query as $singleset)
+		foreach($getHistoryETA_Query as $singleset)
 		{
 			
 			$time = $singleset->avg_time + $time;
