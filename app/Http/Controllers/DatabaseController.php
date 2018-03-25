@@ -448,7 +448,7 @@ class DatabaseController
 									->select('bus_stop_id')
 									->where('route_order', '>',$bus_stop_route_order)
 									->get();
-		print("Hello");
+		
 		foreach($route_order_next as $bus_stop_id_next)
 		{
 		
@@ -459,11 +459,9 @@ class DatabaseController
 									->where('bus_stop_id_next',$bus_stop_id_next)
 									->first();
 									
-			$getHistoryETA_Dataset_singleset = [
-				'getHistoryETA_Query' => $getHistoryETA_Query
-				];
+			
 
-			$getHistoryETA_Dataset->push($getHistoryETA_Dataset_singleset);
+			$getHistoryETA_Dataset->push($getHistoryETA_Query);
 		}
 									
 		if($keepTime != 0)
@@ -478,11 +476,11 @@ class DatabaseController
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
 			print($singleset);
-			$time = $singleset['getHistoryETA_Query']->avg_time + $time;
+			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			self::uploadETAV2($bus_id,$route_id,$singleset['getHistoryETA_Query']->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
+			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
 			
 		}
 		
