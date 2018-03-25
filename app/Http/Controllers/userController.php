@@ -1984,7 +1984,7 @@ class userController extends Controller
 												$compare1 = $data[$o]->start;
 												$compare2 = $busstop[$i];
 												print($compare1."===========".$compare2);
-												print("<br>")
+												print("<br>");
                                                  if($compare1 === $compare2)
                                                  {
 													 
