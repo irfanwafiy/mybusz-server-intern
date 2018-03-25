@@ -1999,6 +1999,8 @@ class userController extends Controller
                                                  }
                                        }
                                        
+									   if($counter > 0)
+									   {
                                        $avgSpeedFinal = $avgSpeed / $counter;
                                        $avgTimeFinal = $avgTime / $counter;
                                        
@@ -2014,6 +2016,8 @@ class userController extends Controller
                                                                                                                     'avg_time' => $avgTimeFinal,
                                                                                                                     'day' => $getDay
                                                                                                                      ]);
+																													 
+									   }
                                        
                                        
                              }
