@@ -232,7 +232,9 @@ class DatabaseController
 		
 		$route_order_next = DB::table('route_bus_stop')
 									->select('bus_stop_id')
-									->where('route_order', '>',$bus_stop_route_order)
+									->where('route_id',$route_id)
+									->where('route_order', '>=',$bus_stop_route_order)
+									->orderBy('route_order', 'asc')
 									->get();
 		
 		foreach($route_order_next as $bus_stop_id_next)
@@ -242,14 +244,14 @@ class DatabaseController
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
-									->where('bus_stop_id_next',$bus_stop_id_next)
+									->where('bus_stop_id_next',$bus_stop_id_next->bus_stop_id)
 									->first();
-									
-			$getHistoryETAV1_Dataset_singleset = [
-				'getHistoryETAV1_Query' => $getHistoryETAV1_Query
-				];
-
-			$getHistoryETAV1_Dataset->push($getHistoryETAV1_Dataset_singleset);
+			
+			if($getHistoryETAV1_Query != null)
+			{
+				
+				$getHistoryETA_Dataset->push($getHistoryETAV1_Query);
+			}
 		}
 									
 		if($keepTime != 0)
@@ -264,11 +266,12 @@ class DatabaseController
 		foreach($getHistoryETAV1_Dataset as $singleset)
 		{
 			
-			$time = $singleset['getHistoryETAV1_Query']->avg_time + $time;
+			
+			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
-			self::uploadETA($bus_id,$route_id,$singleset['getHistoryETAV1_Query']->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
+			self::uploadETA($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
 			
 		}
 	}
@@ -430,15 +433,11 @@ class DatabaseController
 								->where('time',$time)
 								->update(['flag' => $flag]);
 	}
-	//public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
+	public function getHistoryETA($bus_id,$route_id,$bus_service_no,$busstop_id,$keepTime)
 	//tested
-	public function getHistoryETA()
+	//public function getHistoryETA()
 	{
-		$bus_id = 5;
-		$route_id = 5;
-		$bus_service_no = "859A";
-		$busstop_id = 1209;
-		$keepTime =0;
+		
 		
 		$getHistoryETA_Dataset = new Collection;
 		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
