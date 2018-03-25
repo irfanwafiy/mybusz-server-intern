@@ -447,7 +447,7 @@ class DatabaseController
 		$route_order_next = DB::table('route_bus_stop')
 									->select('bus_stop_id')
 									->where('route_id',$route_id)
-									->where('route_order', '>',$bus_stop_route_order)
+									->where('route_order', '>=',$bus_stop_route_order)
 									->get();
 		$count_test =0;
 		foreach($route_order_next as $bus_stop_id_next)
