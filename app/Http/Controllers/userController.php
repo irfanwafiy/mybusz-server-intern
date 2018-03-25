@@ -1982,7 +1982,7 @@ class userController extends Controller
                                        for($o=0; $o<sizeof($data); $o++)
                                        {
 												
-                                                 if($data[$o]->start == $busstop[$i])
+                                                 if($data[$o]->start === $busstop[$i])
                                                  {
 													 
 													 print($data[$o]->start);
