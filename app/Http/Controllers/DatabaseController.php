@@ -477,7 +477,7 @@ class DatabaseController
 		
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
-			print($singleset);
+			
 			$time = $singleset['getHistoryETA_Query']->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
