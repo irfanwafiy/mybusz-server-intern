@@ -437,7 +437,7 @@ class DatabaseController
 		$bus_id = 5;
 		$route_id = 5;
 		$bus_service_no = "859A";
-		$busstop_id = 1201;
+		$busstop_id = 1209;
 		$keepTime =0;
 		
 		$getHistoryETA_Dataset = new Collection;
@@ -450,7 +450,7 @@ class DatabaseController
 									->where('route_order', '>=',$bus_stop_route_order)
 									->orderBy('route_order', 'asc')
 									->get();
-		$count_test =0;
+		
 		foreach($route_order_next as $bus_stop_id_next)
 		{
 		
@@ -463,11 +463,7 @@ class DatabaseController
 			
 			if($getHistoryETA_Query != null)
 			{
-				$count_test++;						
-				print($count_test."->");
-				print($bus_stop_id_next->bus_stop_id.">>");
-				print_r($getHistoryETA_Query);
-				print("<br>");
+				
 				$getHistoryETA_Dataset->push($getHistoryETA_Query);
 			}
 		}
@@ -484,7 +480,7 @@ class DatabaseController
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
 			
-			die();
+			
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
