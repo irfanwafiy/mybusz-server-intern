@@ -37,7 +37,7 @@ class VerifyCsrfToken extends Middleware
 		'/bus_insertlocation',
 		'/syd_Cal',
 		'/getKM_syd',
-		'/getBusstopRoute'
+		'/getBusstopRoute',
 		'/getHistoryETA'
     ];
 }
