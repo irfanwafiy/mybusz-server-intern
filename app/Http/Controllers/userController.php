@@ -1949,7 +1949,7 @@ class userController extends Controller
                              
                              foreach($calculateHistoricDataAverage_Query as $singleset)
                              {
-								 print($singleset);
+								 print($singleset->bus_stop_id_previous);
                                        $data[] = $singleset;
                              }
                              
