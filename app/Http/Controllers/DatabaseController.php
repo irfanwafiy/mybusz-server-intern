@@ -448,7 +448,7 @@ class DatabaseController
 									->select('bus_stop_id')
 									->where('route_order', '>',$bus_stop_route_order)
 									->get();
-		
+		$count_test =0;
 		foreach($route_order_next as $bus_stop_id_next)
 		{
 		
@@ -459,8 +459,9 @@ class DatabaseController
 									->where('bus_stop_id_next',$bus_stop_id_next->bus_stop_id)
 									->first();
 									
-			
+			print($count_test++."->");
 			print_r($getHistoryETA_Query);
+			print("<br>");
 			$getHistoryETA_Dataset->push($getHistoryETA_Query);
 		}
 									
