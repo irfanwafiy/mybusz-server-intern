@@ -956,7 +956,7 @@ class userController extends Controller
 					 public function getAllBeaconInfo()
 					{
 						$getDatabaseClass = self::getDatabaseClass();
-						$routeID = $getDatabaseClass->getpi_routeid($pi_id);
+						//$routeID = $getDatabaseClass->getpi_routeid($pi_id);
 						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon();
 						
 						print($getAllBeaconInfo);
