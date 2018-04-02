@@ -47,9 +47,11 @@ class getBusInfoController extends Controller
 
 	$dataset_busRoute->push($getBusRoute_singleset);
 	}
-	return response()->json([
+	
+	print(json_encode($dataset_busRoute));
+	/* return response()->json([
 		'dataset_busRoute'=>$dataset_busRoute
-		])->setStatusCode(200);
+		])->setStatusCode(200); */
 	}
 	
 	public function getBusRouteInfo(Request $request)
@@ -90,10 +92,10 @@ class getBusInfoController extends Controller
 			
 		}
 		
-		
-		return response()->json([
+		print(json_encode($dataset_busRouteInfo));
+		/* return response()->json([
 		'dataset_busRouteInfo'=>$dataset_busRouteInfo
-		])->setStatusCode(200);
+		])->setStatusCode(200); */
 		//return view('welcometest',compact('bus_route_info'));
 	}
 	
@@ -124,9 +126,11 @@ class getBusInfoController extends Controller
 
 			$dataset_busStop->push($getBusStop_singleset);
 		}
-	return response()->json([
+		
+		print(json_encode($dataset_busStop));
+	/* return response()->json([
 		'dataset_busStop'=>$dataset_busStop
-		])->setStatusCode(200);					
+		])->setStatusCode(200); */					
 		
 	}
 	
@@ -155,9 +159,10 @@ class getBusInfoController extends Controller
 		
 	
 		
-		return response()->json([
+		print(json_encode($getLocationData_Query));
+		/* return response()->json([
 			'dataset_locationdata'=>$getLocationData_Query
-			])->setStatusCode(200);
+			])->setStatusCode(200); */
 	}
 	
 	public function getNearbyBusStop(Request $request)
@@ -173,9 +178,11 @@ class getBusInfoController extends Controller
 										->orderBy('distance')
 										->get();
 		
-		return response()->json([
+		
+		print(json_encode($getNearbyBusStop_Query));
+		/* return response()->json([
 			'dataset_NearbyBusStop'=>$getNearbyBusStop_Query
-			])->setStatusCode(200);
+			])->setStatusCode(200); */
 	}
 
 	public function getBusstopList(Request $request)
@@ -237,10 +244,10 @@ class getBusInfoController extends Controller
 									->where('bus_stop.bus_stop_id', '>', $bus_stop_id)
 									->get();
 		
-		
-		return response()->json([
+		print(json_encode($getBusstopList_Query_Final));
+		/* return response()->json([
 			'dataset_BusstopList'=>$getBusstopList_Query_Final
-			])->setStatusCode(200);
+			])->setStatusCode(200); */
 	}
 	
 	public function getETA(Request $request)
@@ -270,9 +277,10 @@ class getBusInfoController extends Controller
 		
 		$dataset_ETA = self::calculateEta($getETA_Query);
 		
-		return response()->json([
+		print(json_encode($dataset_ETA));
+		/* return response()->json([
 			'dataset_ETA'=>$dataset_ETA
-			])->setStatusCode(200);
+			])->setStatusCode(200); */
 	}
 	
 	public function getBusService(Request $request)
@@ -307,9 +315,10 @@ class getBusInfoController extends Controller
 		
 		$dataset_BusService = self::calculateEta($bus_service_Query);
 		
-		return response()->json([
+		print(json_encode($dataset_BusService));
+		/* return response()->json([
 			'dataset_BusService'=>$dataset_BusService
-			])->setStatusCode(200);
+			])->setStatusCode(200); */
 	}
 	
 	public function updateLocation(Request $request)
