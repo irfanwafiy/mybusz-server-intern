@@ -586,7 +586,7 @@ class DatabaseController
 	public function getAllBusIDByBeacon($pi_id)
 	{
 		$getAllBusIDByBeacon_Query = DB::table('bus')
-									->select('bus_id','beacon_mac')
+									->select('bus.bus_id','bus.beacon_mac')
 									->join('route_pi','route_pi.route_id','=','route.route_id')
 									->join('bus_route','bus_route.bus_id','=','bus.bus_id')
 									->join('route','route.route_id','=','bus_route.route_id')
