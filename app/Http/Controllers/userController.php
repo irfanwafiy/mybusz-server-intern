@@ -957,7 +957,7 @@ class userController extends Controller
 					{
 						$pi_id = $request->input('pi_id');
 						$getDatabaseClass = self::getDatabaseClass();
-						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon();
+						$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon($pi_id);
 						
 						return $getAllBeaconInfo;
 						
