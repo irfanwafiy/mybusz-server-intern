@@ -277,10 +277,12 @@ class getBusInfoController extends Controller
 		
 		$dataset_ETA = self::calculateEta($getETA_Query);
 		
-		print(json_encode($dataset_ETA));
-		/* return response()->json([
+		//print(json_encode($dataset_ETA));
+		
+		print(response()->json([
 			'dataset_ETA'=>$dataset_ETA
-			])->setStatusCode(200); */
+			])->setStatusCode(200;
+		// return ; 
 	}
 	
 	public function getBusService(Request $request)
