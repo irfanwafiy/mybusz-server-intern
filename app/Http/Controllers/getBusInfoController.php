@@ -358,7 +358,7 @@ class getBusInfoController extends Controller
 		//dd(json_encode($getETA_Query));
 		foreach($calcETA_Result as $result)
 		{
-			print($result->eta);
+			//print($result->eta);
 			$result->eta = self::processEta($currentTime, $result->eta);
 			
 			//print($result);
