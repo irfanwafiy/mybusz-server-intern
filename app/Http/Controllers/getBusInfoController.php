@@ -297,11 +297,9 @@ class getBusInfoController extends Controller
 		$bus_service_Query = DB::table('etav2 AS e')
 							->select('e.route_id','bus_route.bus_service_no')
 							->selectraw('GROUP_CONCAT(DISTINCT eta) AS eta')
-							->join('bus_route', function ($join) 
-							{
-								$join->on('bus_route.bus_id', '=', 'e.bus_id')
-									->on('bus_route.route_id','=', 'e.route_id');
-							})->where('e.bus_stop_id',$bus_stop_id)
+							->where('bus_route.bus_id','=', 'e.bus_id')
+							->where('bus_route.route_id','=', 'e.route_id')
+							->where('e.bus_stop_id',$bus_stop_id)
 							->where('e.eta', '>', $time)
 							->where('e.time', '>',function($query)
 											{
