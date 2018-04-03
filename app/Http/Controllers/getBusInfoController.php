@@ -316,7 +316,7 @@ class getBusInfoController extends Controller
 		
 		$dataset_BusService = self::calculateEta($bus_service_Query);
 		
-		print(json_encode($dataset_BusService));
+		print(json_encode($bus_service_Query));
 		/* return response()->json([
 			'dataset_BusService'=>$dataset_BusService
 			])->setStatusCode(200); */
