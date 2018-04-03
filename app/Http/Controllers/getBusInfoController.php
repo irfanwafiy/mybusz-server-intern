@@ -288,7 +288,7 @@ class getBusInfoController extends Controller
 	public function getBusService(Request $request)
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
-		$dataset_BusService = new Collection;
+		$array_BusService = array();
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
 		//$currentTime = round(microtime(true));
@@ -316,9 +316,9 @@ class getBusInfoController extends Controller
 							->orderBy('eta', 'desc')
 							->get();
 		
-		$dataset_BusService = self::calculateEta($bus_service_Query);
+		$array_BusService = self::calculateEta($bus_service_Query);
 		
-		print(json_encode($dataset_BusService));
+		print(json_encode($array_BusService));
 		/* return response()->json([
 			'dataset_BusService'=>$dataset_BusService
 			])->setStatusCode(200); */
@@ -349,7 +349,8 @@ class getBusInfoController extends Controller
 	
 	function calculateEta($calcETA_Result)
 	{
-		$dataset_calcETA = new Collection;
+		//$dataset_calcETA = new Collection;
+		$arr = array();
 		date_default_timezone_set('Asia/Singapore');
 		$currentTime = round(microtime(true));
 		//$currentTime = round(94727184073);
@@ -359,9 +360,9 @@ class getBusInfoController extends Controller
 		{
 			$result->eta = self::processEta($currentTime, $result->eta);
 			
-			$dataset_calcETA->push($result);
+			array_push($arr,$result);
 		}	
-		return $dataset_calcETA;
+		return $arr;
 	}
 	
 	
