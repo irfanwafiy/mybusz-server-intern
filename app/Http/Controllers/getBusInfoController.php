@@ -386,6 +386,6 @@ class getBusInfoController extends Controller
 	function getRelativeTime($t1, $t2) {
 		$timediff = round(($t2-$t1)/60);
 
-		return $timediff."m";
+		return $timediff;
 	}
 }
