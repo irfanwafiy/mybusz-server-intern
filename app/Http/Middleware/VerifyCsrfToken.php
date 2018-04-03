@@ -38,6 +38,8 @@ class VerifyCsrfToken extends Middleware
 		'/syd_Cal',
 		'/getKM_syd',
 		'/getBusstopRoute',
-		'/getHistoryETA'
+		'/getHistoryETA',
+		'/getBusService',
+		'/getETA'
     ];
 }
