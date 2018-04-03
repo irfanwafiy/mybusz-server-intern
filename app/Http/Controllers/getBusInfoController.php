@@ -277,7 +277,7 @@ class getBusInfoController extends Controller
 		
 		$dataset_ETA = self::calculateEta($getETA_Query);
 		
-		print($getETA_Query);
+		print(json_encode($dataset_ETA));
 		
 		/* print(response()->json([
 			'dataset_ETA'=>$dataset_ETA
@@ -297,26 +297,28 @@ class getBusInfoController extends Controller
 		$bus_service_Query = DB::table('etav2 AS e')
 							->select('e.route_id','bus_route.bus_service_no')
 							->selectraw('GROUP_CONCAT(DISTINCT eta) AS eta')
-							->join('bus_route','bus_route.bus_id','=', 'e.bus_id')
-							->where('bus_route.route_id','=', 'e.route_id')
+							->join('bus_route', function ($join) 
+							{
+								$join->on('bus_route.bus_id', '=', 'e.bus_id')
+									->on('bus_route.route_id','=', 'e.route_id');
+							})
 							->where('e.bus_stop_id',$bus_stop_id)
 							->where('e.eta', '>', $time)
-							->groupBy('e.route_id', 'bus_route.bus_service_no')
-							->orderBy('eta', 'desc')
-							->get();
-							
-							/* ->where('e.time', '>',function($query)
+							->where('e.time', '>',function($query)
 											{
 												$query->selectraw('MAX( time ) - INTERVAL 30 SECOND 
 												FROM etav2 v 
 												WHERE v.bus_id = e.bus_id 
 												AND v.route_id = e.route_id');
 											}
-									) */
+									)
+							->groupBy('e.route_id', 'bus_route.bus_service_no')
+							->orderBy('eta', 'desc')
+							->get();
 		
 		$dataset_BusService = self::calculateEta($bus_service_Query);
 		
-		print(json_encode($bus_service_Query));
+		print(json_encode($dataset_BusService));
 		/* return response()->json([
 			'dataset_BusService'=>$dataset_BusService
 			])->setStatusCode(200); */
