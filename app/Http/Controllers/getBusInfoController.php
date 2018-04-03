@@ -301,17 +301,18 @@ class getBusInfoController extends Controller
 							->where('bus_route.route_id','=', 'e.route_id')
 							->where('e.bus_stop_id',$bus_stop_id)
 							->where('e.eta', '>', $time)
-							->where('e.time', '>',function($query)
+							->groupBy('e.route_id', 'bus_route.bus_service_no')
+							->orderBy('eta', 'desc')
+							->get();
+							
+							/* ->where('e.time', '>',function($query)
 											{
 												$query->selectraw('MAX( time ) - INTERVAL 30 SECOND 
 												FROM etav2 v 
 												WHERE v.bus_id = e.bus_id 
 												AND v.route_id = e.route_id');
 											}
-									)
-							->groupBy('e.route_id', 'bus_route.bus_service_no')
-							->orderBy('eta', 'desc')
-							->get();
+									) */
 		
 		$dataset_BusService = self::calculateEta($bus_service_Query);
 		
