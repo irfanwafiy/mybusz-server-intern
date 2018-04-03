@@ -368,7 +368,7 @@ class getBusInfoController extends Controller
 		if($array_BusService!=NULL)
 			print(json_encode($array_BusService));
 		else
-			response("400", "No bus service found");
+			return response("400", "No bus service found");
 			//print("No bus service found");
 			//return response( "No bus service found")->setStatusCode(400);
 		
