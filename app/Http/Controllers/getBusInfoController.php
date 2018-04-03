@@ -277,7 +277,7 @@ class getBusInfoController extends Controller
 		
 		$dataset_ETA = self::calculateEta($getETA_Query);
 		
-		print($dataset_ETA);
+		print($getETA_Query);
 		
 		/* print(response()->json([
 			'dataset_ETA'=>$dataset_ETA
