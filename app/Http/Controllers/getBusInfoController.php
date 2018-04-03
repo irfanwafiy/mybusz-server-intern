@@ -281,8 +281,8 @@ class getBusInfoController extends Controller
 		
 		print(response()->json([
 			'dataset_ETA'=>$dataset_ETA
-			])->setStatusCode(200;
-		// return ; 
+			])->setStatusCode(200));
+		 
 	}
 	
 	public function getBusService(Request $request)
