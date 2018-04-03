@@ -21,16 +21,16 @@ Route::get('/input_bus_stop_859A', function () {
     return view('syd_test_bus_stop');
 });
 
-Route::get('/getBusRoute/{route_id}', 'getBusInfoController@getBusRoute');
-Route::get('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
+Route::post('/getBusRoute', 'getBusInfoController@getBusRoute');
+Route::post('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
 Route::post('/getBusService', 'getBusInfoController@getBusService');
-Route::get('/getBusStop', 'getBusInfoController@getBusStop');
+Route::post('/getBusStop', 'getBusInfoController@getBusStop');
 Route::post('/getBusstopRoute', 'getBusInfoController@getBusstopRoute');
-Route::get('/getLocationData', 'getBusInfoController@getLocationData');
-Route::get('/getNearbyBusStop', 'getBusInfoController@getNearbyBusStop');
-Route::get('/getBusstopList', 'getBusInfoController@getBusstopList');
+Route::post('/getLocationData', 'getBusInfoController@getLocationData');
+Route::post('/getNearbyBusStop', 'getBusInfoController@getNearbyBusStop');
+Route::post('/getBusstopList', 'getBusInfoController@getBusstopList');
 Route::post('/getETA', 'getBusInfoController@getETA');
-Route::get('/updateLocation', 'getBusInfoController@updateLocation');
+Route::post('/updateLocation', 'getBusInfoController@updateLocation');
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 

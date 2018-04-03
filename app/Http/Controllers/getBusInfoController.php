@@ -31,8 +31,10 @@ class getBusInfoController extends Controller
 		return date('Y-m-d H:i:s', time());
 	}
 	
-	public function getBusRoute($route_id)
+	public function getBusRoute(Request $request)
 	{
+		
+		$route_id = $request->input('route_id');
 	$getBusRoute_Query = DB::table('route')
 	->where('route_id', $route_id)
 	->get();
@@ -48,7 +50,11 @@ class getBusInfoController extends Controller
 	$dataset_busRoute->push($getBusRoute_singleset);
 	}
 	
-	print(json_encode($dataset_busRoute));
+	if($dataset_busRoute!=NULL)
+		print(json_encode($dataset_busRoute));
+	else
+		return response( "No bus route found")->setStatusCode(400);
+	
 	/* return response()->json([
 		'dataset_busRoute'=>$dataset_busRoute
 		])->setStatusCode(200); */
@@ -56,7 +62,8 @@ class getBusInfoController extends Controller
 	
 	public function getBusRouteInfo(Request $request)
 	{
-		$dataset_busRouteInfo = new Collection;
+		
+		$array_busRouteInfo = array();
 		$bus_id = $request->input('bus_id');
 		$bus_no = $request->input('bus_no');
 		
@@ -82,17 +89,24 @@ class getBusInfoController extends Controller
 							
 			foreach($bus_route_info as $singleset)
 			{
-				$getBusRouteInfo_singleset = [
+				/* $getBusRouteInfo_singleset = [
 							'route_id' => $singleset->route_id,
 							'bus_stop' => $singleset->name
-							];
-
-				$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
+							]; */
+				array_push($array_busRouteInfo, $singleset);
+				//$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
 			}
 			
 		}
 		
-		print(json_encode($dataset_busRouteInfo));
+		
+		if($array_busRouteInfo!=NULL)
+			print(json_encode($array_busRouteInfo));
+		else
+			return response( "No bus route found")->setStatusCode(400);
+		
+		
+		//print(json_encode($dataset_busRouteInfo));
 		/* return response()->json([
 		'dataset_busRouteInfo'=>$dataset_busRouteInfo
 		])->setStatusCode(200); */
@@ -102,7 +116,8 @@ class getBusInfoController extends Controller
 	
 	public function getBusStop(Request $request)
 	{
-		$dataset_busStop = new Collection;
+		//$dataset_busStop = new Collection;
+		$array_busstop = array();
 		$route_id = $request->input('route_id');
 		
 		$getBusStop_Query = DB::table('bus_stop')
@@ -117,17 +132,23 @@ class getBusInfoController extends Controller
 							->get();
 		foreach($getBusStop_Query as $singleset)
 		{
-			$getBusStop_singleset = [
+			/* $getBusStop_singleset = [
 						'bus_stop_id' => $singleset->bus_stop_id,
 						'name' => $singleset->name,
 						'latitude' => $singleset->latitude,
 						'longitude' => $singleset->longitude
 						];
 
-			$dataset_busStop->push($getBusStop_singleset);
+			$dataset_busStop->push($getBusStop_singleset); */
+			
+			array_push($array_busstop, $singleset);
 		}
 		
-		print(json_encode($dataset_busStop));
+		if($array_busstop!=NULL)
+			print(json_encode($array_busstop));
+		else
+			return response( "No bus stop found")->setStatusCode(400);
+		
 	/* return response()->json([
 		'dataset_busStop'=>$dataset_busStop
 		])->setStatusCode(200); */					
@@ -146,7 +167,12 @@ class getBusInfoController extends Controller
 									->get();
 		
 		
-		print(json_encode($getBusstopRoute_Query));
+		
+		
+		if($getBusstopRoute_Query!=NULL)
+			print(json_encode($getBusstopRoute_Query));
+		else
+			return response( "No nearby bus stop found")->setStatusCode(400);
 		
 	}
 
@@ -159,7 +185,13 @@ class getBusInfoController extends Controller
 		
 	
 		
-		print(json_encode($getLocationData_Query));
+		
+		
+		
+		if($getLocationData_Query!=NULL)
+			print(json_encode($getLocationData_Query));
+		else
+			return response( "No location data found")->setStatusCode(400);
 		/* return response()->json([
 			'dataset_locationdata'=>$getLocationData_Query
 			])->setStatusCode(200); */
@@ -178,8 +210,11 @@ class getBusInfoController extends Controller
 										->orderBy('distance')
 										->get();
 		
+		if($getNearbyBusStop_Query!=NULL)
+			print(json_encode($getNearbyBusStop_Query));
+		else
+			return response( "No nearby bus stop found")->setStatusCode(400);
 		
-		print(json_encode($getNearbyBusStop_Query));
 		/* return response()->json([
 			'dataset_NearbyBusStop'=>$getNearbyBusStop_Query
 			])->setStatusCode(200); */
@@ -244,7 +279,12 @@ class getBusInfoController extends Controller
 									->where('bus_stop.bus_stop_id', '>', $bus_stop_id)
 									->get();
 		
-		print(json_encode($getBusstopList_Query_Final));
+		
+		if($getBusstopList_Query_Final!=NULL)
+			print(json_encode($getBusstopList_Query_Final));
+		else
+			return response( "No Bus stop list found")->setStatusCode(400);
+		
 		/* return response()->json([
 			'dataset_BusstopList'=>$getBusstopList_Query_Final
 			])->setStatusCode(200); */
@@ -255,7 +295,7 @@ class getBusInfoController extends Controller
 		$bus_stop_id = $request->input('bus_stop_id');
 		$bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
-		$dataset_ETA = new Collection;
+		$array_ETA = array();
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
 		//$time = '2014/10/29 10:19:48';
@@ -275,9 +315,14 @@ class getBusInfoController extends Controller
 						->orderBy('e.time','desc')
 						->get();
 		
-		$dataset_ETA = self::calculateEta($getETA_Query);
+		$array_ETA = self::calculateEta($getETA_Query);
 		
-		print(json_encode($dataset_ETA));
+		
+		if($array_ETA!=NULL)
+			print(json_encode($array_ETA));
+		else
+			return response( "No bus service found")->setStatusCode(400);
+		
 		
 		/* print(response()->json([
 			'dataset_ETA'=>$dataset_ETA
@@ -318,7 +363,12 @@ class getBusInfoController extends Controller
 		
 		$array_BusService = self::calculateEta($bus_service_Query);
 		
-		print(json_encode($array_BusService));
+		
+		if($array_BusService!=NULL)
+			print(json_encode($array_BusService));
+		else
+			return response( "No bus service found")->setStatusCode(400);
+		
 		/* return response()->json([
 			'dataset_BusService'=>$dataset_BusService
 			])->setStatusCode(200); */
@@ -343,8 +393,10 @@ class getBusInfoController extends Controller
 								'speed' => $speed,
 								'time' => $currentTime
 								]);
-		
-		return response('Location data updated')->setStatusCode(200);
+		if($updateLocation_Query)
+			return response('Location data updated')->setStatusCode(200);
+		else
+			return response('Unable to update location data')->setStatusCode(400);
 	}
 	
 	function calculateEta($calcETA_Result)
