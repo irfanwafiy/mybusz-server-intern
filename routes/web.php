@@ -23,7 +23,7 @@ Route::get('/input_bus_stop_859A', function () {
 
 Route::get('/getBusRoute/{route_id}', 'getBusInfoController@getBusRoute');
 Route::get('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
-Route::post('/getBusService', 'getBusInfoController@getBusService');
+Route::get('/getBusService', 'getBusInfoController@getBusService');
 Route::get('/getBusStop', 'getBusInfoController@getBusStop');
 Route::post('/getBusstopRoute', 'getBusInfoController@getBusstopRoute');
 Route::get('/getLocationData', 'getBusInfoController@getLocationData');
@@ -31,7 +31,6 @@ Route::get('/getNearbyBusStop', 'getBusInfoController@getNearbyBusStop');
 Route::get('/getBusstopList', 'getBusInfoController@getBusstopList');
 Route::get('/getETA', 'getBusInfoController@getETA');
 Route::get('/updateLocation', 'getBusInfoController@updateLocation');
-
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
