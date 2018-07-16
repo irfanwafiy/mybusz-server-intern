@@ -106,7 +106,7 @@ class getBusInfoController extends Controller
 		}
 		
 		
-		if($array_busRouteInfo!=NULL)
+		if($dataset_busRouteInfo!=NULL)
 			print(json_encode($dataset_busRouteInfo));
 			//print(json_encode($array_busRouteInfo));
 		else
