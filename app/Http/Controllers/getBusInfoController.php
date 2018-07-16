@@ -107,7 +107,7 @@ class getBusInfoController extends Controller
 		
 		
 		if($array_busRouteInfo!=NULL)
-			print(json_encode($array_busRouteInfo));
+			return json_encode($array_busRouteInfo);
 		else
 			return response( "No bus route found")->setStatusCode(400);
 		
