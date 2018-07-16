@@ -74,7 +74,8 @@ class getBusInfoController extends Controller
 							->where('bus.bus_id',$bus_id)
 							->where('bus_service_no',$bus_no)
 							->get();
-							
+		
+			print(json_encode($bus_route_info_route_id));
 		foreach($bus_route_info_route_id as $r_id)
 		{
 			
@@ -100,6 +101,8 @@ class getBusInfoController extends Controller
 				array_push($array_busRouteInfo, $singleset);
 				//$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
 			}
+			print(' Array ');
+			print(json_encode($array_busRouteInfo));
 			
 		}
 		
