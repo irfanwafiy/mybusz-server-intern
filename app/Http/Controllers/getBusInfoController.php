@@ -64,7 +64,7 @@ class getBusInfoController extends Controller
 	{
 		
 		$array_busRouteInfo = array();
-		$dataset_busRouteInfo = new Collection;
+		//$dataset_busRouteInfo = new Collection;
 		$bus_id = $request->input('bus_id');
 		$bus_no = $request->input('bus_no');
 		
@@ -94,21 +94,20 @@ class getBusInfoController extends Controller
 			
 			foreach($bus_route_info as $singleset)
 			{
-				 $getBusRouteInfo_singleset = [
+				 /* $getBusRouteInfo_singleset = [
 							'route_id' => $singleset->route_id,
 							'name' => $singleset->name
-							]; 
-				//array_push($array_busRouteInfo, $singleset);
-				$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
+							];  */
+				array_push($array_busRouteInfo, $singleset);
+				//$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
 			}
 			
 			
 		}
 		
 		
-		if($dataset_busRouteInfo!=NULL)
-			print(json_encode($dataset_busRouteInfo));
-			//print(json_encode($array_busRouteInfo));
+		if($array_busRouteInfo!=NULL)
+			print(json_encode($array_busRouteInfo));
 		else
 			return response( "No bus route found")->setStatusCode(400);
 		
