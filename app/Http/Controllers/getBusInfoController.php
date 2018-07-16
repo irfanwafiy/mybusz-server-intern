@@ -90,7 +90,6 @@ class getBusInfoController extends Controller
 			print('Hello ');
 			print(json_encode($bus_route_info));
 			
-			break;
 			
 			foreach($bus_route_info as $singleset)
 			{
