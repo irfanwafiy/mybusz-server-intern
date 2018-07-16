@@ -66,7 +66,7 @@ class getBusInfoController extends Controller
 		$array_busRouteInfo = array();
 		//$dataset_busRouteInfo = new Collection;
 		$bus_id = $request->input('bus_id');
-		$bus_no = $request->input('bus_no');
+		$bus_no = $request->input('bus_service_no');
 		
 		$bus_route_info_route_id = DB::table('bus_route')
 							->select('bus_route.route_id')
