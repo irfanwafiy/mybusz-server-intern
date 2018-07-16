@@ -96,7 +96,7 @@ class getBusInfoController extends Controller
 			{
 				 $getBusRouteInfo_singleset = [
 							'route_id' => $singleset->route_id,
-							'bus_stop' => $singleset->name
+							'name' => $singleset->name
 							]; 
 				//array_push($array_busRouteInfo, $singleset);
 				$dataset_busRouteInfo->push($getBusRouteInfo_singleset);
