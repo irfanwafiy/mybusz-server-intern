@@ -86,7 +86,12 @@ class getBusInfoController extends Controller
 							->orderBy('bus_stop.bus_stop_id', 'desc')
 							->limit(1)
 							->get();
-							
+			
+			print('Hello ');
+			print(json_encode($bus_route_info));
+			
+			break;
+			
 			foreach($bus_route_info as $singleset)
 			{
 				/* $getBusRouteInfo_singleset = [
