@@ -91,21 +91,21 @@ class userController extends Controller
 					$getDatabaseClass->insertLocationData($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
 					$getDatabaseClass->insertLocationDataV2($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
 					
-					return response(200,"Sucessfully Upload")->setStatusCode(200);
+					return response("Sucessfully Upload")->setStatusCode(200);
 
 				}
 			}
 			
 			else 
 			{
-				return response(400,"Current location not on polyline")->setStatusCode(400);
+				return response("Current location not on polyline")->setStatusCode(400);
 			}
 		
 		}
 		
 		else
 		{
-			return response(400,"Bus not found")->setStatusCode(400);
+			return response("Bus not found")->setStatusCode(400);
 			
 		}
 	}
