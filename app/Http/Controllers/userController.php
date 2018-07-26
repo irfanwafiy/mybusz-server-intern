@@ -90,8 +90,9 @@ class userController extends Controller
 					$newlocation = explode(',',$newlocation);
 					$getDatabaseClass->insertLocationData($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
 					$getDatabaseClass->insertLocationDataV2($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
-					
-					return response("Sucessfully Upload")->setStatusCode(200);
+					$json = json_encode("Sucessfully Upload");
+					$json_resp = "".$json;
+					return response($json_resp)->setStatusCode(200);
 
 				}
 			}
