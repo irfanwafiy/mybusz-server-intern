@@ -90,27 +90,22 @@ class userController extends Controller
 					$newlocation = explode(',',$newlocation);
 					$getDatabaseClass->insertLocationData($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
 					$getDatabaseClass->insertLocationDataV2($bus_id, $route_id, $imei, $newlocation[0], $newlocation[1], $speedkmhr);
-					$json = json_encode(200,"Sucessfully Upload");
-					$json_resp = "".$json;
-					return response($json_resp)->setStatusCode(200);
+					
+					return response("Sucessfully Upload")->setStatusCode(200);
 
 				}
 			}
 			
 			else 
 			{
-				$json = json_encode(400,"Current location not on polyline");
-				$json_resp = "".$json;
-				return response($json_resp)->setStatusCode(400);
+				return response("Current location not on polyline")->setStatusCode(400);
 			}
 		
 		}
 		
 		else
 		{
-			$json = json_encode(400,"Bus not found");
-			$json_resp = "".$json;
-			return response($json_resp)->setStatusCode(400);
+			return response("Bus not found")->setStatusCode(400);
 			
 		}
 	}
