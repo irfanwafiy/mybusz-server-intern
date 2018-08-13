@@ -304,7 +304,7 @@ class getBusInfoController extends Controller
 		$array_ETA = array();
 	//	$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
-		$time = '2014/10/29 10:19:48';
+		$time = '2014-10-29 10:19:48';
 
 		$getETA_Query = DB::table('bus_route')
 						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
