@@ -305,9 +305,7 @@ class getBusInfoController extends Controller
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
 		//$time = '2014/10/29 10:19:48';
-		print(" bus_stop_id: ".$bus_stop_id." line 1 ");
-
-
+		
 		$getETA_Query = DB::table('bus_route')
 						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
 						->join('etav2 AS e', function ($join)
@@ -322,10 +320,9 @@ class getBusInfoController extends Controller
 						->whereraw('e.time = ( SELECT MAX( t.time ) FROM etav2 t WHERE t.bus_id = ? AND t.route_id = ?) ',[$bus_id,$route_id])
 						->orderBy('e.time','desc')
 						->get();
-		print(" bus_id: ".$bus_id." line 2 ");
+
 		$array_ETA = self::calculateEta($getETA_Query);
 
-		print(" route_id: ".$route_id." line 3 ");
 
 		if($array_ETA!=NULL)
 			print(json_encode($array_ETA));
