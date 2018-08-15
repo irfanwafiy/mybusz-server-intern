@@ -322,12 +322,12 @@ class getBusInfoController extends Controller
 						->get();
 
 		$array_ETA = self::calculateEta($getETA_Query);
-
+		$getETA_response = "".json_encode($array_ETA);
 
 		if($array_ETA!=NULL)
-			print(json_encode($array_ETA));
+			return response($getETA_response)->setStatusCode(200);
 		else
-			print("No bus service found");
+			return response("No bus service found")->setStatusCode(400);
 			//return response( "No bus service found")->setStatusCode(400);
 
 
