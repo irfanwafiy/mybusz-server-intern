@@ -847,7 +847,7 @@ class userController extends Controller
                                                                                                  'time' => $time
                                                                                         ]);
 
-										self::calculateETA();
+										//self::calculateETA();
                              }
 							 else
 							 {
