@@ -119,6 +119,24 @@ class getBusInfoController extends Controller
 		//return view('welcometest',compact('bus_route_info'));
 	}
 
+	public function getAllBusStop()
+	{
+		$array_allBusStop = array();
+		$getAllBusStop_Query = DB:: table('bus_stop')
+														->get();
+
+		foreach($getAllBusStop_Query as $singleset)
+		{
+			array_push($array_allBusStop, $singleset);
+		}
+
+		if($array_allBusStop != NULL)
+			print(json_encode($array_allBusStop));
+		else
+			return response( "No bus stop registered")->setStatusCode(400);
+
+
+	}
 
 	public function getBusStop(Request $request)
 	{
@@ -276,13 +294,23 @@ class getBusInfoController extends Controller
 		{
 			$bus_stop_id = 0;
 		}
+		$route_order = 0;
+		if ($bus_stop_id > 0)
+		{
+			$getBusStopID = DB::table('route_bus_stop')
+											->select('route_order')
+											->where('route_id', $route)
+											->where('bus_stop_id', $bus_stop_id)
+											->first();
+			$route_order = $getBusStopID;
+		}
 
 		$getBusstopList_Query_Final = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
 									->addselect(DB::raw('0 AS Distance'))
 									->join('route_bus_stop', 'bus_stop.bus_stop_id', '=', 'route_bus_stop.bus_stop_id')
 									->where('route_bus_stop.route_id', $route)
-									->where('bus_stop.bus_stop_id', '>', $bus_stop_id)
+									->where('route_bus_stop.route_order', '>', $routeOrder)
 									->get();
 
 
