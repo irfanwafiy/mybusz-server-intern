@@ -295,6 +295,7 @@ class getBusInfoController extends Controller
 			$bus_stop_id = 0;
 		}
 		$route_order = 0;
+		
 		if ($bus_stop_id > 0)
 		{
 			$getBusStopID = DB::table('route_bus_stop')
@@ -310,7 +311,7 @@ class getBusInfoController extends Controller
 									->addselect(DB::raw('0 AS Distance'))
 									->join('route_bus_stop', 'bus_stop.bus_stop_id', '=', 'route_bus_stop.bus_stop_id')
 									->where('route_bus_stop.route_id', $route)
-									->where('route_bus_stop.route_order', '>', $routeOrder)
+									->where('route_bus_stop.route_order', '>', $route_order)
 									->get();
 
 
