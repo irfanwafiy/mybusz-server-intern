@@ -303,7 +303,7 @@ class getBusInfoController extends Controller
 											->where('route_id', $route)
 											->where('bus_stop_id', $bus_stop_id)
 											->first();
-			print_r("hello  ".$getBusStopID);
+			print_r($getBusStopID);
 			$route_order = $getBusStopID;
 		}
 
