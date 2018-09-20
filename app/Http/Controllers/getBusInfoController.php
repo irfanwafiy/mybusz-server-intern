@@ -295,7 +295,7 @@ class getBusInfoController extends Controller
 			$bus_stop_id = 0;
 		}
 		$route_order = 0;
-		
+
 		if ($bus_stop_id > 0)
 		{
 			$getBusStopID = DB::table('route_bus_stop')
@@ -305,6 +305,8 @@ class getBusInfoController extends Controller
 											->first();
 			$route_order = $getBusStopID;
 		}
+
+		print("test : ".$route_order);
 
 		$getBusstopList_Query_Final = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
