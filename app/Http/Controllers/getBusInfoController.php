@@ -303,12 +303,11 @@ class getBusInfoController extends Controller
 											->where('route_id', $route)
 											->where('bus_stop_id', $bus_stop_id)
 											->first();
-			print_r($getBusStopID);
-			print("routeorder ".$getBusStopID->route_order);
+
 			$route_order = $getBusStopID->route_order;
 		}
 
-		print("test : ".$route_order);
+
 
 		$getBusstopList_Query_Final = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
@@ -318,7 +317,7 @@ class getBusInfoController extends Controller
 									->where('route_bus_stop.route_order', '>', $route_order)
 									->get();
 
-
+s
 		if($getBusstopList_Query_Final!=NULL)
 			print(json_encode($getBusstopList_Query_Final));
 		else
