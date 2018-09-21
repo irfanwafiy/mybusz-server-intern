@@ -317,7 +317,7 @@ class getBusInfoController extends Controller
 									->where('route_bus_stop.route_order', '>', $route_order)
 									->get();
 
-s
+
 		if($getBusstopList_Query_Final!=NULL)
 			print(json_encode($getBusstopList_Query_Final));
 		else
