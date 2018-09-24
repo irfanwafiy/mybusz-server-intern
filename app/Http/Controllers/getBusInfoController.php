@@ -205,7 +205,7 @@ class getBusInfoController extends Controller
 	{
 		$route = $request->input('route_id');
 		$bus = $request->input('bus');
-		
+
 
 		$getBusstopRoute_Query = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
@@ -215,7 +215,7 @@ class getBusInfoController extends Controller
 									->orderBy('route_bus_stop.route_order')
 									->get();
 
-		print_r($getBusstopRoute_Query);
+		print(json_encode($getBusstopRoute_Query));
 
 
 		// if($getBusstopRoute_Query!=NULL)
