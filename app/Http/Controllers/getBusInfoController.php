@@ -204,7 +204,8 @@ class getBusInfoController extends Controller
 	public function getBusstopRoute_Test(Request $request)
 	{
 		$route = $request->input('route_id');
-		$route = 2;
+		$bus = $request->input('bus');
+		$route = 1;
 
 		$getBusstopRoute_Query = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
