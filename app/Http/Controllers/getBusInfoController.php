@@ -215,13 +215,14 @@ class getBusInfoController extends Controller
 									->orderBy('route_bus_stop.route_order')
 									->get();
 
-		print(json_encode($getBusstopRoute_Query));
+		//print(json_encode($getBusstopRoute_Query));
 
 
-		// if($getBusstopRoute_Query!=NULL)
-		// 	print(json_encode($getBusstopRoute_Query));
-		// else
-		// 	return response( "No nearby bus stop found")->setStatusCode(400);
+		if($getBusstopRoute_Query!=NULL)
+			print('Hello');
+			//print(json_encode($getBusstopRoute_Query));
+		else
+			return response( "No nearby bus stop found")->setStatusCode(400);
 
 	}
 
