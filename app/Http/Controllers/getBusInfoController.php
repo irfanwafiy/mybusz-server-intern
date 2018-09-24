@@ -201,6 +201,28 @@ class getBusInfoController extends Controller
 
 	}
 
+	public function getBusstopRoute_Test(Request $request)
+	{
+		$route = $request->input('route_id');
+
+		$getBusstopRoute_Query = DB::table('bus_stop')
+									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
+									->addselect(DB::raw('0 AS Distance'))
+									->join('route_bus_stop', 'bus_stop.bus_stop_id', '=', 'route_bus_stop.bus_stop_id')
+									->where('route_bus_stop.route_id', $route)
+									->orderBy('route_bus_stop.route_order')
+									->get();
+
+
+
+
+		if($getBusstopRoute_Query!=NULL)
+			print(json_encode($getBusstopRoute_Query));
+		else
+			return response( "No nearby bus stop found")->setStatusCode(400);
+
+	}
+
 	public function getLocationData()
 	{
 		$getLocationData_Query = DB::table('location_data')
