@@ -212,7 +212,7 @@ class getBusInfoController extends Controller
 									->addselect(DB::raw('0 AS Distance'))
 									->join('route_bus_stop', 'bus_stop.bus_stop_id', '=', 'route_bus_stop.bus_stop_id')
 									->where('route_bus_stop.route_id', $route)
-									->where('route_bus_stop.bus_stop_id', '<', 1005)
+									->where('route_bus_stop.bus_stop_id', '<', 1020)
 									->orderBy('route_bus_stop.route_order')
 									->get();
 
