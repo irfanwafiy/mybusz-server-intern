@@ -33,7 +33,7 @@ Route::post('/getNearbyBusStop', 'getBusInfoController@getNearbyBusStop');
 Route::post('/getBusstopList', 'getBusInfoController@getBusstopList');
 Route::post('/getETA', 'getBusInfoController@getETA');
 Route::post('/updateLocation', 'getBusInfoController@updateLocation');
-Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test');
+
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
@@ -71,3 +71,5 @@ Route::post('/pushCurrentData','userController@pushCurrentData');
 Route::post('/getBusStopServices','userController@getBusStopServices');
 
 });
+
+Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test');
