@@ -204,7 +204,7 @@ class getBusInfoController extends Controller
 	public function getBusstopRoute_Test(Request $request)
 	{
 		$route = $request->input('route_id');
-		$bus = $request->input('bus');
+		$array_busstopRoute = array();
 
 
 		$getBusstopRoute_Query = DB::table('bus_stop')
@@ -216,11 +216,14 @@ class getBusInfoController extends Controller
 									->get();
 
 		//print(json_encode($getBusstopRoute_Query));
-
+		foreach($getBusStop_Query as $singleset)
+		{
+			array_push($array_busstopRoute, $singleset);
+		}
 
 		if($getBusstopRoute_Query!=NULL)
-			print('Hello');
-			//print(json_encode($getBusstopRoute_Query));
+			print(json_encode($array_busstopRoute));
+			// print(json_encode($getBusstopRoute_Query));
 		else
 			return response( "No nearby bus stop found")->setStatusCode(400);
 
