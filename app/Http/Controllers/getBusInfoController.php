@@ -215,7 +215,7 @@ class getBusInfoController extends Controller
 									->orderBy('route_bus_stop.route_order')
 									->get();
 
-		print_r($getBusRoute_Query);
+		print_r($getBusstopRoute_Query);
 
 
 		// if($getBusstopRoute_Query!=NULL)
