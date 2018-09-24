@@ -216,7 +216,7 @@ class getBusInfoController extends Controller
 									->get();
 
 		//print(json_encode($getBusstopRoute_Query));
-		foreach($getBusStop_Query as $singleset)
+		foreach($getBusstopRoute_Query as $singleset)
 		{
 			array_push($array_busstopRoute, $singleset);
 		}
