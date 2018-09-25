@@ -11,7 +11,6 @@
 |
 */
 
-Route::middleware(['cors'])->group(function () {
 
 Route::get('/', function () {
     return view('welcome');
@@ -70,5 +69,3 @@ Route::post('/getKM_syd','userController@getKM_syd');
 Route::post('/pushCurrentData','userController@pushCurrentData');
 //Route::post('/getETA','userController@getETA');
 Route::post('/getBusStopServices','userController@getBusStopServices');
-
-});
