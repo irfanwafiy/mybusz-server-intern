@@ -566,13 +566,13 @@ class getBusInfoController extends Controller
 		$first_three = 0;
 		foreach($nearbyBusStop as $singleset)
 		{
-			if($array_getmobile_nearbyStop.length > 3)
+			if($array_getmobile_nearbyStop.size > 3)
 			{
 				break;
 			}
 			else {
 				array_push($array_getmobile_nearbyStop, $singleset);
-				
+
 			}
 
 		}
