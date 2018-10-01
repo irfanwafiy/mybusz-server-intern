@@ -364,7 +364,7 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getETA_method($bus_stop_id, $bus_id, $route_id)
+	public function getETA_method($bus_stop_id, $bus_id, $route_id,$status)
 	{
 		$array_ETA = array();
 		$time = self::getTime();
@@ -389,10 +389,20 @@ class getBusInfoController extends Controller
 		$array_ETA = self::calculateEta($getETA_Query);
 		$getETA_response = "".json_encode($array_ETA);
 
-		if($array_ETA!=NULL)
-			return response($getETA_response)->setStatusCode(200);
-		else
-			return response("No bus service found")->setStatusCode(400);
+		if($status)
+		{
+			if($array_ETA!=NULL)
+				return response($getETA_response)->setStatusCode(200);
+			else
+				return response("No bus service found")->setStatusCode(400);
+		}
+		else {
+			if($array_ETA!=NULL)
+				return $getETA_response;
+			else
+				return "No bus service found";
+		}
+
 	}
 
 	public function getETA(Request $request)
@@ -400,8 +410,9 @@ class getBusInfoController extends Controller
 		$bus_stop_id = $request->input('bus_stop_id');
 		$bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
+		$status = true;
 
-		return self::getETA_method($bus_stop_id, $bus_id, $route_id);
+		return self::getETA_method($bus_stop_id, $bus_id, $route_id, $status);
 			//return response( "No bus service found")->setStatusCode(400);
 
 
