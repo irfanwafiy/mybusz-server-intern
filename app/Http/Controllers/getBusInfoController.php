@@ -563,6 +563,7 @@ class getBusInfoController extends Controller
 
 		$nearbyBusStop = self::getNearbyBusStop_method($lat,$lng);
 		$array_getmobile_nearbyStop = array();
+		$array_getmobile_nearbyStop_return = array();
 		foreach($nearbyBusStop as $singleset)
 		{
 			if(count($array_getmobile_nearbyStop) > 2)
@@ -574,6 +575,9 @@ class getBusInfoController extends Controller
 
 			}
 
+		}
+		foreach ($array_getmobile_nearbyStop as $singleset2) {
+				$array_mobileBusService = self::getBusService_method($singleset2->bus_stop_id);
 		}
 
 		return $array_getmobile_nearbyStop;
