@@ -36,6 +36,8 @@ Route::post('/updateLocation', 'getBusInfoController@updateLocation');
 Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test')->middleware('cors');
 Route::post('/getAllBusStop', 'getBusInfoController@getAllBusStop');
 
+Route::post('/getListBus' 'getBusInfoController@getListBus');
+
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
 Route::get('/getHistoryETA', 'DatabaseController@getHistoryETA');

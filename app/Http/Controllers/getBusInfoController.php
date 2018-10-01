@@ -361,6 +361,9 @@ class getBusInfoController extends Controller
 	{
 		$bus_service_no = $request->input('bus_service');
 
+		return self::getETA_method(6,6,6,false);
+
+
 
 	}
 
