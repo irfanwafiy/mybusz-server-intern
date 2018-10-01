@@ -357,11 +357,15 @@ class getBusInfoController extends Controller
 			])->setStatusCode(200); */
 	}
 
-	public function getETA(Request $request)
+	public function getListBus(Request $request)
 	{
-		$bus_stop_id = $request->input('bus_stop_id');
-		$bus_id = $request->input('bus_id');
-		$route_id = $request->input('route_id');
+		$bus_service_no = $request->input('bus_service');
+
+
+	}
+
+	public function getETA_method($bus_stop_id, $bus_id, $route_id)
+	{
 		$array_ETA = array();
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
@@ -389,6 +393,15 @@ class getBusInfoController extends Controller
 			return response($getETA_response)->setStatusCode(200);
 		else
 			return response("No bus service found")->setStatusCode(400);
+	}
+
+	public function getETA(Request $request)
+	{
+		$bus_stop_id = $request->input('bus_stop_id');
+		$bus_id = $request->input('bus_id');
+		$route_id = $request->input('route_id');
+
+		return self::getETA_method($bus_stop_id, $bus_id, $route_id);
 			//return response( "No bus service found")->setStatusCode(400);
 
 
