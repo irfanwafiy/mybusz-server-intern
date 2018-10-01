@@ -250,18 +250,24 @@ class getBusInfoController extends Controller
 			])->setStatusCode(200); */
 	}
 
-	public function getNearbyBusStop(Request $request)
+	public function getNearbyBusStop_method($lat, $lng)
 	{
-		$lat = $request->input('lat');
-		$lng = $request->input('lng');
-
-
 		$getNearbyBusStop_Query = DB::table('bus_stop')
 										->select('*')
 										->selectraw('(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',[$lat,$lng,$lat])
 										->having('distance', '<', 1)
 										->orderBy('distance')
 										->get();
+
+		return $getNearbyBusStop_Query;
+	}
+
+	public function getNearbyBusStop(Request $request)
+	{
+		$lat = $request->input('lat');
+		$lng = $request->input('lng');
+
+		$getNearbyBusStop_Query = self::getNearbyBusStop_method($lat, $lng);
 
 		if($getNearbyBusStop_Query!=NULL)
 			print(json_encode($getNearbyBusStop_Query));
@@ -357,15 +363,7 @@ class getBusInfoController extends Controller
 			])->setStatusCode(200); */
 	}
 
-	public function getListBus(Request $request)
-	{
-		$bus_service_no = $request->input('bus_service');
 
-		return self::getETA_method(6,6,6,false);
-
-
-
-	}
 
 	public function getETA_method($bus_stop_id, $bus_id, $route_id,$status)
 	{
@@ -403,7 +401,7 @@ class getBusInfoController extends Controller
 			if($array_ETA!=NULL)
 				return $getETA_response;
 			else
-				return "No bus service found, Code 400";
+				return "No bus service found";
 		}
 
 	}
@@ -425,9 +423,8 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getBusService(Request $request)
+	public function getBusService_method($bus_stop_id)
 	{
-		$bus_stop_id = $request->input('bus_stop_id');
 		$array_BusService = array();
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
@@ -458,6 +455,15 @@ class getBusInfoController extends Controller
 
 		$array_BusService = self::calculateEta($bus_service_Query);
 
+		return $array_BusService;
+
+	}
+
+	public function getBusService(Request $request)
+	{
+		$bus_stop_id = $request->input('bus_stop_id');
+
+		$array_BusService = self::getBusService_method($bus_stop_id)
 
 		if($array_BusService!=NULL)
 			print(json_encode($array_BusService));
@@ -537,5 +543,27 @@ class getBusInfoController extends Controller
 		$timediff = round(($t2-$t1)/60);
 
 		return $timediff;
+	}
+
+	//mobile APP
+	public function getListBus(Request $request)
+	{
+		$bus_service_no = $request->input('bus_service');
+
+		return self::getETA_method(6,6,6,false);
+
+
+
+	}
+
+	public function getmobile_nearbyStop(Request $request)
+	{
+		$lat = $request->input('lat');
+		$lng = $request->input('lng');
+
+		$nearbyBusStop = self::getNearbyBusStop_method($lat,$lng);
+
+		return $nearbyBusStop;
+
 	}
 }

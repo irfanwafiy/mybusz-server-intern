@@ -37,6 +37,7 @@ Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test'
 Route::post('/getAllBusStop', 'getBusInfoController@getAllBusStop');
 
 Route::post('/getListBus', 'getBusInfoController@getListBus');
+Route::post('/getmobile_nearbyStop', 'getBusInfoController@getmobile_nearbyStop');
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
