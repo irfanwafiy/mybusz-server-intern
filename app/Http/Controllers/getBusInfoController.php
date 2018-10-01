@@ -403,7 +403,7 @@ class getBusInfoController extends Controller
 			if($array_ETA!=NULL)
 				return $getETA_response;
 			else
-				return "No bus service found";
+				return "No bus service found, Code 400";
 		}
 
 	}
