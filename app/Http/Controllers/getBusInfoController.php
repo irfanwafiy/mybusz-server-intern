@@ -463,7 +463,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 
-		$array_BusService = self::getBusService_method($bus_stop_id)
+		$array_BusService = self::getBusService_method($bus_stop_id);
 
 		if($array_BusService!=NULL)
 			print(json_encode($array_BusService));
