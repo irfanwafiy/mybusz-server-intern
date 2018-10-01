@@ -563,7 +563,7 @@ class getBusInfoController extends Controller
 
 		$nearbyBusStop = self::getNearbyBusStop_method($lat,$lng);
 
-		return $nearbyBusStop;
+		return $nearbyBusStop[1];
 
 	}
 }
