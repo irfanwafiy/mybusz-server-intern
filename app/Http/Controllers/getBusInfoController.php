@@ -562,8 +562,22 @@ class getBusInfoController extends Controller
 		$lng = $request->input('lng');
 
 		$nearbyBusStop = self::getNearbyBusStop_method($lat,$lng);
+		$array_getmobile_nearbyStop = array();
+		$first_three = 0;
+		foreach($nearbyBusStop as $singleset)
+		{
+			if($first_three > 2)
+			{
+				break;
+			}
+			else {
+				array_push($array_getmobile_nearbyStop, $singleset);
+				$first_three++;
+			}
 
-		return print($nearbyBusStop[1]);
+		}
+
+		return print($array_getmobile_nearbyStop);
 
 	}
 }
