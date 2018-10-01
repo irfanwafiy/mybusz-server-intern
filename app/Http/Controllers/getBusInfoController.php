@@ -577,7 +577,7 @@ class getBusInfoController extends Controller
 
 		}
 
-		return print($array_getmobile_nearbyStop);
+		return print(json_encode($array_getmobile_nearbyStop));
 
 	}
 }
