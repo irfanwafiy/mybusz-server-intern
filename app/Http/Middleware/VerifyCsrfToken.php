@@ -49,7 +49,6 @@ class VerifyCsrfToken extends Middleware
 		'/updateLocation',
 		'/getHistoryETA',
     '/getBusstopRoute_Test',
-    '/getAllBusStop',
-    '/getmobile_nearbyStop'
+    '/getAllBusStop'
     ];
 }
