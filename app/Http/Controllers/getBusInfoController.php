@@ -596,19 +596,34 @@ class getBusInfoController extends Controller
 			{
 				$BusService = self::getBusService_method($singleset2->bus_stop_id);
 
+
 				foreach ($BusService as $singleset3)
 				{
 					if($singleset3->bus_service_no == $bus_service_no)
 					{
-						$dataset_busList = [
-							'stop_id' => $singleset2->bus_stop_id,
-							'stop_name' => $singleset2->name,
-							'stop_eta' => $singleset3->eta
-						];
-					 array_push($route_busstops_array, $dataset_busList);
+						$eta = $singleset3->eta
 					}
 
 				}
+
+				if($eta != NULL)
+				{
+					$dataset_busList = [
+						'stop_id' => $singleset2->bus_stop_id,
+						'stop_name' => $singleset2->name,
+						'stop_eta' => $eta
+					];
+				}
+				else
+				{
+					$dataset_busList = [
+						'stop_id' => $singleset2->bus_stop_id,
+						'stop_name' => $singleset2->name,
+						'stop_eta' => 'N/A'
+					];
+				}
+
+			 array_push($route_busstops_array, $dataset_busList);
 
 			}
 			$dataset_busList = [
