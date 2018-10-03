@@ -545,12 +545,19 @@ class getBusInfoController extends Controller
 		return $timediff;
 	}
 
+
 	//mobile APP
 	public function getListBus(Request $request)
 	{
 		$bus_service_no = $request->input('bus_service');
 
-		return self::getETA_method(6,6,6,false);
+		$bus_route_info_route_id = DB::table('bus_route')
+							->select('bus_route.route_id')
+							->where('bus_service_no',$bus_service_no)
+							->get();
+
+			return $bus_route_info_route_id;
+		//return self::getETA_method(6,6,6,false);
 
 
 
@@ -593,4 +600,5 @@ class getBusInfoController extends Controller
 		return $array_getmobile_nearbyStop_return;
 
 	}
+
 }
