@@ -594,7 +594,7 @@ class getBusInfoController extends Controller
 			$dataset_busList = [
 				'routeInfo' => $singleset,
 				'route_busstops' => $route_busstops
-			]
+			];
 
 			array_push($listBus_array, $dataset_busList);
 		}
