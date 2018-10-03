@@ -556,7 +556,7 @@ class getBusInfoController extends Controller
 							->where('bus_service_no',$bus_service_no)
 							->first();
 
-			return $bus_route_info_route_id;
+			return json_encode($bus_route_info_route_id);
 		//return self::getETA_method(6,6,6,false);
 
 
