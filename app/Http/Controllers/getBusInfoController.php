@@ -116,7 +116,7 @@ class getBusInfoController extends Controller
 		$array_busRouteInfo_result = self::getBusRouteInfo_method($bus_id, $bus_no)
 
 
-		if($array_busRouteInfo_result!=NULL)
+		if($array_busRouteInfo_result.length > 0 )
 			print(json_encode($array_busRouteInfo_result));
 		else
 			return response( "No bus route found")->setStatusCode(400);
