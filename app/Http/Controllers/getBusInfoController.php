@@ -552,9 +552,9 @@ class getBusInfoController extends Controller
 		$bus_service_no = $request->input('bus_service');
 
 		$bus_route_info_route_id = DB::table('bus_route')
-							->select('bus_route.route_id')
+							->select('bus_route.bus_id')
 							->where('bus_service_no',$bus_service_no)
-							->get();
+							->first();
 
 			return $bus_route_info_route_id;
 		//return self::getETA_method(6,6,6,false);
