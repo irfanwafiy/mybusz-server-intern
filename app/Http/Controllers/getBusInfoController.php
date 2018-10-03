@@ -60,7 +60,7 @@ class getBusInfoController extends Controller
 		])->setStatusCode(200); */
 	}
 
-	public function getBusRouteInfo_method($bus_id, $bus_service_no)
+	public function getBusRouteInfo_method($bus_id, $bus_no)
 	{
 		$array_busRouteInfo = array();
 		$bus_route_info_route_id = DB::table('bus_route')
