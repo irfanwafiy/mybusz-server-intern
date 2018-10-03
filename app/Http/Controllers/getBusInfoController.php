@@ -601,7 +601,7 @@ class getBusInfoController extends Controller
 				{
 					if($singleset3->bus_service_no == $bus_service_no)
 					{
-						$eta = $singleset3->eta
+						$eta = $singleset3->eta;
 					}
 
 				}
