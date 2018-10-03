@@ -595,7 +595,7 @@ class getBusInfoController extends Controller
 			foreach ($route_busstops as $singleset2)
 			{
 				$BusService = self::getBusService_method($singleset2->bus_stop_id);
-
+				$eta = NULL;
 
 				foreach ($BusService as $singleset3)
 				{
