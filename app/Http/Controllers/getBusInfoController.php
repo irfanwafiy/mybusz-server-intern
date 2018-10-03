@@ -60,14 +60,9 @@ class getBusInfoController extends Controller
 		])->setStatusCode(200); */
 	}
 
-	public function getBusRouteInfo(Request $request)
+	public function getBusRouteInfo_method($bus_id, $bus_service_no)
 	{
-
 		$array_busRouteInfo = array();
-		//$dataset_busRouteInfo = new Collection;
-		$bus_id = $request->input('bus_id');
-		$bus_no = $request->input('bus_service_no');
-
 		$bus_route_info_route_id = DB::table('bus_route')
 							->select('bus_route.route_id')
 							->join('bus', 'bus_route.bus_id', '=', 'bus.bus_id')
@@ -105,9 +100,24 @@ class getBusInfoController extends Controller
 
 		}
 
+		return $array_busRouteInfo;
 
-		if($array_busRouteInfo!=NULL)
-			print(json_encode($array_busRouteInfo));
+
+	}
+
+	public function getBusRouteInfo(Request $request)
+	{
+
+		$array_busRouteInfo_result = array();
+		//$dataset_busRouteInfo = new Collection;
+		$bus_id = $request->input('bus_id');
+		$bus_no = $request->input('bus_service_no');
+
+		$array_busRouteInfo_result = self::getBusRouteInfo_method($bus_id, $bus_no)
+
+
+		if($array_busRouteInfo_result!=NULL)
+			print(json_encode($array_busRouteInfo_result));
 		else
 			return response( "No bus route found")->setStatusCode(400);
 
@@ -138,11 +148,10 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getBusStop(Request $request)
+	public function getBusStop_method($route_id)
 	{
-		//$dataset_busStop = new Collection;
+
 		$array_busstop = array();
-		$route_id = $request->input('route_id');
 
 		$getBusStop_Query = DB::table('bus_stop')
 							->select(	'bus_stop.bus_stop_id',
@@ -168,8 +177,19 @@ class getBusInfoController extends Controller
 			array_push($array_busstop, $singleset);
 		}
 
-		if($array_busstop!=NULL)
-			print(json_encode($array_busstop));
+		return $array_busstop;
+	}
+
+	public function getBusStop(Request $request)
+	{
+		//$dataset_busStop = new Collection;
+		$array_busstop_result = array();
+		$route_id = $request->input('route_id');
+
+		$array_busstop_result = self::getBusStop_method($route_id);
+
+		if($array_busstop_result!=NULL)
+			print(json_encode($array_busstop_result));
 		else
 			return response( "No bus stop found")->setStatusCode(400);
 
@@ -179,10 +199,8 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getBusstopRoute(Request $request)
+	public function getBusstopRoute_method($route)
 	{
-		$route = $request->input('route');
-
 		$getBusstopRoute_Query = DB::table('bus_stop')
 									->select('bus_stop.bus_stop_id', 'bus_stop.name', 'bus_stop.latitude', 'bus_stop.longitude')
 									->addselect(DB::raw('0 AS Distance'))
@@ -191,11 +209,20 @@ class getBusInfoController extends Controller
 									->orderBy('route_bus_stop.route_order')
 									->get();
 
+		return $getBusstopRoute_Query;
+	}
+
+	public function getBusstopRoute(Request $request)
+	{
+		$route = $request->input('route');
+
+
+		$getBusstopRoute_result = self::getBusstopRoute_method($route);
 
 
 
-		if($getBusstopRoute_Query!=NULL)
-			print(json_encode($getBusstopRoute_Query));
+		if($getBusstopRoute_result!=NULL)
+			print(json_encode($getBusstopRoute_result));
 		else
 			return response( "No nearby bus stop found")->setStatusCode(400);
 
@@ -549,14 +576,31 @@ class getBusInfoController extends Controller
 	//mobile APP
 	public function getListBus(Request $request)
 	{
+		$listBus_array = array();
 		$bus_service_no = $request->input('bus_service');
 
 		$bus_route_info_route_id = DB::table('bus_route')
 							->select('bus_route.bus_id')
 							->where('bus_service_no',$bus_service_no)
 							->first();
-		$bus_id = "".$bus_route_info_route_id->bus_id;
-			return json_encode($bus_route_info_route_id);
+
+		$bus_id = $bus_route_info_route_id->bus_id;
+
+		$getBusRouteInfo = self::getBusRouteInfo_method($bus_id, $bus_service_no);
+
+		foreach ($getBusRouteInfo as $singleset)
+		{
+			$route_busstops = self::getBusstopRoute_method($singleset->route_id);
+			$dataset_busList = [
+				'routeInfo' => $singleset,
+				'route_busstops' => $route_busstops
+			]
+
+			array_push($listBus_array, $dataset_busList);
+		}
+
+
+			return $listBus_array;
 		//return self::getETA_method(6,6,6,false);
 
 
