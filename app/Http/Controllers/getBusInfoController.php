@@ -619,7 +619,7 @@ class getBusInfoController extends Controller
 					$dataset_busList = [
 						'stop_id' => $singleset2->bus_stop_id,
 						'stop_name' => $singleset2->name,
-						'stop_eta' => 'N//A'
+						'stop_eta' => "N/A"
 					];
 				}
 
