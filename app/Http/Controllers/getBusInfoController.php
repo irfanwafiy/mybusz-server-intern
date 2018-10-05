@@ -574,23 +574,10 @@ class getBusInfoController extends Controller
 
 
 	//mobile APP
-	public function getListBus(Request $request)
+	public function bus_stops_eta_method($route_id)
 	{
-		$listBus_array = array();
-		$bus_service_no = $request->input('bus_service');
 
-		$bus_route_info_route_id = DB::table('bus_route')
-							->select('bus_route.bus_id')
-							->where('bus_service_no',$bus_service_no)
-							->first();
-
-		$bus_id = $bus_route_info_route_id->bus_id;
-
-		$getBusRouteInfo = self::getBusRouteInfo_method($bus_id, $bus_service_no);
-
-		foreach ($getBusRouteInfo as $singleset)
-		{
-			$route_busstops = self::getBusstopRoute_method($singleset->route_id);
+			$route_busstops = self::getBusstopRoute_method($route_id);
 			$route_busstops_array = array();
 			foreach ($route_busstops as $singleset2)
 			{
@@ -631,13 +618,36 @@ class getBusInfoController extends Controller
 				'route_busstops' => $route_busstops_array
 			];
 
+			return $dataset_busList;
+
+
+	}
+
+	public function getListBus(Request $request)
+	{
+		$listBus_array = array();
+		$bus_service_no = $request->input('bus_service');
+
+		$bus_route_info_route_id = DB::table('bus_route')
+							->select('bus_route.bus_id')
+							->where('bus_service_no',$bus_service_no)
+							->first();
+
+		$bus_id = $bus_route_info_route_id->bus_id;
+
+		$getBusRouteInfo = self::getBusRouteInfo_method($bus_id, $bus_service_no);
+
+		foreach ($getBusRouteInfo as $singleset)
+		{
+			$dataset_busList = self::bus_stops_eta_method($singleset->route_id);
+
+
 			array_push($listBus_array, $dataset_busList);
 
 		}
 
 
 			return $listBus_array;
-		//return self::getETA_method(6,6,6,false);
 
 
 
