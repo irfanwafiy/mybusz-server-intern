@@ -574,7 +574,7 @@ class getBusInfoController extends Controller
 
 
 	//mobile APP
-	public function bus_stops_eta_method($route_id)
+	public function bus_stops_eta_method($route_id,$bus_service_no)
 	{
 
 			$route_busstops = self::getBusstopRoute_method($route_id);
@@ -636,7 +636,7 @@ class getBusInfoController extends Controller
 
 		foreach ($getBusRouteInfo as $singleset)
 		{
-			$route_busstops_array = self::bus_stops_eta_method($singleset->route_id);
+			$route_busstops_array = self::bus_stops_eta_method($singleset->route_id,$bus_service_no);
 
 			$dataset_busList = [
 				'routeInfo' => $singleset,
