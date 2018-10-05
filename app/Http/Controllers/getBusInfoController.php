@@ -581,7 +581,7 @@ class getBusInfoController extends Controller
 		$bus_service_no = $request->input('bus_service');
 		$route_id = $request->input('route_id');
 
-		return bus_stops_eta_method($route_id,$bus_service_no);
+		return self::bus_stops_eta_method($route_id,$bus_service_no);
 
 	}
 
