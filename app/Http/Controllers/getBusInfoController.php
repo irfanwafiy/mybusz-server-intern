@@ -613,12 +613,9 @@ class getBusInfoController extends Controller
 			 array_push($route_busstops_array, $dataset_busList);
 
 			}
-			$dataset_busList = [
-				'routeInfo' => $singleset,
-				'route_busstops' => $route_busstops_array
-			];
 
-			return $dataset_busList;
+
+			return $route_busstops_array;
 
 
 	}
@@ -639,8 +636,12 @@ class getBusInfoController extends Controller
 
 		foreach ($getBusRouteInfo as $singleset)
 		{
-			$dataset_busList = self::bus_stops_eta_method($singleset->route_id);
+			$route_busstops_array = self::bus_stops_eta_method($singleset->route_id);
 
+			$dataset_busList = [
+				'routeInfo' => $singleset,
+				'route_busstops' => $route_busstops_array
+			];
 
 			array_push($listBus_array, $dataset_busList);
 
