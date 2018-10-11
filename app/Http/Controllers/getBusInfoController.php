@@ -573,7 +573,35 @@ class getBusInfoController extends Controller
 	}
 
 
+	public function getBusStop_BusServices_method($bus_stop_id)
+	{
+		$busServices_array = array();
+		$getRoute_id = DB::table('route_bus_stop')
+							->select('route_bus_stop.route_id')
+							->where('bus_stop_id',$bus_stop_id)
+							->get();
+
+		foreach ($getRoute_id as $singleset) {
+			$getBusServiceList = DB::table('bus_route')
+													->select('bus_route.bus_service_no')
+													->where('route_id', $singleset)
+													->distinct()
+													->get();
+			array_push($busServices_array, $getBusServiceList);
+		}
+
+		return $busServices_array;
+
+	}
+
 	//mobile APP
+
+	public function getbus_stop_bus_services(Request $request)
+	{
+		$bus_stop_id = $request->input('bus_stop_id');
+
+		return self::getBusStop_BusServices_method($bus_stop_id);
+	}
 
 	public function getbus_stops_eta(Request $request)
 	{
