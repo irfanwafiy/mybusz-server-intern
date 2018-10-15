@@ -591,7 +591,7 @@ class getBusInfoController extends Controller
 				'latitude' => $singleset->latitude,
 				'longitude' => $singleset->longitude,
 				'bus_services' => self::getBusStop_BusServices_method($singleset->bus_stop_id)
-			]
+			];
 			array_push($array_allBusStop, $dataset);
 		}
 
