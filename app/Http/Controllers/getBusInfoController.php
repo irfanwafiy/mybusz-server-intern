@@ -589,8 +589,10 @@ class getBusInfoController extends Controller
 			$getBusService = self::getBusStop_BusServices_method($singleset->bus_stop_id);
 			$busServices_array = array();
 			foreach ($getBusService as $busService) {
+				foreach ($busService as $bs) {
+					array_push($busServices_array, $bs->bus_service_no);
+				}
 
-				array_push($busServices_array, $busService->bus_service_no);
 			}
 			$dataset = [
 				'bus_stop_id' => $singleset->bus_stop_id,
