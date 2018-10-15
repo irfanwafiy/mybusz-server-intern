@@ -129,24 +129,7 @@ class getBusInfoController extends Controller
 		//return view('welcometest',compact('bus_route_info'));
 	}
 
-	public function getAllBusStop()
-	{
-		$array_allBusStop = array();
-		$getAllBusStop_Query = DB:: table('bus_stop')
-														->get();
 
-		foreach($getAllBusStop_Query as $singleset)
-		{
-			array_push($array_allBusStop, $singleset);
-		}
-
-		if($array_allBusStop != NULL)
-			print(json_encode($array_allBusStop));
-		else
-			return response( "No bus stop registered")->setStatusCode(400);
-
-
-	}
 
 	public function getBusStop_method($route_id)
 	{
@@ -591,6 +574,32 @@ class getBusInfoController extends Controller
 		}
 
 		return $busServices_array;
+
+	}
+
+	public function getAllBusStop()
+	{
+		$array_allBusStop = array();
+		$getAllBusStop_Query = DB:: table('bus_stop')
+														->get();
+
+		foreach($getAllBusStop_Query as $singleset)
+		{
+			$dataset = [
+				'bus_stop_id' => $singleset->bus_stop_id,
+				'name' => $singleset->name,
+				'latitude' => $singleset->latitude,
+				'longitude' => $singleset->longitude,
+				'bus_services' => self::getBusStop_BusServices_method($singleset->bus_stop_id)
+			]
+			array_push($array_allBusStop, $dataset);
+		}
+
+		if($array_allBusStop != NULL)
+			print(json_encode($array_allBusStop));
+		else
+			return response( "No bus stop registered")->setStatusCode(400);
+
 
 	}
 
