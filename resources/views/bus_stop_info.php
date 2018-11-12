@@ -4,124 +4,170 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Visit www.psdgraphics.com for more stuff</title>
 <style>
-/*
-Modern table design - template
-Download more PSD stuff from www.psdgraphics.com
-*/
+$baseColor: #398B93;
+$borderRadius: 10px;
+$imageBig: 100px;
+$imageSmall: 60px;
+$padding: 10px;
 
-
-
-
-#psdgraphics-com-table {
-	margin:0;
-	padding: 4px;
-	width: 578px;
-	font: 11px Arial, Helvetica, sans-serif;
-	color:#747474;
-	background-color:#0c2a62;
+body {
+   background-color: lighten($baseColor, 30%);
+   * { box-sizing: border-box; }
 }
 
-
-#psdg-header {
-	margin:0;
-	padding: 14px 0 0 24px;
-	width: 554px;
-	height: 55px;
-	color:#FFF;
-	font-size:13px;
-	background: #0c2c65 url(images/head-bcg.jpg) no-repeat right top;
+.header {
+   background-color: darken($baseColor, 5%);
+   color: white;
+   font-size: 1.5em;
+   padding: 1rem;
+   text-align: center;
+   text-transform: uppercase;
 }
 
-.psdg-bold {
-	font: bold 22px Arial, Helvetica, sans-serif;
-
+img {
+   border-radius: 50%;
+   height: $imageSmall;
+   width: $imageSmall;
 }
 
-#psdg-top {
-	margin:0;
-	padding: 0;
-	width: 578px;
-	height: 46px;
-	border-top: 2px solid #FFF;
-	background: #eff4ff url(images/top-light-blue.png) repeat-x left top;
+.table-users {
+   border: 1px solid darken($baseColor, 5%);
+   border-radius: $borderRadius;
+   box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+   max-width: calc(100% - 2em);
+   margin: 1em auto;
+   overflow: hidden;
+   width: 800px;
 }
 
-.psdg-top-cell {
-	float:left;
-	padding: 15px 0 0 0;
-	text-align:center;
-	width:105px;
-	height: 31px;
-	border-right: 1px solid #ced9ec;
-	color:#1f3d71;
-	font: 13px Arial, Helvetica, sans-serif;
+table {
+   width: 100%;
+
+   td, th {
+      color: darken($baseColor, 10%);
+      padding: $padding;
+   }
+
+   td {
+      text-align: center;
+      vertical-align: middle;
+
+      &:last-child {
+         font-size: 0.95em;
+         line-height: 1.4;
+         text-align: left;
+      }
+   }
+
+   th {
+      background-color: lighten($baseColor, 50%);
+      font-weight: 300;
+   }
+
+   tr {
+      &:nth-child(2n) { background-color: white; }
+      &:nth-child(2n+1) { background-color: lighten($baseColor, 55%) }
+   }
 }
 
-#psdg-middle {
-	margin:0;
-	padding: 0;
-	width: 578px;
-	background: #f6f6f6 url(images/center-bcg.png) repeat-y right top;
+@media screen and (max-width: 700px) {
+   table, tr, td { display: block; }
+
+   td {
+      &:first-child {
+         position: absolute;
+         top: 50%;
+         transform: translateY(-50%);
+         width: $imageBig;
+      }
+
+      &:not(:first-child) {
+         clear: both;
+         margin-left: $imageBig;
+         padding: 4px 20px 4px 90px;
+         position: relative;
+         text-align: left;
+
+         &:before {
+            color: lighten($baseColor, 30%);
+            content: '';
+            display: block;
+            left: 0;
+            position: absolute;
+         }
+      }
+
+      &:nth-child(2):before { content: 'Name:'; }
+      &:nth-child(3):before { content: 'Email:'; }
+      &:nth-child(4):before { content: 'Phone:'; }
+      &:nth-child(5):before { content: 'Comments:'; }
+   }
+
+   tr {
+      padding: $padding 0;
+      position: relative;
+      &:first-child { display: none; }
+   }
 }
 
-.psdg-left {
-	float:left;
-	margin:0;
-	padding: 10px 0 0 24px;
-	width: 129px;
-	text-align: left;
-	height: 25px;
-	border-right: 1px solid #ced9ec;
-	border-bottom: 1px solid #b3c1db;
-	color:#1f3d71;
-	font: 13px Arial, Helvetica, sans-serif;
-	background: #e4ebf8 url(images/center-blue.png) repeat-y left top;
-}
+@media screen and (max-width: 500px) {
+   .header {
+      background-color: transparent;
+      color: lighten($baseColor, 60%);
+      font-size: 2em;
+      font-weight: 700;
+      padding: 0;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+   }
 
+   img {
+      border: 3px solid;
+      border-color: lighten($baseColor, 50%);
+      height: $imageBig;
+      margin: 0.5rem 0;
+      width: $imageBig;
+   }
 
+   td {
+      &:first-child {
+         background-color: lighten($baseColor, 45%);
+         border-bottom: 1px solid lighten($baseColor, 30%);
+         border-radius: $borderRadius $borderRadius 0 0;
+         position: relative;
+         top: 0;
+         transform: translateY(0);
+         width: 100%;
+      }
 
-.psdg-right {
-	float:left;
-	margin:0;
-	padding: 11px 0 0 0;
-	width: 105px;
-	text-align:center;
-	height: 24px;
-	border-right: 1px solid #ced9ec;
-	border-bottom: 1px solid #b3c1db;
-}
+      &:not(:first-child) {
+         margin: 0;
+         padding: 5px 1em;
+         width: 100%;
 
-#psdg-bottom {
-	clear:both;
-	margin:0;
-	padding: 0;
-	width: 578px;
-	height: 48px;
-	border-top: 2px solid #FFF;
-	background: #e4e3e3 url(images/bottom-line.png) repeat-x left top;
-}
+         &:before {
+            font-size: .8em;
+            padding-top: 0.3em;
+            position: relative;
+         }
+      }
 
+      &:last-child  { padding-bottom: 1rem !important; }
+   }
 
-.psdg-bottom-cell {
-	float:left;
-	padding: 15px 0 0 0;
-	text-align:center;
-	width:105px;
-	height: 33px;
-	border-right: 1px solid #ced9ec;
-	color:#070707;
-	font: 13px Arial, Helvetica, sans-serif;
-}
+   tr {
+      background-color: white !important;
+      border: 1px solid lighten($baseColor, 20%);
+      border-radius: $borderRadius;
+      box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+      margin: 0.5rem 0;
+      padding: 0;
+   }
 
-
-
-#psdg-footer {
-	font-size: 10px;
-	color:#8a8a8a;
-	margin:0;
-	padding: 8px 0 8px 12px;
-	width: 566px;
-	background: #f6f6f6 url(images/center-bcg.png) repeat-y right top;
+   .table-users {
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+   }
 }
 </style>
 
@@ -129,102 +175,51 @@ Download more PSD stuff from www.psdgraphics.com
 
 <body>
 
-<div id="psdgraphics-com-table">
+  <div class="table-users">
+     <div class="header">Users</div>
 
+     <table cellspacing="0">
+        <tr>
+           <th>Picture</th>
+           <th>Name</th>
+           <th>Email</th>
+           <th>Phone</th>
+           <th width="230">Comments</th>
+        </tr>
 
+        <tr>
+           <td><img src="http://lorempixel.com/100/100/people/1" alt="" /></td>
+           <td>Jane Doe</td>
+           <td>jane.doe@foo.com</td>
+           <td>01 800 2000</td>
+           <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+        </tr>
 
-<div id="psdg-header">
-<span class="psdg-bold">Modern table design - template</span><br />
-Download PSD source from www.psdgraphics.com
-</div>
+        <tr>
+           <td><img src="http://lorempixel.com/100/100/sports/2" alt="" /></td>
+           <td>John Doe</td>
+           <td>john.doe@foo.com</td>
+           <td>01 800 2000</td>
+           <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
+        </tr>
 
-<div id="psdg-top">
-<div class="psdg-top-cell" style="width:129px; text-align:left; padding-left: 24px;">Summary</div>
-<div class="psdg-top-cell">Website.com</div>
-<div class="psdg-top-cell">Website.net</div>
-<div class="psdg-top-cell">Website.org</div>
-<div class="psdg-top-cell" style="border:none;">Website.info</div>
-</div>
+        <tr>
+           <td><img src="http://lorempixel.com/100/100/people/9" alt="" /></td>
+           <td>Jane Smith</td>
+           <td>jane.smith@foo.com</td>
+           <td>01 800 2000</td>
+           <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
+        </tr>
 
-
-<div id="psdg-middle">
-
-
-
-<div class="psdg-left">Daily Unique</div>
-<div class="psdg-right">10 000</div>
-<div class="psdg-right">10 000</div>
-<div class="psdg-right">10 000</div>
-<div class="psdg-right">10 000</div>
-
-
-<div class="psdg-left">Unique Visitors </div>
-<div class="psdg-right">300 000</div>
-<div class="psdg-right">300 000</div>
-<div class="psdg-right">300 000</div>
-<div class="psdg-right">300 000</div>
-
-
-<div class="psdg-left">Browser </div>
-<div class="psdg-right">Firefox</div>
-<div class="psdg-right">Firefox</div>
-<div class="psdg-right">Firefox</div>
-<div class="psdg-right">Firefox</div>
-
-
-<div class="psdg-left">Operating System</div>
-<div class="psdg-right">Windows 7</div>
-<div class="psdg-right">Windows 7</div>
-<div class="psdg-right">Windows 7</div>
-<div class="psdg-right">Windows 7</div>
-
-
-<div class="psdg-left">Screen Resolution</div>
-<div class="psdg-right">1280x1024</div>
-<div class="psdg-right">1280x1024</div>
-<div class="psdg-right">1280x1024</div>
-<div class="psdg-right">1280x1024</div>
-
-
-<div class="psdg-left">Domain/Country</div>
-<div class="psdg-right">.com</div>
-<div class="psdg-right">.com</div>
-<div class="psdg-right">.com</div>
-<div class="psdg-right">.com</div>
-
-
-<div class="psdg-left">Continent</div>
-<div class="psdg-right">Europe</div>
-<div class="psdg-right">Europe</div>
-<div class="psdg-right">Europe</div>
-<div class="psdg-right">Europe</div>
-
-
-
-
-
-
-
-<div id="psdg-bottom">
-<div class="psdg-bottom-cell" style="width:129px; text-align:left; padding-left: 24px;">Status:</div>
-<div class="psdg-bottom-cell">Approved</div>
-<div class="psdg-bottom-cell">Approved</div>
-<div class="psdg-bottom-cell">Approved</div>
-<div class="psdg-bottom-cell" style="border:none;">Approved</div>
-</div>
-
-
-</div>
-
-
-<div id="psdg-footer">
-* Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-</div>
-
-
-
-
-</div>
+        <tr>
+           <td><img src="http://lorempixel.com/100/100/people/3" alt="" /></td>
+           <td>John Smith</td>
+           <td>john.smith@foo.com</td>
+           <td>01 800 2000</td>
+           <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
+        </tr>
+     </table>
+  </div>
 
 
 
