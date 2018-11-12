@@ -55,28 +55,24 @@ th {
         <tr>
            <td>Jane Doe</td>
            <td>jane.doe@foo.com</td>
-           <td>01 800 2000</td>
            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
         </tr>
 
         <tr>
            <td>Jane Doe</td>
            <td>jane.doe@foo.com</td>
-           <td>01 800 2000</td>
            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
         </tr>
 
         <tr>
            <td>Jane Doe</td>
            <td>jane.doe@foo.com</td>
-           <td>01 800 2000</td>
            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
         </tr>
 
         <tr>
            <td>Jane Doe</td>
            <td>jane.doe@foo.com</td>
-           <td>01 800 2000</td>
            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
         </tr>
      </table>
