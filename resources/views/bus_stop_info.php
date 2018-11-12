@@ -49,7 +49,7 @@ th {
         <tr>
            <th>Service</th>
            <th>NextBus</th>
-           <th width="230">Desyination</th>
+           <th>Desyination</th>
         </tr>
 
         <tr>
