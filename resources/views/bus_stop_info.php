@@ -13,7 +13,7 @@ body {
 }
 
 .header {
-   background-color: darken(#398B93, 5%);
+   background-color: darkcyan;
    color: white;
    font-size: 1.5em;
    padding: 1rem;
