@@ -8,7 +8,7 @@
 
 
 body {
-   background-color: #AFEEEE;
+   background-color: #FFFFFF;
    * { box-sizing: border-box; }
 }
 
@@ -34,7 +34,9 @@ th, td {
 }
 
 
+tr:nth-child(odd){background-color: #AFEEEE;}
 tr:nth-child(even){background-color: #FFFDD0;}
+
 
 th {
     background-color: darkcyan;
