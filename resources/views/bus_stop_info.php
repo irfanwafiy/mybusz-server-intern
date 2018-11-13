@@ -16,11 +16,10 @@ body {
 
 .header {
    background-color: lightcyan;
-   color: white;
+   color: black;
    font-size: 1.5em;
    padding: 1rem;
-   text-align: center;
-   text-transform: uppercase;
+   text-align: left;
 }
 table {
     position: absolute;
@@ -57,7 +56,7 @@ th {
 <body>
 
   <div class="table-users">
-     <div class="header">Users</div>
+     <div class="header">Tuesday, 13 November 2018 21:00</div>
 
      <table cellspacing="0">
         <tr>
