@@ -6,7 +6,7 @@
 <style>
 
 @font-face {
-    font-family: OptimusPrinceps;
+    font-family: data-latin_font;
     src: url('{{ public_path('fonts/data-latin_font.tff') }}');
 }
 
@@ -23,6 +23,11 @@ body {
    text-transform: uppercase;
 }
 table {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 100%;
 }
