@@ -632,14 +632,14 @@ class getBusInfoController extends Controller
 			if($eta != NULL)
 			{
 				$dataset_busList = [
-					'bus_service_no' => $singleset1->bus_service_no,
+					'bus_service_no' => $singleset->bus_service_no,
 					'stop_eta' => $eta
 				];
 			}
 			else
 			{
 				$dataset_busList = [
-					'bus_service_no' => $singleset1->bus_service_no,
+					'bus_service_no' => $singleset->bus_service_no,
 					'stop_eta' => "NA"
 				];
 			}
