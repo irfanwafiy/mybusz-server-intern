@@ -23,16 +23,16 @@ body {
 }
 p {
   font-weight: bold;
+  font-size: 125%;
 }
 .header {
    background-color: lightcyan;
    color: black;
-   font-size: 1.5em;
    text-align: center;
    font-weight: bold;
    font-size: 230%;
    position: absolute;
-   top: 5%;
+   top: 7%;
    bottom: 0;
    left: 0;
    right: 0;
@@ -40,7 +40,7 @@ p {
 }
 table {
     position: absolute;
-    top: 16%;
+    top: 18%;
     bottom: 0;
     left: 0;
     right: 0;
