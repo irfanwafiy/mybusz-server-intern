@@ -17,8 +17,8 @@ body {
 p {
   font-weight: bold;
   position: absolute;
-  top: 10;
-  bottom: 0;
+  top: 0;
+  bottom: 10%;
   left: 0;
   right: 0;
 }
