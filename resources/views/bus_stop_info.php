@@ -21,6 +21,9 @@ body {
   left: 0;
   right: 0;
 }
+p {
+  font-weight: bold;
+}
 .header {
    background-color: lightcyan;
    color: black;
@@ -29,7 +32,7 @@ body {
    font-weight: bold;
    font-size: 230%;
    position: absolute;
-   top: 7%;
+   top: 5%;
    bottom: 0;
    left: 0;
    right: 0;
@@ -37,7 +40,7 @@ body {
 }
 table {
     position: absolute;
-    top: 18%;
+    top: 16%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -68,7 +71,7 @@ th {
 <body>
 
   <div class="table-users">
-    Tuesday, 13 November 2018 21:00
+    <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">Opp Sembawang Stn (1201)</div>
 
      <table cellspacing="0">
