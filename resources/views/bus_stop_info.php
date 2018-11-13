@@ -26,7 +26,7 @@ body {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 2%;
+   padding-top: 1%;
 }
 table {
     position: absolute;
