@@ -16,11 +16,7 @@ body {
 
 p {
   font-weight: bold;
-  position: absolute;
-  top: 0;
-  bottom: 10%;
-  left: 0;
-  right: 0;
+  padding-bottom: 5%
 }
 .header {
    background-color: lightcyan;
