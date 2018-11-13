@@ -5,7 +5,10 @@
 <title>Visit www.psdgraphics.com for more stuff</title>
 <style>
 
-
+@font-face {
+    font-family: OptimusPrinceps;
+    src: url('{{ public_path('fonts/data-latin_font.tff') }}');
+}
 
 body {
    background-color: #FFFFFF;
@@ -20,7 +23,6 @@ body {
    text-transform: uppercase;
 }
 table {
-    border-collapse: collapse;
     width: 100%;
     height: 100%;
 }
