@@ -615,53 +615,61 @@ class getBusInfoController extends Controller
 	public function getBusStopInfo(Request $request)
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
-		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
-		$bus_service_available = self::getBusService_method($bus_stop_id);
-		$getBusStopInfo_array = array();
-		foreach ($bus_service_list as $singleset)
-		{
-			$getDestination_route_id = DB::table('bus_route')
-												->select('bus_route.route_id')
-												->join('route_bus_stop','route_bus_stop.route_id', '=', 'bus_route.route_id')
-												->where('route_bus_stop.bus_stop_id', $bus_stop_id)
-												->where('bus_route.bus_service_no', $singleset[0]->bus_service_no)
-												->first();
-			$getDestination_name = DB::table('bus_stop')
-														->select('bus_stop.name')
-														->join('route_bus_stop','route_bus_stop.bus_stop_id', '=', 'bus_stop.bus_stop_id')
-														->where('route_bus_stop.route_id', $getDestination_route_id)
-														->orderBy('route_bus_stop.route_order', 'desc')
-														->first();
-			$eta = NULL;
-			foreach ($bus_service_available as $singleset2)
-			{
-				if($singleset[0]->bus_service_no == $singleset2->bus_service_no)
-				{
-					$eta = $singleset2->eta;
-				}
-			}
+		$getDestination_route_id = DB::table('bus_route')
+											->select('bus_route.route_id')
+											->join('route_bus_stop','route_bus_stop.route_id', '=', 'bus_route.route_id')
+											->where('route_bus_stop.bus_stop_id', $bus_stop_id)
+											->where('bus_route.bus_service_no', '980')
+											->first();
+		return $getDestination_route_id;
+		// $bus_stop_id = $request->input('bus_stop_id');
+		// $bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
+		// $bus_service_available = self::getBusService_method($bus_stop_id);
+		// $getBusStopInfo_array = array();
+		// foreach ($bus_service_list as $singleset)
+		// {
+		// 	$getDestination_route_id = DB::table('bus_route')
+		// 										->select('bus_route.route_id')
+		// 										->join('route_bus_stop','route_bus_stop.route_id', '=', 'bus_route.route_id')
+		// 										->where('route_bus_stop.bus_stop_id', $bus_stop_id)
+		// 										->where('bus_route.bus_service_no', $singleset[0]->bus_service_no)
+		// 										->first();
+		// 	$getDestination_name = DB::table('bus_stop')
+		// 												->select('bus_stop.name')
+		// 												->join('route_bus_stop','route_bus_stop.bus_stop_id', '=', 'bus_stop.bus_stop_id')
+		// 												->where('route_bus_stop.route_id', $getDestination_route_id)
+		// 												->orderBy('route_bus_stop.route_order', 'desc')
+		// 												->first();
+		// 	$eta = NULL;
+		// 	foreach ($bus_service_available as $singleset2)
+		// 	{
+		// 		if($singleset[0]->bus_service_no == $singleset2->bus_service_no)
+		// 		{
+		// 			$eta = $singleset2->eta;
+		// 		}
+		// 	}
+		//
+		// 	if($eta != NULL)
+		// 	{
+		// 		$dataset_busList = [
+		// 			'bus_service_no' => $singleset[0]->bus_service_no,
+		// 			'stop_eta' => $eta,
+		// 			'Destination' => $getDestination_name
+		// 		];
+		// 	}
+		// 	else
+		// 	{
+		// 		$dataset_busList = [
+		// 			'bus_service_no' => $singleset[0]->bus_service_no,
+		// 			'stop_eta' => "NA",
+		// 			'Destination' => $getDestination_name
+		// 		];
+		// 	}
+		//
+		// 	array_push($getBusStopInfo_array, $dataset_busList);
+		// }
 
-			if($eta != NULL)
-			{
-				$dataset_busList = [
-					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => $eta,
-					'Destination' => $getDestination_name
-				];
-			}
-			else
-			{
-				$dataset_busList = [
-					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => "NA",
-					'Destination' => $getDestination_name
-				];
-			}
-
-			array_push($getBusStopInfo_array, $dataset_busList);
-		}
-
-		return $getBusStopInfo_array;
+		//return $getBusStopInfo_array;
 		//return view('bus_stop_info', $getBusStopInfo_array);
 	}
 
