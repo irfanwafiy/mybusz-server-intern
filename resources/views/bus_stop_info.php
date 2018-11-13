@@ -33,7 +33,6 @@ table {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 2%;
     width: 100%;
 }
 
@@ -43,6 +42,7 @@ th, td {
     font-size: 120%;
     width: 30%;
     font-family: data-latinFont;
+    padding: 2%;
 }
 
 
