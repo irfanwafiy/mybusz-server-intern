@@ -30,6 +30,7 @@ th, td {
     font-size: 250%;
     padding: 3%;
     width: 30%
+    font-family: data-latinFont;
 }
 
 
