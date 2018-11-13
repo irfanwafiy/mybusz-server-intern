@@ -48,14 +48,14 @@ th {
      <table cellspacing="0">
         <tr>
            <th>Service</th>
-           <th>NextBus</th>
-           <th>Desyination</th>
+           <th>Incoming</th>
+           <th>Destination</th>
         </tr>
 
         <tr>
-           <td>Jane Doe</td>
-           <td>jane.doe@foo.com</td>
-           <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+           <td>117</td>
+           <td>20 mins</td>
+           <td>Sembawang Int</td>
         </tr>
 
         <tr>
