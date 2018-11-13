@@ -654,14 +654,14 @@ class getBusInfoController extends Controller
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => "NA",
-					'Destination' => "Hello"
+					'Destination' => $getDestination_name
 				];
 			}
 
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
 
-		return $getBusStopInfo_array
+		return $getBusStopInfo_array;
 		//return view('bus_stop_info', $getBusStopInfo_array);
 	}
 
