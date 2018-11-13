@@ -14,15 +14,13 @@ body {
    background-color: #FFFFFF;
 }
 
-.table-users {
+p {
+  font-weight: bold;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-}
-p {
-  font-weight: bold;
 }
 .header {
    background-color: lightcyan;
