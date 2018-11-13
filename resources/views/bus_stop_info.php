@@ -9,7 +9,6 @@
 
 body {
    background-color: #FFFFFF;
-   * { box-sizing: border-box; }
 }
 
 .header {
