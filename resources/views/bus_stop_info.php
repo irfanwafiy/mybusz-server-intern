@@ -20,7 +20,7 @@ body {
    font-size: 1.5em;
    text-align: center;
    font-weight: bold;
-   font-size: 200%;
+   font-size: 230%;
    position: absolute;
    top: 5%;
    bottom: 0;
@@ -30,7 +30,7 @@ body {
 }
 table {
     position: absolute;
-    top: 10%;
+    top: 15%;
     bottom: 0;
     left: 0;
     right: 0;
