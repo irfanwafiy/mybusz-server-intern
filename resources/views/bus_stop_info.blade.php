@@ -83,11 +83,14 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
-        @foreach ($getBusStopInfo_array as $data)
+        @foreach ($data as $value)
         <tr>
-           <td>{{$data->bus_service_no}}</td>
-           <td>{{$data->stop_eta}} mins</td>
-           <td>{{$data->Destination}}</td>
+           <td>{{$value->bus_service_no}}</td>
+
+           <td>{{$value->stop_eta}}@if ($value->stop_eta != 'NA') mins @endif</td>
+
+
+           <td>{{$value->Destination}}</td>
         </tr>
         @endforeach
         <tr>
