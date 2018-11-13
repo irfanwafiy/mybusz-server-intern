@@ -36,7 +36,7 @@ p {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 1.5%;
+   padding-top: 1%;
 }
 table {
     position: absolute;
