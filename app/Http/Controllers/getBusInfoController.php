@@ -612,6 +612,44 @@ class getBusInfoController extends Controller
 
 	}
 
+	public function getBusStopInfo(Request $request)
+	{
+		$bus_stop_id = $request->input('bus_stop_id');
+		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
+		$bus_service_available = self::getBusService_method($bus_stop_id);
+		$getBusStopInfo_array = array();
+		foreach ($bus_service_list as $singleset)
+		{
+			$eta = NULL;
+			foreach ($bus_service_available as $singleset2)
+			{
+				if($singleset->bus_service_no == $singleset2->bus_service_no)
+				{
+					$eta = $singleset2->eta;
+				}
+			}
+
+			if($eta != NULL)
+			{
+				$dataset_busList = [
+					'bus_service_no' => $singleset1->bus_service_no,
+					'stop_eta' => $eta
+				];
+			}
+			else
+			{
+				$dataset_busList = [
+					'bus_service_no' => $singleset1->bus_service_no,
+					'stop_eta' => "NA"
+				];
+			}
+
+			array_push($getBusStopInfo_array, $dataset_busList);
+		}
+
+		return $getBusStopInfo_array;
+	}
+
 	//mobile APP
 
 	public function getbus_stop_bus_services(Request $request)
