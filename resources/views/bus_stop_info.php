@@ -14,7 +14,7 @@ body {
    background-color: #FFFFFF;
 }
 
-.h2 {
+h2 {
    background-color: lightcyan;
    color: black;
    font-size: 1.5em;
