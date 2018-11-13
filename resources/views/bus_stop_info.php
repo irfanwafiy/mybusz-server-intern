@@ -20,7 +20,7 @@ body {
    font-size: 1.5em;
    text-align: center;
    font-weight: bold;
-   font-size: 180%;
+   font-size: 250%;
    position: absolute;
    top: 5%;
    bottom: 0;
