@@ -8,7 +8,7 @@
 
 
 body {
-   background-color: lighten(#398B93, 30%);
+   background-color: #AFEEEE;
    * { box-sizing: border-box; }
 }
 
@@ -33,7 +33,7 @@ th, td {
 }
 
 
-tr:nth-child(even){background-color: red}
+tr:nth-child(even){background-color: #FFFDD0;}
 
 th {
     background-color: #4CAF50;
