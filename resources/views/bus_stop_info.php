@@ -59,8 +59,9 @@ th {
 </head>
 
 <body>
-<h3>Tuesday, 13 November 2018 21:00</h3>
+
   <div class="table-users">
+    <h3>Tuesday, 13 November 2018 21:00</h3>
      <div class="header">Opp Sembawang Stn (1201)</div>
 
      <table cellspacing="0">
