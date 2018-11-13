@@ -623,7 +623,7 @@ class getBusInfoController extends Controller
 			$eta = NULL;
 			foreach ($bus_service_available as $singleset2)
 			{
-				if($singleset->bus_service_no == $singleset2->bus_service_no)
+				if($singleset[0]->bus_service_no == $singleset2->bus_service_no)
 				{
 					$eta = $singleset2->eta;
 				}
@@ -632,14 +632,14 @@ class getBusInfoController extends Controller
 			if($eta != NULL)
 			{
 				$dataset_busList = [
-					'bus_service_no' => $singleset->bus_service_no,
+					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => $eta
 				];
 			}
 			else
 			{
 				$dataset_busList = [
-					'bus_service_no' => $singleset->bus_service_no,
+					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => "NA"
 				];
 			}
