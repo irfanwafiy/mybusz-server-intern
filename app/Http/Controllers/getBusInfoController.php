@@ -654,7 +654,7 @@ class getBusInfoController extends Controller
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => "NA",
-					'Destination' => $getDestination_name
+					'Destination' => "Hello"
 				];
 			}
 
