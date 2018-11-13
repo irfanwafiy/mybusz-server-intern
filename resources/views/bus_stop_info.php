@@ -30,7 +30,7 @@ body {
 }
 table {
     position: absolute;
-    top: 15%;
+    top: 16%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -59,7 +59,7 @@ th {
 </head>
 
 <body>
-Tuesday, 13 November 2018 21:00
+<h3>Tuesday, 13 November 2018 21:00</h3>
   <div class="table-users">
      <div class="header">Opp Sembawang Stn (1201)</div>
 
