@@ -13,10 +13,16 @@
 body {
    background-color: #FFFFFF;
 }
-
+.table-users{
+    position: absolute;
+    height: 100%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    top: -2.5%;
+}
 p {
   font-weight: bold;
-  padding-bottom: 5%
 }
 .header {
    background-color: lightcyan;
@@ -30,7 +36,7 @@ p {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 1%;
+   padding-top: 1.5%;
 }
 table {
     position: absolute;
