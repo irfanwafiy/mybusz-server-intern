@@ -80,7 +80,13 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
-
+        @foreach ($getBusStopInfo_array as $data)
+        <tr>
+           <td>{{$data->bus_service_no}}</td>
+           <td>{{$data->stop_eta}} mins</td>
+           <td>Sembawang Int</td>
+        </tr>
+        @endforeach
         <tr>
            <td>117</td>
            <td>20 mins</td>
