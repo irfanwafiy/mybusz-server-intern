@@ -18,11 +18,13 @@ body {
    background-color: lightcyan;
    color: black;
    font-size: 1.5em;
-   text-align: left;
+   text-align: center;
+   font-weight: bold;
+   font-size: 200%
 }
 table {
     position: absolute;
-    top: 8%;
+    top: 10%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -33,7 +35,7 @@ table {
 th, td {
     text-align: center;
     color: #005555;
-    font-size: 250%;
+    font-size: 180%;
     padding: 3%;
     width: 30%;
     font-family: data-latinFont;
