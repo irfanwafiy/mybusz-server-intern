@@ -20,12 +20,13 @@ body {
    font-size: 1.5em;
    text-align: center;
    font-weight: bold;
-   font-size: 150%;
+   font-size: 180%;
    position: absolute;
    top: 5%;
    bottom: 0;
    left: 0;
    right: 0;
+   padding-top: 2%;
 }
 table {
     position: absolute;
