@@ -14,7 +14,7 @@ body {
    background-color: #FFFFFF;
 }
 
-.header {
+.h2 {
    background-color: lightcyan;
    color: black;
    font-size: 1.5em;
@@ -25,7 +25,7 @@ body {
    top: 3%;
    bottom: 0;
    left: 0;
-   right: -10%;
+   right: -1-%;
    width: 100%;
    height: 100%;
 }
@@ -64,7 +64,7 @@ th {
 <body>
 Tuesday, 13 November 2018 21:00
   <div class="table-users">
-     <div class="header">Opp Sembawang Stn (1201)</div>
+     <h2>Opp Sembawang Stn (1201)</h2>
 
      <table cellspacing="0">
         <tr>
