@@ -20,7 +20,7 @@ body {
    font-size: 1.5em;
    text-align: center;
    font-weight: bold;
-   font-size: 250%;
+   font-size: 200%;
    position: absolute;
    top: 5%;
    bottom: 0;
@@ -40,7 +40,7 @@ table {
 th, td {
     text-align: center;
     color: #005555;
-    font-size: 120%;
+    font-size: 180%;
     width: 30%;
     padding: 1%;
 }
