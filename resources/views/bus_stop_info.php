@@ -27,7 +27,7 @@ table {
 
 th, td {
     text-align: center;
-    font-size: 25%;
+    font-size: 250%;
     padding: 3%;
     width: 30%
 }
