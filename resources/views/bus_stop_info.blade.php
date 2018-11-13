@@ -72,7 +72,7 @@ th {
 </head>
 
 <body>
-
+{{dd($getBusStopInfo_array)}}
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">Opp Sembawang Stn (1201)</div>
@@ -121,7 +121,7 @@ th {
 
 
   </div>
-    {{dd($getBusStopInfo_array)}}
+
 
 
 
