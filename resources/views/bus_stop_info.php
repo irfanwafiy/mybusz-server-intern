@@ -33,6 +33,7 @@ table {
     bottom: 0;
     left: 0;
     right: 0;
+    height: 30%;
 }
 
 th, td {
