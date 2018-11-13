@@ -27,7 +27,7 @@ table {
 
 th, td {
     text-align: left;
-    padding: 8px;
+    padding: 10%;
 }
 
 tr:nth-child(even){background-color: red}
