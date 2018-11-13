@@ -22,6 +22,7 @@ body {
 table {
     border-collapse: collapse;
     width: 100%;
+    height: 100%;
 }
 
 th, td {
@@ -29,7 +30,7 @@ th, td {
     color: #005555;
     font-size: 250%;
     padding: 3%;
-    width: 30%
+    width: 30%;
     font-family: data-latinFont;
 }
 
