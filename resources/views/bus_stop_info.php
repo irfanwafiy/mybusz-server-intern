@@ -22,7 +22,7 @@ body {
    font-weight: bold;
    font-size: 230%;
    position: absolute;
-   top: 5%;
+   top: 7%;
    bottom: 0;
    left: 0;
    right: 0;
@@ -30,7 +30,7 @@ body {
 }
 table {
     position: absolute;
-    top: 16%;
+    top: 18%;
     bottom: 0;
     left: 0;
     right: 0;
