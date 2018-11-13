@@ -121,7 +121,7 @@ th {
 
 
   </div>
-    dd($getBusStopInfo_array)
+    {{dd($getBusStopInfo_array)}}
 
 
 
