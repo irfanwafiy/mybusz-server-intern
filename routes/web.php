@@ -20,7 +20,7 @@ Route::get('/bus_simulator', function () {
     return view('bus_simulator');
 });
 Route::get('/bus_stop_info', function () {
-    return view('bus_stop_info');
+    return view('busStop_info');
 });
 Route::get('/input_bus_stop_859A', function () {
     return view('syd_test_bus_stop');
