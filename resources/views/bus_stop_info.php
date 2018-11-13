@@ -13,7 +13,7 @@ body {
 }
 
 .header {
-   background-color: darkcyan;
+   background-color: lightcyan;
    color: white;
    font-size: 1.5em;
    padding: 1rem;
@@ -27,6 +27,7 @@ table {
 
 th, td {
     text-align: center;
+    color: #005555;
     font-size: 250%;
     padding: 3%;
     width: 30%
@@ -36,7 +37,7 @@ th, td {
 tr:nth-child(even){background-color: #FFFDD0;}
 
 th {
-    background-color: #4CAF50;
+    background-color: darkcyan;
     color: white;
 }
 </style>
