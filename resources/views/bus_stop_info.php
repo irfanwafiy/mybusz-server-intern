@@ -26,7 +26,6 @@ body {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 2%;
 }
 table {
     position: absolute;
@@ -42,7 +41,6 @@ th, td {
     text-align: center;
     color: #005555;
     font-size: 120%;
-    padding: 3%;
     width: 30%;
     font-family: data-latinFont;
 }
