@@ -18,12 +18,11 @@ body {
    background-color: lightcyan;
    color: black;
    font-size: 1.5em;
-   padding: 1rem;
    text-align: left;
 }
 table {
     position: absolute;
-    top: 7%;
+    top: 8%;
     bottom: 0;
     left: 0;
     right: 0;
