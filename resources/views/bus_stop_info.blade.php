@@ -119,9 +119,9 @@ th {
         </tr>
      </table>
 
-     {{$getBusStopInfo_array->bus_service_no}}
-  </div>
 
+  </div>
+    dd{{$getBusStopInfo_array}}
 
 
 
