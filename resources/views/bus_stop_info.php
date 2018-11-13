@@ -41,8 +41,7 @@ th, td {
     color: #005555;
     font-size: 120%;
     width: 30%;
-    font-family: data-latinFont;
-    padding: 0.5%;
+    padding: 1%;
 }
 
 
