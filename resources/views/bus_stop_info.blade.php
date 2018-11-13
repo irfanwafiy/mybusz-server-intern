@@ -83,6 +83,7 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
+        {{$getBusStopInfo_array[0]}}
         @foreach($getBusStopInfo_array as $value)
         <tr>
            <td>{{$value->bus_service_no}}</td>
