@@ -622,13 +622,13 @@ class getBusInfoController extends Controller
 		{
 			$getDestination_route_id = DB::table('bus_route')
 												->select('bus_route.route_id')
-												->join('route_bus_stop.route_id', '=', 'bus_route.route_id')
+												->join('route_bus_stop','route_bus_stop.route_id', '=', 'bus_route.route_id')
 												->where('route_bus_stop.bus_stop_id', $bus_stop_id)
 												->where('bus_route.bus_service_no', $singleset[0]->bus_service_no)
 												->first();
 			$getDestination_name = DB::table('bus_stop')
 														->select('bus_stop.name')
-														->join('route_bus_stop.bus_stop_id', '=', 'bus_stop.bus_stop_id')
+														->join('route_bus_stop','route_bus_stop.bus_stop_id', '=', 'bus_stop.bus_stop_id')
 														->where('route_bus_stop.route_id', $getDestination_route_id)
 														->orderBy('route_bus_stop.route_order', 'desc')
 														->first();
