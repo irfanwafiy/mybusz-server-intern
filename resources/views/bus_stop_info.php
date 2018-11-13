@@ -42,7 +42,7 @@ th, td {
     font-size: 120%;
     width: 30%;
     font-family: data-latinFont;
-    padding: 2%;
+    padding: 0.5%;
 }
 
 
