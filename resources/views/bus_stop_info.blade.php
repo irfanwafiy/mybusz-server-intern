@@ -83,15 +83,16 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
+        {{dd($data->bus_data[0])}}
         @foreach($data->bus_data as $value)
 
         <tr>
-           <td>{{$value[0]->bus_service_no}}</td>
+           <td>{{$value->bus_service_no}}</td>
 
-           <td>{{$value[0]->stop_eta}}@if ($value->stop_eta != 'NA') mins @endif</td>
+           <td>{{$value->stop_eta}}@if ($value->stop_eta != 'NA') mins @endif</td>
 
 
-           <td>{{$value[0]->Destination}}</td>
+           <td>{{$value->Destination}}</td>
         </tr>
         @endforeach
         <tr>
