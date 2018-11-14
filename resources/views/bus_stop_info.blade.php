@@ -72,7 +72,7 @@ th {
 </head>
 
 <body>
-{{dd($getBusStopInfo_array)}}
+{{dd($data)}}
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">Opp Sembawang Stn (1201)</div>
@@ -84,7 +84,7 @@ th {
            <th>Destination</th>
         </tr>
 
-        @foreach($getBusStopInfo_array as $value)
+        @foreach($data as $value)
         <tr>
            <td>{{$value->bus_service_no}}</td>
 
