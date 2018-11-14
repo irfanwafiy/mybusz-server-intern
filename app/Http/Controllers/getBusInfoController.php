@@ -666,6 +666,8 @@ class getBusInfoController extends Controller
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
 			$stop_name = $getBusStopName['name'];
+
+			dd($stop_name);
 		$data = [
 		'bus_data' => $getBusStopInfo_array,
 		'stop_name' => $stop_name
