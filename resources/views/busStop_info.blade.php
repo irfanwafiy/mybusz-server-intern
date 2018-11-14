@@ -116,7 +116,7 @@ input[type=submit]:hover {
 				<form action="https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo" method="post">
 
 				  <label for="bus_id">bus_stop_id:</label>
-				  <input id="bus_stop_id" type="text" name="bus_id" value="">
+				  <input id="bus_stop_id" type="text" name="bus_stop_id" value="">
 				  <br><br>
 				  <input type="submit" value="Submit">
 				</form>
