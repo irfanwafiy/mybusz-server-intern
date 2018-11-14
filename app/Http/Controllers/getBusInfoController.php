@@ -667,7 +667,7 @@ class getBusInfoController extends Controller
 		}
 		$data = [
 		'bus_data' => $getBusStopInfo_array,
-		'stop_name' => $getBusStopName
+		'stop_name' => $getBusStopName->name
 	];
 		//return $getBusStopInfo_array;
 		return view('bus_stop_info', compact('data'));
