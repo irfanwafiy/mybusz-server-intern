@@ -669,7 +669,7 @@ class getBusInfoController extends Controller
 
 			$data_dummy = array(
 				"hello" => "hi",
-				"test" => "".$getBusStopName->name
+				"test" => (object)$getBusStopName->name
 			);
 
 		$data = array(
