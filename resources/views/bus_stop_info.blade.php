@@ -75,7 +75,7 @@ th {
 
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
-     <div class="header">Opp Sembawang Stn (1201)</div>
+     <div class="header">{{$sset_view['title']}}</div>
 
      <table cellspacing="0">
         <tr>
