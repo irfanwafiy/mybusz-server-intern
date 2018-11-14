@@ -612,16 +612,7 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getBusStopInfo_method($bus_stop_id)
-	{
-
-		dd($bus_stop_id);
-		$data_dummy = array(
-												"hello" => "hi",
-												"test" => $stop_name
-											);
-		return $data_dummy;
-	}
+	
 
 	public function getBusStopInfo(Request $request)
 	{
@@ -632,7 +623,7 @@ class getBusInfoController extends Controller
 		$getBusStopInfo_array = array();
 		$getBusStopName = DB::table('bus_stop')
 											->select('name')
-											->where('bus_stop_id', "1201")
+											->where('bus_stop_id', $bus_stop_id)
 											->first();
 		$stop_name = $getBusStopName->name;
 		foreach ($bus_service_list as $singleset)

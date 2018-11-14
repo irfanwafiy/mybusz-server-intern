@@ -93,29 +93,7 @@ th {
            <td>{{$value['Destination']}}</td>
         </tr>
         @endforeach
-        <tr>
-           <td>117</td>
-           <td>20 mins</td>
-           <td>Sembawang Int</td>
-        </tr>
-
-        <tr>
-           <td>Jane Doe</td>
-           <td>jane.doe@foo.com</td>
-           <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-        </tr>
-
-        <tr>
-           <td>Jane Doe</td>
-           <td>jane.doe@foo.com</td>
-           <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-        </tr>
-
-        <tr>
-           <td>Jane Doe</td>
-           <td>jane.doe@foo.com</td>
-           <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-        </tr>
+        
      </table>
 
 
