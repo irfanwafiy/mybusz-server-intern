@@ -662,7 +662,7 @@ class getBusInfoController extends Controller
 					'Destination' => $getDestination_name->name
 				];
 			}
-			$dataset_busList = (object)$dataset_busList;
+
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
 			// $stop_name = $getBusStopName->name;
@@ -672,7 +672,7 @@ class getBusInfoController extends Controller
 		'stop_name' => $getBusStopName
 	);
 	$data = (object)$data;
-		return view('bus_stop_info', compact('data'));
+		return view('bus_stop_info', compact('data','getBusStopName'));
 	}
 
 	//mobile APP
