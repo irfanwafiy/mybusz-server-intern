@@ -113,7 +113,7 @@ input[type=submit]:hover {
 				<div class="title m-b-md">
                     Bus Simulator
                 </div>
-				<form action="https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo" method="get">
+				<form action="https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo" method="post">
 
 				  <label for="bus_id">bus_stop_id:</label>
 				  <input id="bus_stop_id" type="text" name="bus_id" value="">
