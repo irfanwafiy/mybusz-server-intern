@@ -662,12 +662,11 @@ class getBusInfoController extends Controller
 					'Destination' => $getDestination_name->name
 				];
 			}
-
+			$dataset_busList = (object)$dataset_busList;
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
 			// $stop_name = $getBusStopName->name;
-			$getBusStopInfo_array = (object)$getBusStopInfo_array;
-			$getBusStopName = (object)$getBusStopName;
+
 		$data = array(
 		'bus_data' => $getBusStopInfo_array,
 		'stop_name' => $getBusStopName
