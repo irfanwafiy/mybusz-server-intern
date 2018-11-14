@@ -667,6 +667,7 @@ class getBusInfoController extends Controller
 		}
 			// $stop_name = $getBusStopName->name;
 			$getBusStopInfo_array = (object)$getBusStopInfo_array;
+			$getBusStopName = (object)$getBusStopName;
 		$data = array(
 		'bus_data' => $getBusStopInfo_array,
 		'stop_name' => $getBusStopName
