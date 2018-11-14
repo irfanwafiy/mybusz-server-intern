@@ -75,7 +75,7 @@ th {
 
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
-     <div class="header">{{$data->stop_name}}</div>
+     <div class="header">{{$data['stop_name']}}</div>
 
      <table cellspacing="0">
         <tr>
@@ -83,7 +83,7 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
-        {{dd($data->bus_data)}}
+        {{dd($data['bus_data'])}}
         @foreach($data as $value)
 
         <tr>
