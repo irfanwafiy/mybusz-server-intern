@@ -662,8 +662,8 @@ class getBusInfoController extends Controller
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
 
-
-		return view('bus_stop_info', compact('getBusStopInfo_array'));
+		return $getBusStopInfo_array
+		//return view('bus_stop_info', compact('getBusStopInfo_array'));
 	}
 
 	//mobile APP
