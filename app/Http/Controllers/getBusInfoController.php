@@ -657,7 +657,7 @@ class getBusInfoController extends Controller
 					$eta = $singleset2->eta;
 				}
 			}
-
+			dd($eta);
 			if($eta != NULL)
 			{
 				$dataset_busList = [
