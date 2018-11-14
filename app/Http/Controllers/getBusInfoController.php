@@ -616,7 +616,7 @@ class getBusInfoController extends Controller
 	{
 		$getBusStopName = DB::table('bus_stop')
 											->select('name')
-											->where('bus_stop_id', $bus_stop_id)
+											->where('bus_stop_id', "1201")
 											->first();
 		$stop_name = $getBusStopName;
 		dd($getBusStopName);
