@@ -657,12 +657,11 @@ class getBusInfoController extends Controller
 					$eta = $singleset2->eta;
 				}
 			}
-			dd($eta);
 			if($eta != NULL)
 			{
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => $eta,
+					'stop_eta' => $eta[0]['relative_time'],
 					'Destination' => $getDestination_name->name
 				];
 			}
