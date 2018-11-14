@@ -72,7 +72,7 @@ th {
 </head>
 
 <body>
-{{dd(json_decode($data))}}
+
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">Opp Sembawang Stn (1201)</div>
@@ -85,6 +85,7 @@ th {
         </tr>
 
         @foreach($data as $value)
+        {{dd($value->bus_service_no)}}
         <tr>
            <td>{{$value->bus_service_no}}</td>
 
