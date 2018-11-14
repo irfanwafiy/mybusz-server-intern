@@ -619,6 +619,10 @@ class getBusInfoController extends Controller
 		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
 		$bus_service_available = self::getBusService_method($bus_stop_id);
 		$getBusStopInfo_array = array();
+		$getBusStopName = DB::table('bus_stop')
+											->select('name')
+											->where('bus_stop_id', $bus_stop_id)
+											->first();
 		foreach ($bus_service_list as $singleset)
 		{
 			$getDestination_route_id = DB::table('bus_route')
@@ -661,12 +665,12 @@ class getBusInfoController extends Controller
 
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
-		$data = $getBusStopInfo_array;
-		$sset_view = [
-		'title' => "My Bus"
+		$data = [
+		'bus_data' => $getBusStopInfo_array,
+		'stop_name' => $getBusStopName
 	];
 		//return $getBusStopInfo_array;
-		return view('bus_stop_info', compact('data','sset_view'));
+		return view('bus_stop_info', compact('data'));
 	}
 
 	//mobile APP
