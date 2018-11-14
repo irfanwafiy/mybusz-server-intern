@@ -619,7 +619,7 @@ class getBusInfoController extends Controller
 											->where('bus_stop_id', "1201")
 											->first();
 		$stop_name = $getBusStopName;
-		dd($getBusStopName);
+		dd($bus_stop_id);
 		$data_dummy = array(
 												"hello" => "hi",
 												"test" => $stop_name
