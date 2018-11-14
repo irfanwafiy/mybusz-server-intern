@@ -62,7 +62,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-			
+
 			input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -98,23 +98,23 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     padding: 20px;
 }
-			
-			
+
+
         </style>
     </head>
     <body>
-        
+
 
             <div class="content">
-                
-				 
-                
+
+
+
 				<div class="myForm">
 				<div class="title m-b-md">
                     Bus Simulator
                 </div>
-				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="post">
-  
+				<form action="https://laravelsyd-fypfinalver.herokuapp.com/bus_insertlocation" method="get">
+
 				  <label for="bus_id">Bus_id:</label>
 				  <input id="bus_id" type="text" name="bus_id" value="">
 				  <br><br>
@@ -135,8 +135,8 @@ input[type=submit]:hover {
 				  <br><br>
 				  <input type="submit" value="Submit">
 				</form>
-				</div> 
+				</div>
             </div>
-			
+
     </body>
 </html>
