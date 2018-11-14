@@ -618,7 +618,7 @@ class getBusInfoController extends Controller
 											->select('name')
 											->where('bus_stop_id', $bus_stop_id)
 											->first();
-		$stop_name = $getBusStopName->name;
+		$stop_name = $getBusStopName;
 		$data_dummy = array(
 												"hello" => "hi",
 												"test" => $stop_name
