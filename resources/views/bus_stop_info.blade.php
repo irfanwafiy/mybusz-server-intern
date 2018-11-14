@@ -75,7 +75,7 @@ th {
 
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
-     <div class="header">{{$data->stop_name->name}}</div>
+     <div class="header">{{$data->stop_name['name']}}</div>
 
      <table cellspacing="0">
         <tr>
