@@ -70,9 +70,9 @@ th {
 </style>
 
 </head>
-
+@section("content")
 <body>
-{{var_dump($data)}}
+{{dd($data)}}
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">{{$data}}</div>
@@ -129,4 +129,5 @@ th {
 
 
 </body>
+@stop
 </html>
