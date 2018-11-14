@@ -663,7 +663,7 @@ class getBusInfoController extends Controller
 		}
 		$data = $getBusStopInfo_collection;
 		//return $getBusStopInfo_array;
-		return view('bus_stop_info', ['getBusStopInfo_array' => $data]);
+		return view('bus_stop_info', compact('data'));
 	}
 
 	//mobile APP
