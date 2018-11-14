@@ -665,12 +665,11 @@ class getBusInfoController extends Controller
 
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
-	// 	print_r($getBusStopName);
-	// 	$data = [
-	// 	'bus_data' => $getBusStopInfo_array,
-	// 	'stop_name' => $getBusStopName
-	// ];
-		return $getBusStopName->name;
+			$stop_name = $getBusStopName->name;
+		$data = [
+		'bus_data' => $getBusStopInfo_array,
+		'stop_name' => $stop_name
+	];
 		//return view('bus_stop_info', compact('data'));
 	}
 
