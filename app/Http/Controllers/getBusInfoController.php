@@ -669,13 +669,13 @@ class getBusInfoController extends Controller
 
 			$data_dummy = array(
 				"hello" => "hi",
-				"test" => $getBusStopName->name
+				"test" => "" + $getBusStopName->name
 			);
-			return $data_dummy;
-	// 	$data = array(
-	// 	'stop_name' => $data_dummy
-	// );
-	// 	return view('bus_stop_info', ['data' => $data]);
+
+		$data = array(
+		'stop_name' => $data_dummy
+	);
+		return view('bus_stop_info', ['data' => $data]);
 	 }
 
 	//mobile APP
