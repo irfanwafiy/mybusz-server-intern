@@ -668,7 +668,7 @@ class getBusInfoController extends Controller
 			// $stop_name = $getBusStopName->name;
 
 		$data = array(
-		'stop_name' => $getBusStopName
+		'stop_name' => "hello"
 	);
 		return view('bus_stop_info', ['data' => $data]);
 	}
