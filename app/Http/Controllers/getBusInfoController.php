@@ -622,7 +622,7 @@ class getBusInfoController extends Controller
 		$getBusStopName = DB::table('bus_stop')
 											->select('name')
 											->where('bus_stop_id', $bus_stop_id)
-											->get();
+											->first();
 		foreach ($bus_service_list as $singleset)
 		{
 			$getDestination_route_id = DB::table('bus_route')
@@ -665,7 +665,7 @@ class getBusInfoController extends Controller
 
 			array_push($getBusStopInfo_array, $dataset_busList);
 		}
-			$stop_name = $getBusStopName->name;
+			$stop_name = $getBusStopName->'name';
 		$data = [
 		'bus_data' => $getBusStopInfo_array,
 		'stop_name' => $stop_name
