@@ -668,11 +668,10 @@ class getBusInfoController extends Controller
 			// $stop_name = $getBusStopName->name;
 
 		$data = array(
-		'bus_data' => $getBusStopInfo_array,
 		'stop_name' => $getBusStopName
 	);
 	$data = (object)$data;
-		return view('bus_stop_info', compact('data','getBusStopName'));
+		return view('bus_stop_info', compact('data'));
 	}
 
 	//mobile APP
