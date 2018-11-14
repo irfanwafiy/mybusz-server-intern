@@ -669,7 +669,7 @@ class getBusInfoController extends Controller
 
 		$data = [
 		'bus_data' => $getBusStopInfo_array,
-		'stop_name' => $getBusStopName->name
+		'stop_name' => $getBusStopName
 	];
 		return view('bus_stop_info')->with('data',json_decode($data,true));
 	}
