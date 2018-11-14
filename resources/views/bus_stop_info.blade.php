@@ -72,7 +72,7 @@ th {
 </head>
 
 <body>
-{{dd($data['stop_name']->name)}}
+{{dd($data['stop_name'])}}
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">{{$data}}</div>
