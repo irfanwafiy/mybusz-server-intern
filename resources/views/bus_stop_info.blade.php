@@ -83,7 +83,7 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
-        {{dd($data->stop_name)}}
+        {{dd($data->stop_name->name)}}
         @foreach($data as $value)
 
         <tr>
