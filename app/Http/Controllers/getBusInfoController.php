@@ -612,6 +612,20 @@ class getBusInfoController extends Controller
 
 	}
 
+	public function getBusStopInfo_method($bus_stop_id)
+	{
+		$getBusStopName = DB::table('bus_stop')
+											->select('name')
+											->where('bus_stop_id', $bus_stop_id)
+											->first();
+		$stop_name = $getBusStopName->name
+		$data_dummy = array(
+												"hello" => "hi",
+												"test" => $stop_name
+											);
+		return $data_dummy;
+	}
+
 	public function getBusStopInfo(Request $request)
 	{
 
@@ -619,10 +633,7 @@ class getBusInfoController extends Controller
 		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
 		$bus_service_available = self::getBusService_method($bus_stop_id);
 		$getBusStopInfo_array = array();
-		$getBusStopName = DB::table('bus_stop')
-											->select('name')
-											->where('bus_stop_id', $bus_stop_id)
-											->first();
+		$data = self::getBusStopInfo_method($bus_stop_id);
 		// foreach ($bus_service_list as $singleset)
 		// {
 		// 	$getDestination_route_id = DB::table('bus_route')
@@ -667,14 +678,11 @@ class getBusInfoController extends Controller
 		// }
 			// $stop_name = $getBusStopName->name;
 
-			$data_dummy = array(
-				"hello" => "hi",
-				"test" => $getBusStopName->name
-			);
 
-		$data = array(
-		'stop_name' => "hello"
-	);
+
+	// 	$data = array(
+	// 	'stop_name' => "hello"
+	// );
 		return view('bus_stop_info', ['data' => $data]);
 	 }
 
