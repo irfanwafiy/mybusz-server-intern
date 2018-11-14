@@ -661,10 +661,9 @@ class getBusInfoController extends Controller
 
 			$getBusStopInfo_collection->push($dataset_busList);
 		}
-		$data = json_decode($getBusStopInfo_collection, true);
-		return $data;
-		// print_r($data['bus_service_no']);
-		// return view('bus_stop_info', compact('data'));
+		$data = $getBusStopInfo_collection;
+		//return $getBusStopInfo_array;
+		return view('bus_stop_info', compact('data'));
 	}
 
 	//mobile APP

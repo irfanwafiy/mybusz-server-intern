@@ -72,7 +72,7 @@ th {
 </head>
 
 <body>
-{{dd($data)}}
+{{dd(json_decode($data))}}
   <div class="table-users">
     <p>Tuesday, 13 November 2018 21:00</p>
      <div class="header">Opp Sembawang Stn (1201)</div>
