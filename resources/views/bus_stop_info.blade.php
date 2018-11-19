@@ -94,7 +94,8 @@ th {
         </tr>
         {{++$key}}
         @endforeach
-        <tr id="test">
+        <tr>
+          {{count($data['bus_data'])}}
         <tr>
      </table>
 
