@@ -620,18 +620,20 @@ class getBusInfoController extends Controller
 		$route_id = $request->input('route_id');
 		$array_refresh = self::getETA_method_test($bus_stop_id, $route_id);
 		$array_refresh_return = array();
+		if (count($array_refresh) > 0)
+		{
+			foreach ($array_refresh as $singleset) {
 
-		foreach ($array_refresh as $singleset) {
-			if($singleset->eta != NULL)
-			{
-				$array_refresh_return = self::array_sort_by_column($singleset->eta);
-					return $array_refresh_return[0]['time'];
-			}
-			else {
-				return "NA";
-			}
+					$array_refresh_return = self::array_sort_by_column($singleset->eta);
 
+
+			}
+			return $array_refresh_return[0]['time'];
 		}
+		else {
+			return "NA";
+		}
+
 
 
 	}
