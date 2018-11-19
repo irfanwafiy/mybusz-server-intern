@@ -650,7 +650,8 @@ class getBusInfoController extends Controller
 			}
 			if($eta != NULL)
 			{
-				$eta = $eta->sortby(function ($a, $b) {
+
+				$eta = $eta->sortby(function ($a['relative_time'], $b['relative_time']) {
 				    return strtotime($a) - strtotime($b);
 				});
 
