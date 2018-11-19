@@ -39,7 +39,7 @@ p {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 1%;
+   padding-top: 1.5%;
 }
 table {
     position: absolute;
@@ -123,7 +123,7 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('clock').innerHTML =
-    D + ", " + d + " " + M + " " + " " + Y + h + ":" + m + ":" + s;
+    D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {
