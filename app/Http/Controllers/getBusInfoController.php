@@ -652,7 +652,7 @@ class getBusInfoController extends Controller
 			{
 
 				$eta = self::array_sort_by_column($eta, 'relative_time');
-
+				dd($eta);
 				// usort($arr, "date_sort");
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
