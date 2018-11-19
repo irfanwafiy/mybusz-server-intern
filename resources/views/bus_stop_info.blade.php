@@ -106,12 +106,9 @@ th {
 
 
 </body>
-@section("scripts")
 
 <!-- Scripts -->
 
-<script src="{{ URL::asset('/js/clock.js') }}"></script>
+<script src="{{ URL::to('js/clock.js') }}"></script>
 
-
-@stop
 </html>
