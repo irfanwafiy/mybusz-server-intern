@@ -88,7 +88,7 @@ th {
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta{{$key}}" value="{{$value['eta_date']}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
+           <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
@@ -136,7 +136,7 @@ function startTime() {
     for (var i =0; i < buses; i++)
     {
       var index = 'eta' + i
-      var eta_date = document.getElementById(index).value;
+      var eta_date = document.getElementById(index).getAttribute("eta_date");
       if (eta_date == "NA")
       {
         if(i > 0)
