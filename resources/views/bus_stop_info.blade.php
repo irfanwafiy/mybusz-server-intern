@@ -110,7 +110,7 @@ th {
 
 <!-- Scripts -->
 
-<script src="{{ URL::asset('js/clock.js') }}"></script>
+<script src="{{ URL::asset('/js/clock.js') }}"></script>
 
 
 @stop
