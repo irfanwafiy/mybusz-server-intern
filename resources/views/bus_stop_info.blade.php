@@ -95,7 +95,7 @@ th {
         {{++$key}}
         @endforeach
         <tr>
-          {{count($data['bus_data'])}}
+          {{$data['bus_data'].length}}
         <tr>
      </table>
 
