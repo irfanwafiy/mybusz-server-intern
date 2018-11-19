@@ -45,6 +45,7 @@ Route::post('/getbus_stops_eta', 'getBusInfoController@getbus_stops_eta');
 Route::post('/getbus_stop_bus_services', 'getBusInfoController@getbus_stop_bus_services');
 
 Route::post('/getBusStopInfo', 'getBusInfoController@getBusStopInfo');
+Route::post('/getBusStopInfo_refresh','getBusInfoController@getBusStopInfo_refresh');
 
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
