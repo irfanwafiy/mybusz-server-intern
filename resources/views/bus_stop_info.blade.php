@@ -88,7 +88,7 @@ th {
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta">@if ($key < 1) 17:15:00 @elseif ($key >= 1) 17:16:00  @endif</td>
+           <td id="eta">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
