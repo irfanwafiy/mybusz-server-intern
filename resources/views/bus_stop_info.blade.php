@@ -83,7 +83,7 @@ th {
            <th>Destination</th>
         </tr>
         @foreach($data['bus_data'] as $value)
-        {{ $count = 0; }}
+        {{ $count = 0}}
         <tr>
            <td>{{$value['bus_service_no']}}</td>
 
