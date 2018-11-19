@@ -685,7 +685,7 @@ class getBusInfoController extends Controller
 	 function array_sort_by_column($arr) {
 
 			usort($arr, function ($a, $b) {
-			    return strtotime($a) - strtotime($b);
+			    return strtotime($a['relative_time']) - strtotime($b['relative_time']);
 			});
 			return $arr;
 	}
