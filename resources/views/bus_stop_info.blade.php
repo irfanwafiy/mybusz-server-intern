@@ -106,10 +106,6 @@ th {
 
 
 </body>
-
-<!-- Scripts -->
-
-<!-- <script src="{{ URL::to('js/clock.js') }}"></script> -->
 <script>
 function startTime() {
     var today = new Date();
@@ -117,14 +113,18 @@ function startTime() {
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday",
     "Saturday"];
     var D = days[today.getDay()];
+    var M = months[today.getMonth()];
+    var Y = today.getFullYear();
+    var d = today.getDate();
     var h = today.getHours();
     var m = today.getMinutes();
     var s = today.getSeconds();
     h = checkTime(h);
     m = checkTime(m);
     s = checkTime(s);
+    Tuesday, 13 November 2018 21:00
     document.getElementById('clock').innerHTML =
-    D + ", "+ h + ":" + m + ":" + s;
+    D + ", " + d + " " + M + " " + " " + Y + h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {
@@ -132,6 +132,5 @@ function checkTime(i) {
     return i;
 }
 </script>
-
 
 </html>
