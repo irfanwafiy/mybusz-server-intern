@@ -83,15 +83,16 @@ th {
            <th>Destination</th>
         </tr>
         @foreach($data['bus_data'] as $value)
-
+        {{ $count = 0; }}
         <tr>
            <td>{{$value['bus_service_no']}}</td>
 
-           <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td>
-
+           <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
+           <td id="eta">@if ($count < 1) 17:15:00  @endif @if ($count >= 1) 17:16:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
+        {{$count++;}}
         @endforeach
 
      </table>
