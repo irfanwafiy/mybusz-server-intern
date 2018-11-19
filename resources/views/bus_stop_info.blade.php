@@ -71,7 +71,7 @@ th {
 
 </head>
 
-<body onload="startTime()">
+<body onload="startScript({{count($data['bus_data'])}})">
   <div class="table-users">
     <p id="clock"></p>
      <div class="header">{{$data['stop_name']}}</div>
@@ -88,14 +88,13 @@ th {
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta{{$key}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
+           <td id="eta{{$key}}" value="{{$value['eta_date']}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
         {{++$key}}
         @endforeach
-        <tr>
-          {{$data['bus_data'].length}}
+        <tr id="test">
         <tr>
      </table>
 
@@ -111,6 +110,12 @@ th {
 
 </body>
 <script>
+var buses = 0;
+function startScript(num_bus)
+{
+  buses = num_bus;
+  startTime();
+}
 function startTime() {
     var today = new Date();
     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
@@ -127,16 +132,18 @@ function startTime() {
     m = checkTime(m);
     s = checkTime(s);
     var clock =D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
-    var clock_check = h + ":" + m + ":" + s;
     document.getElementById('clock').innerHTML = clock;
-    var eta_id = document.getElementById('eta1');
-    var eta_check = eta_id.textContent;
-    document.getElementById('test').innerHTML = eta_check + "======" + clock_check;
-    if(clock_check == eta_check)
+    for (var i =0; i < buses; i++)
     {
+      var index = 'eta' + i
+      var eta_check = new Date(document.getElementById(index).value);
+      if(today >= eta_check)
+      {
 
-      eta_id.innerHTML = "Update";
+        document.getElementById(index).innerHTML = "Update";
+      }
     }
+
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {
