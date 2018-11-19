@@ -641,7 +641,7 @@ class getBusInfoController extends Controller
 						->where('e.route_id', $route_id)
 						->where('bus_stop_id', $bus_stop_id)
 						->where('e.eta', '>', $time)
-						->whereraw('e.time = ( SELECT MAX( t.time ) FROM etav2 t WHERE t.bus_id = ? AND t.route_id = ?) ',[$bus_id,$route_id])
+						->whereraw('e.time = ( SELECT MAX( t.time ) FROM etav2 t WHERE t.route_id = ?) ',[$route_id])
 						->orderBy('e.time','desc')
 						->get();
 
