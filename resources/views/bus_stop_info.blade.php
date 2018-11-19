@@ -92,7 +92,7 @@ th {
 
            <td>{{$value['Destination']}}</td>
         </tr>
-        {{$count++}}
+        {{$count = 1}}
         @endforeach
 
      </table>
