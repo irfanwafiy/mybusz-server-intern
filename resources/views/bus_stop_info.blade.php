@@ -122,7 +122,6 @@ function startTime() {
     h = checkTime(h);
     m = checkTime(m);
     s = checkTime(s);
-    Tuesday, 13 November 2018 21:00
     document.getElementById('clock').innerHTML =
     D + ", " + d + " " + M + " " + " " + Y + h + ":" + m + ":" + s;
     var t = setTimeout(startTime, 500);
