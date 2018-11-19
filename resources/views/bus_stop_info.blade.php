@@ -90,7 +90,7 @@ th {
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
            <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
 
-           <td>{{$value['Destination']}}</td>
+           <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
         </tr>
         {{++$key}}
         @endforeach
@@ -148,7 +148,7 @@ function startTime() {
         }
 
       }
-      
+
       var eta_check = new Date(eta_date);
 
       if(today >= eta_check)
@@ -164,6 +164,21 @@ function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
 }
+
+function refresh() {
+    const userAction = async () => {
+    const response = await fetch('http://example.com/movies.json', {
+      method: 'POST',
+      body: {""}, // string or object
+      headers:{
+        'Content-Type': 'application/json'
+      }
+    });
+    const myJson = await response.json(); //extract JSON from the http response
+    // do something with myJson
+  }
+}
+
 </script>
 
 </html>

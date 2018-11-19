@@ -375,6 +375,7 @@ class getBusInfoController extends Controller
 
 
 
+
 	public function getETA_method($bus_stop_id, $bus_id, $route_id,$status)
 	{
 		$array_ETA = array();
@@ -613,6 +614,55 @@ class getBusInfoController extends Controller
 	}
 
 
+	public function getBusStopInfo_refresh(Request $request)
+	{
+		$bus_stop_id = $request->input('bus_stop_id');
+		$bus_id = $request->input('bus_id');
+		$route_id = $request->input('route_id');
+		$status = true;
+
+		return self::getETA_method_test($bus_stop_id, $route_id, $status);
+	}
+
+	public function getETA_method_test($bus_stop_id, $route_id,$status)
+	{
+		$array_ETA = array();
+		$time = self::getTime();
+		//$time = date('Y/m/d H:i:s', time());
+		//$time = '2014-10-29 10:19:48';
+
+		$getETA_Query = DB::table('bus_route')
+						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
+						->join('etav2 AS e', function ($join)
+							{
+								$join->on('bus_route.bus_id', '=', 'e.bus_id')
+									->on('bus_route.route_id','=', 'e.route_id');
+							})
+						->where('e.route_id', $route_id)
+						->where('bus_stop_id', $bus_stop_id)
+						->where('e.eta', '>', $time)
+						->whereraw('e.time = ( SELECT MAX( t.time ) FROM etav2 t WHERE t.bus_id = ? AND t.route_id = ?) ',[$bus_id,$route_id])
+						->orderBy('e.time','desc')
+						->get();
+
+		$array_ETA = self::calculateEta($getETA_Query);
+		$getETA_response = "".json_encode($array_ETA);
+
+		if($status)
+		{
+			if($array_ETA!=NULL)
+				return response($getETA_response)->setStatusCode(200);
+			else
+				return response("No bus service found")->setStatusCode(400);
+		}
+		else {
+			if($array_ETA!=NULL)
+				return $getETA_response;
+			else
+				return "No bus service found";
+		}
+
+	}
 
 	public function getBusStopInfo(Request $request)
 	{
@@ -657,7 +707,8 @@ class getBusInfoController extends Controller
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => $stop_eta,
 					'Destination' => $getDestination_name->name,
-					'eta_date' => $eta[0]['time']
+					'eta_date' => $eta[0]['time'],
+					'route' => $getDestination_route_id->route_id
 				];
 			}
 			else
@@ -666,7 +717,8 @@ class getBusInfoController extends Controller
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => "NA",
 					'Destination' => $getDestination_name->name,
-					'eta_date' => "NA"
+					'eta_date' => "NA",
+					'route' => $getDestination_route_id->route_id
 				];
 			}
 
