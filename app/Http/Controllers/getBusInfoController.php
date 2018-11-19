@@ -612,7 +612,7 @@ class getBusInfoController extends Controller
 
 	}
 
-	
+
 
 	public function getBusStopInfo(Request $request)
 	{
@@ -650,6 +650,11 @@ class getBusInfoController extends Controller
 			}
 			if($eta != NULL)
 			{
+				$eta = $eta->sortby(function ($a, $b) {
+				    return strtotime($a) - strtotime($b);
+				});
+
+				// usort($arr, "date_sort");
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => $eta[0]['relative_time'],
