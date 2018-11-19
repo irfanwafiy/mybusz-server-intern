@@ -39,7 +39,7 @@ p {
    bottom: 0;
    left: 0;
    right: 0;
-   padding-top: 1%;
+   padding-top: 0.5%;
 }
 table {
     position: absolute;
@@ -82,17 +82,17 @@ th {
            <th>Incoming</th>
            <th>Destination</th>
         </tr>
-        @foreach($data['bus_data'] as $value)
-        {{ $count = 0}}
+        @foreach($data['bus_data'] as $key=>$value)
+
         <tr>
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta">@if ($count < 1) 17:15:00 {{$count++}} @elseif ($count >= 1) 17:16:00  @endif</td>
+           <td id="eta">@if ($key < 1) 17:15:00 @elseif ($key >= 1) 17:16:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
-
+        {{++$key}}
         @endforeach
 
      </table>
