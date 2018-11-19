@@ -96,6 +96,7 @@ th {
         @endforeach
 
      </table>
+     <h3 id="test"></h3>
 
 
   </div>
@@ -128,8 +129,10 @@ function startTime() {
     document.getElementById('clock').innerHTML = clock;
     var eta_id = document.getElementById('eta');
     var eta_check = eta_id.textContent;
+    document.getElementById('test').innerHTML = eta_check + "======" + clock_check;
     if(clock_check == eta_check)
     {
+
       eta_id.innerHTML = "Update";
     }
     var t = setTimeout(startTime, 500);
