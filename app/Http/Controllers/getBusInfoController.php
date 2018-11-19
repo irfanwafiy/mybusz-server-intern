@@ -652,11 +652,10 @@ class getBusInfoController extends Controller
 			{
 
 				$eta = self::array_sort_by_column($eta);
-				dd($eta);
-				// usort($arr, "date_sort");
+				$stop_eta = getTime($eta[0]['time']);
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => $eta[0]['relative_time'],
+					'stop_eta' => $stop_eta,
 					'Destination' => $getDestination_name->name
 				];
 			}
@@ -688,6 +687,13 @@ class getBusInfoController extends Controller
 			    return strtotime($a['time']) - strtotime($b['time']);
 			});
 			return $arr;
+	}
+
+	function getTime($string) {
+		$tring_search   = ' ';
+		$pos = strpos($string, $tring_search);
+
+		return substr($string, $pos+1);
 	}
 
 	//mobile APP
