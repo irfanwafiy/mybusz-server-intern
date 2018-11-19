@@ -71,9 +71,9 @@ th {
 
 </head>
 
-<body>
+<body onload="startTime()">
   <div class="table-users">
-    <p>Tuesday, 13 November 2018 21:00</p>
+    <p id="clock"></p>
      <div class="header">{{$data['stop_name']}}</div>
 
      <table cellspacing="0">
@@ -93,7 +93,7 @@ th {
            <td>{{$value['Destination']}}</td>
         </tr>
         @endforeach
-        
+
      </table>
 
 
@@ -106,4 +106,12 @@ th {
 
 
 </body>
+@section("scripts")
+
+<!-- Scripts -->
+
+<script src="{{ URL::asset('js/clock.js') }}"></script>
+
+
+@stop
 </html>
