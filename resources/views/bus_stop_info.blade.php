@@ -136,7 +136,20 @@ function startTime() {
     for (var i =0; i < buses; i++)
     {
       var index = 'eta' + i
-      var eta_check = new Date(document.getElementById(index).value);
+      var eta_date = document.getElementById(index).value;
+      if (eta_date == "NA")
+      {
+        if(i > 0)
+        {
+          eta_date = '2018-11-19 18:40:00';
+        }
+        else {
+          eta_date = '2018-11-19 18:30:00';
+        }
+
+      }
+      var eta_check = new Date(eta_date);
+      document.getElementById("test").innerHTML = "" + eta_check;
       if(today >= eta_check)
       {
 
