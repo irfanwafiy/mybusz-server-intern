@@ -635,8 +635,7 @@ class getBusInfoController extends Controller
 						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
 						->join('etav2 AS e', function ($join)
 							{
-								$join->on('bus_route.bus_id', '=', 'e.bus_id')
-									->on('bus_route.route_id','=', 'e.route_id');
+								$join->on('bus_route.route_id','=', 'e.route_id');
 							})
 						->where('e.route_id', $route_id)
 						->where('bus_stop_id', $bus_stop_id)
