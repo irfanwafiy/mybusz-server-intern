@@ -626,41 +626,38 @@ class getBusInfoController extends Controller
 
 	public function getETA_method_test($bus_stop_id, $route_id,$status)
 	{
-		$array_ETA = array();
+		$array_BusService = array();
 		$time = self::getTime();
 		//$time = date('Y/m/d H:i:s', time());
-		//$time = '2014-10-29 10:19:48';
+		//$currentTime = round(microtime(true));
+		//$currentTime = '2015-12-28 15:41:00';
 
-		$getETA_Query = DB::table('bus_route')
-						->select('bus_route.route_id', 'bus_route.bus_service_no', 'eta')
-						->join('etav2 AS e', function ($join)
+		$bus_service_Query = DB::table('etav2 AS e')
+							->select('e.route_id','bus_route.bus_service_no')
+							->selectraw('GROUP_CONCAT(DISTINCT eta) AS eta')
+							->join('bus_route', function ($join)
 							{
 								$join->on('bus_route.bus_id', '=', 'e.bus_id')
 									->on('bus_route.route_id','=', 'e.route_id');
 							})
-						->where('e.route_id', $route_id)
-						->where('bus_stop_id', $bus_stop_id)
-						->where('e.eta', '>', $time)
-						->whereraw('e.time = ( SELECT MAX( t.time ) FROM etav2 t WHERE t.route_id = ?) ',[$route_id])
-						->orderBy('e.time','desc')
-						->get();
+							->where('e.bus_stop_id',$bus_stop_id)
+							->where('e.route_id', $route_id)
+							->where('e.eta', '>', $time)
+							->where('e.time', '>',function($query)
+											{
+												$query->selectraw('MAX( time ) - INTERVAL 30 SECOND
+												FROM etav2 v
+												WHERE v.bus_id = e.bus_id
+												AND v.route_id = e.route_id');
+											}
+									)
+							->groupBy('e.route_id', 'bus_route.bus_service_no')
+							->orderBy('eta', 'desc')
+							->get();
 
-		$array_ETA = self::calculateEta($getETA_Query);
-		$getETA_response = "".json_encode($array_ETA);
+		$array_BusService = self::calculateEta($bus_service_Query);
 
-		if($status)
-		{
-			if($array_ETA!=NULL)
-				return response($getETA_response)->setStatusCode(200);
-			else
-				return response("No bus service found")->setStatusCode(400);
-		}
-		else {
-			if($array_ETA!=NULL)
-				return $getETA_response;
-			else
-				return "No bus service found";
-		}
+		return $array_BusService;
 
 	}
 
