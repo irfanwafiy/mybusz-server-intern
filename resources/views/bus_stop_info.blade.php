@@ -88,7 +88,7 @@ th {
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
+           <td id="eta{{$key}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
 
            <td>{{$value['Destination']}}</td>
         </tr>
@@ -128,7 +128,7 @@ function startTime() {
     var clock =D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
     var clock_check = h + ":" + m + ":" + s;
     document.getElementById('clock').innerHTML = clock;
-    var eta_id = document.getElementById('eta');
+    var eta_id = document.getElementById('eta0');
     var eta_check = eta_id.textContent;
     document.getElementById('test').innerHTML = eta_check + "======" + clock_check;
     if(clock_check == eta_check)
