@@ -87,7 +87,7 @@ th {
         <tr>
            <td>{{$value['bus_service_no']}}</td>
 
-           <td>{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') mins @endif</td>
+           <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td>
 
 
            <td>{{$value['Destination']}}</td>
@@ -122,8 +122,15 @@ function startTime() {
     h = checkTime(h);
     m = checkTime(m);
     s = checkTime(s);
-    document.getElementById('clock').innerHTML =
-    D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
+    var clock =D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
+    var clock_check = h + ":" + m + ":" + s;
+    document.getElementById('clock').innerHTML = clock;
+    var eta_id = document.getElementById('eta');
+    var eta_check = eta_id.textContent;
+    if(clock_check == eta_check)
+    {
+      eta_id.innerHTML = "Update";
+    }
     var t = setTimeout(startTime, 500);
 }
 function checkTime(i) {
