@@ -148,10 +148,10 @@ function startTime() {
         }
 
       }
-      document.getElementById("test").innerHTML = "" + eta_date;
+      
       var eta_check = new Date(eta_date);
 
-      if(today <= eta_check)
+      if(today >= eta_check)
       {
 
         document.getElementById(index).innerHTML = "Update";
