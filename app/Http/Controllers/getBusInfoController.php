@@ -622,7 +622,7 @@ class getBusInfoController extends Controller
 		$array_refresh_return = array();
 
 		foreach ($array_refresh as $singleset) {
-		$array_refresh_return = array_sort_by_column($singleset->eta);
+		$array_refresh_return = self::array_sort_by_column($singleset->eta);
 
 		}
 		return $array_refresh_return[0]['time'];
