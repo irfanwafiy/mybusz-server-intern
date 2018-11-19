@@ -652,7 +652,7 @@ class getBusInfoController extends Controller
 			{
 
 				$eta = self::array_sort_by_column($eta);
-				$stop_eta = getTime($eta[0]['time']);
+				$stop_eta = self::getstring_Time($eta[0]['time']);
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => $stop_eta,
@@ -689,7 +689,7 @@ class getBusInfoController extends Controller
 			return $arr;
 	}
 
-	function getTime($string) {
+	function getstring_Time($string) {
 		$tring_search   = ' ';
 		$pos = strpos($string, $tring_search);
 
