@@ -651,9 +651,7 @@ class getBusInfoController extends Controller
 			if($eta != NULL)
 			{
 
-				$eta = $eta->sortby(function ($a['relative_time'], $b['relative_time']) {
-				    return strtotime($a) - strtotime($b);
-				});
+				$eta = self::array_sort_by_column($eta, 'relative_time');
 
 				// usort($arr, "date_sort");
 				$dataset_busList = [
@@ -683,6 +681,17 @@ class getBusInfoController extends Controller
 	);
 		return view('bus_stop_info', ['data' => $data]);
 	 }
+
+	 function array_sort_by_column($array, $column, $direction = SORT_ASC) {
+	    $reference_array = array();
+
+	    foreach($array as $key => $row) {
+	        $reference_array[$key] = $row[$column];
+	    }
+
+	    array_multisort($reference_array, $direction, $array);
+			return $reference_array;
+	}
 
 	//mobile APP
 
