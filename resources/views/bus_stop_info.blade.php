@@ -128,7 +128,7 @@ function startTime() {
     var clock =D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
     var clock_check = h + ":" + m + ":" + s;
     document.getElementById('clock').innerHTML = clock;
-    var eta_id = document.getElementById('eta0');
+    var eta_id = document.getElementById('eta1');
     var eta_check = eta_id.textContent;
     document.getElementById('test').innerHTML = eta_check + "======" + clock_check;
     if(clock_check == eta_check)
