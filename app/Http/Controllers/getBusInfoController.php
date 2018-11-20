@@ -618,7 +618,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$route_id = $request->input('route_id');
-		$array_refresh = self::getETA_method_test($bus_stop_id, $route_id);
+		$array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
 		$array_refresh_return = array();
 		if (count($array_refresh) > 0)
 		{
@@ -638,7 +638,7 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getETA_method_test($bus_stop_id, $route_id)
+	public function getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id)
 	{
 		$array_BusService = array();
 		$time = self::getTime();
@@ -741,6 +741,7 @@ class getBusInfoController extends Controller
 
 		$data = array(
 		'stop_name' => $stop_name,
+		'bus_stop_id' => $bus_stop_id,
 		"bus_data" => $getBusStopInfo_array
 	);
 		return view('bus_stop_info', ['data' => $data]);

@@ -74,7 +74,7 @@ th {
 <body onload="startScript({{count($data['bus_data'])}})">
   <div class="table-users">
     <p id="clock"></p>
-     <div class="header">{{$data['stop_name']}}</div>
+     <div class="header" id="stop_id" stop_id="{{$data['bus_stop_id']}}">{{$data['stop_name']}}</div>
 
      <table cellspacing="0">
         <tr>
@@ -88,7 +88,7 @@ th {
            <td>{{$value['bus_service_no']}}</td>
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
-           <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}">@if ($key < 1) 17:25:00 @elseif ($key >= 1) 17:26:00  @endif</td>
+           <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA">{{$value['stop_eta']}}</td>
 
            <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
         </tr>
@@ -135,27 +135,43 @@ function startTime() {
     document.getElementById('clock').innerHTML = clock;
     for (var i =0; i < buses; i++)
     {
-      var index = 'eta' + i
-      var eta_date = document.getElementById(index).getAttribute("eta_date");
+      var index_date = 'eta' + i;
+      var index_route = 'route' + i;
+      var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
+      var eta_date = document.getElementById(index_date).getAttribute("eta_date");
+      var bus_route = document.getElementById(index_route).getAttribute("route");
+      var eta_grace_check = document.getElementById(index_date).getAttribute("eta_grace_check");
       if (eta_date == "NA")
       {
-        if(i > 0)
+        if(eta_grace_check == "NA")
         {
-          eta_date = '2018-11-19 18:40:00';
+          grace_time = 5 * 60000;
+          eta_grace_check = today + grace_time;
+          document.getElementById(index_date).getAttribute("eta_grace_check") = eta_grace_check;
         }
-        else {
-          eta_date = '2018-11-19 18:30:00';
+        else
+        {
+          var grace_check = new Date(eta_grace_check);
+          if(grace_check >= today)
+            {
+              refresh(bus_stop_id, bus_route);
+              document.getElementById(index_date).getAttribute("eta_grace_check") = "NA";
+            }
         }
 
       }
-
-      var eta_check = new Date(eta_date);
-
-      if(today >= eta_check)
+      else
       {
+        var eta_check = new Date(eta_date);
 
-        document.getElementById(index).innerHTML = "Update";
+        if(today >= eta_check)
+        {
+
+          refresh(bus_stop_id, bus_route);
+        }
       }
+
+
     }
 
     var t = setTimeout(startTime, 500);
@@ -165,17 +181,18 @@ function checkTime(i) {
     return i;
 }
 
-function refresh() {
+function refresh(bus_stop_id, bus_route) {
     const userAction = async () => {
-    const response = await fetch('http://example.com/movies.json', {
+    const response = await fetch('https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh', {
       method: 'POST',
-      body: {""}, // string or object
+      body: {"bus_stop_id": bus_stop_id,
+              "bus_route": bus_route}, // string or object
       headers:{
         'Content-Type': 'application/json'
       }
     });
     const myJson = await response.json(); //extract JSON from the http response
-    // do something with myJson
+    document.getElementById('test').innerHTML = myJson;
   }
 }
 
