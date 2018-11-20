@@ -193,6 +193,7 @@ function refresh(bus_stop_id, bus_route) {
       }
     });
     const myJson = await response.json(); //extract JSON from the http response
+    console.log(myJson);
     document.getElementById('test').innerHTML = myJson;
   }
 }
