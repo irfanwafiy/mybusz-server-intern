@@ -146,8 +146,8 @@ function startTime() {
       {
         if(eta_grace_check == "NA")
         {
-          grace_time = 5 * 60000;
-          eta_grace_check = today + grace_time;
+          grace_time =today +  (5 * 60000);
+          eta_grace_check = grace_time;
           document.getElementById(index_date).setAttribute("eta_grace_check", eta_grace_check);
         }
         else
