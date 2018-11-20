@@ -748,8 +748,8 @@ class getBusInfoController extends Controller
 	 }
 
 	 function sort_bus_service($arr) {
-		 sort($arr, function ($a, $b) {
-				 return strtotime($a['bus_service_no']) - strtotime($b['bus_service_no']);
+		 asort($arr, function ($a, $b) {
+				 return $a['bus_service_no'] - $b['bus_service_no'];
 		 });
 		 return $arr;
 	 }
