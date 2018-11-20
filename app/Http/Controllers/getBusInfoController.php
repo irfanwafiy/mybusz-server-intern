@@ -748,7 +748,9 @@ class getBusInfoController extends Controller
 	 }
 
 	 function sort_bus_service($arr) {
-		 asort($arr['bus_service_no']);
+		 usort($arr, function ($a, $b) {
+				 return strcmp($a['bus_service_no']) - strcmp($b['bus_service_no']);
+		 });
 		 return $arr;
 	 }
 	 function array_sort_by_column($arr) {
