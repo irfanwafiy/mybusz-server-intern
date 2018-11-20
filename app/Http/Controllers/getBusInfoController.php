@@ -737,16 +737,22 @@ class getBusInfoController extends Controller
 		}
 
 
-
+		$getBusStopInfo_array_sorted = sort_bus_service($getBusStopInfo_array);
 
 		$data = array(
 		'stop_name' => $stop_name,
 		'bus_stop_id' => $bus_stop_id,
-		"bus_data" => $getBusStopInfo_array
+		"bus_data" => $getBusStopInfo_array_sorted
 	);
 		return view('bus_stop_info', ['data' => $data]);
 	 }
 
+	 fucntion sort_bus_service($arr) {
+		 sort($arr, function ($a, $b) {
+				 return strtotime($a['bus_service_no']) - strtotime($b['bus_service_no']);
+		 });
+		 return $arr;
+	 }
 	 function array_sort_by_column($arr) {
 
 			usort($arr, function ($a, $b) {
