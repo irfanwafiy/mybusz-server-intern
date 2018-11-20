@@ -194,8 +194,16 @@ function refresh(bus_stop_id, bus_route, index_date) {
     }));
     req.onload = function() {
       var resp = this.responseText;
-      var n = resp.indexOf(" ");
-      var eat_date_text =  resp.substr(n,resp.length);
+      if (resp == "NA")
+      {
+        var eat_date_text =  resp;
+      }
+      else
+      {
+        var n = resp.indexOf(" ");
+        var eat_date_text =  resp.substr(n,resp.length);
+      }
+
       document.getElementById(index_date).innerHTML = eat_date_text;
       document.getElementById(index_date).setAttribute("eta_date", resp);
       document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
