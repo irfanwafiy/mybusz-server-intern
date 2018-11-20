@@ -187,7 +187,7 @@ function refresh(bus_stop_id, bus_route) {
     const response = await fetch('https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh', {
       method: 'POST',
       body: {"bus_stop_id": bus_stop_id,
-              "bus_route": bus_route}, // string or object
+              "route_id": bus_route}, // string or object
       headers:{
         'Content-Type': 'application/json'
       }
