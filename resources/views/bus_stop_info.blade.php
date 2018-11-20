@@ -196,7 +196,7 @@ function refresh(bus_stop_id, bus_route, index_date) {
       var resp = this.responseText;
       var n = resp.indexOf(" ");
       var eat_date_text =  resp.substr(n,resp.length);
-      document.getElementById(index_date).innerHTML = resp;
+      document.getElementById(index_date).innerHTML = eat_date_text;
       document.getElementById(index_date).setAttribute("eta_date", resp);
       document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
     }
