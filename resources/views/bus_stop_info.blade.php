@@ -141,7 +141,6 @@ function startTime() {
       var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
       var eta_date = document.getElementById(index_date).getAttribute("eta_date");
       var bus_route = document.getElementById(index_route).getAttribute("route");
-      var dest_test = document.getElementById(index_route).textContent;
       var eta_grace_check = document.getElementById(index_date).getAttribute("eta_grace_check");
       if (eta_date == "NA")
       {
@@ -156,7 +155,7 @@ function startTime() {
           var grace_check = new Date(eta_grace_check);
           if(today >= grace_check)
             {
-              refresh(bus_stop_id, bus_route, dest_test);
+              refresh(bus_stop_id, bus_route, index_date);
               document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
             }
         }
@@ -169,7 +168,7 @@ function startTime() {
         if(today >= eta_check)
         {
 
-          refresh(bus_stop_id, bus_route,dest_test);
+          refresh(bus_stop_id, bus_route,index_date);
         }
       }
 
@@ -183,7 +182,7 @@ function checkTime(i) {
     return i;
 }
 
-function refresh(bus_stop_id, bus_route, dest_test) {
+function refresh(bus_stop_id, bus_route, index_date) {
 
 
     var req = new XMLHttpRequest();
@@ -194,9 +193,9 @@ function refresh(bus_stop_id, bus_route, dest_test) {
         'route_id': bus_route
     }));
     req.onload = function() {
-      console.log("HELLO")
-      console.log(this.responseText);
-      console.log(dest_test)
+      document.getElementById(index_date).innerHTML = this.responseText;
+      document.getElementById(index_date).setAttribute("eta_date", this.responseText);
+      document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
     }
 }
 
