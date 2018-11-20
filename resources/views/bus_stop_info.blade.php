@@ -184,19 +184,33 @@ function checkTime(i) {
 
 function refresh(bus_stop_id, bus_route) {
     console.log("refresh, " + bus_stop_id + " , " + bus_route);
-    const userAction = async () => {
-    const response = await fetch('https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh', {
-      method: 'POST',
-      body: {"bus_stop_id": bus_stop_id,
-              "route_id": bus_route}, // string or object
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    });
-    const myJson = await response.json(); //extract JSON from the http response
-    console.log(myJson);
-    document.getElementById('test').innerHTML = myJson;
-  }
+  //   const userAction = async () => {
+  //   const response = await fetch('https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh', {
+  //     method: 'POST',
+  //     body: {"bus_stop_id": bus_stop_id,
+  //             "route_id": bus_route}, // string or object
+  //     headers:{
+  //       'Content-Type': 'application/json'
+  //     }
+  //   });
+  //   const myJson = await response.json(); //extract JSON from the http response
+  //   console.log(myJson);
+  //   document.getElementById('test').innerHTML = myJson;
+  // }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh", true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({
+        'bus_stop_id': bus_stop_id,
+        'route_id': bus_route
+    }));
+    xhr.onload = function() {
+      console.log("HELLO")
+      console.log(this.responseText);
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+    }
 }
 
 </script>
