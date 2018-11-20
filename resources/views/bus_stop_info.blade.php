@@ -71,10 +71,10 @@ th {
 
 </head>
 
-<body onload="startScript({{count($data['bus_data'])}})">
+<body onload="startTime()">
   <div class="table-users">
     <p id="clock"></p>
-     <div class="header" id="stop_id" stop_id="{{$data['bus_stop_id']}}">{{$data['stop_name']}}</div>
+     <div class="header" id="stop_id" stop_id="{{$data['bus_stop_id']}}" num_bus="{{count($data['bus_data'])}}">{{$data['stop_name']}}</div>
 
      <table cellspacing="0">
         <tr>
@@ -110,13 +110,14 @@ th {
 
 </body>
 <script>
-var buses = 0;
+var buses = ;
 function startScript(num_bus)
 {
   buses = num_bus;
   startTime();
 }
 function startTime() {
+    buses = document.getElementById("stop_id").getAttribute("num_bus");
     var today = new Date();
     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday",
