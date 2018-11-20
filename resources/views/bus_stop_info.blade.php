@@ -110,14 +110,14 @@ th {
 
 </body>
 <script>
-var buses = ;
+var buses = 0;
 function startScript(num_bus)
 {
   buses = num_bus;
   startTime();
 }
 function startTime() {
-    buses = document.getElementById("stop_id").getAttribute("num_bus");
+    buses = parseInt(document.getElementById("stop_id").getAttribute("num_bus"));
     var today = new Date();
     var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday","Friday",
@@ -134,46 +134,46 @@ function startTime() {
     s = checkTime(s);
     var clock =D + ", " + d + " " + M + " " + " " + Y + " " + h + ":" + m + ":" + s;
     document.getElementById('clock').innerHTML = clock;
-    for (var i =0; i < buses; i++)
-    {
-      var index_date = 'eta' + i;
-      var index_route = 'route' + i;
-      var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
-      var eta_date = document.getElementById(index_date).getAttribute("eta_date");
-      var bus_route = document.getElementById(index_route).getAttribute("route");
-      var eta_grace_check = document.getElementById(index_date).getAttribute("eta_grace_check");
-      if (eta_date == "NA")
-      {
-        if(eta_grace_check == "NA")
-        {
-          grace_time = 5 * 60000;
-          eta_grace_check = today + grace_time;
-          document.getElementById(index_date).getAttribute("eta_grace_check") = eta_grace_check;
-        }
-        else
-        {
-          var grace_check = new Date(eta_grace_check);
-          if(grace_check >= today)
-            {
-              refresh(bus_stop_id, bus_route);
-              document.getElementById(index_date).getAttribute("eta_grace_check") = "NA";
-            }
-        }
-
-      }
-      else
-      {
-        var eta_check = new Date(eta_date);
-
-        if(today >= eta_check)
-        {
-
-          refresh(bus_stop_id, bus_route);
-        }
-      }
-
-
-    }
+    // for (var i =0; i < buses; i++)
+    // {
+    //   var index_date = 'eta' + i;
+    //   var index_route = 'route' + i;
+    //   var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
+    //   var eta_date = document.getElementById(index_date).getAttribute("eta_date");
+    //   var bus_route = document.getElementById(index_route).getAttribute("route");
+    //   var eta_grace_check = document.getElementById(index_date).getAttribute("eta_grace_check");
+    //   if (eta_date == "NA")
+    //   {
+    //     if(eta_grace_check == "NA")
+    //     {
+    //       grace_time = 5 * 60000;
+    //       eta_grace_check = today + grace_time;
+    //       document.getElementById(index_date).getAttribute("eta_grace_check") = eta_grace_check;
+    //     }
+    //     else
+    //     {
+    //       var grace_check = new Date(eta_grace_check);
+    //       if(grace_check >= today)
+    //         {
+    //           refresh(bus_stop_id, bus_route);
+    //           document.getElementById(index_date).getAttribute("eta_grace_check") = "NA";
+    //         }
+    //     }
+    //
+    //   }
+    //   else
+    //   {
+    //     var eta_check = new Date(eta_date);
+    //
+    //     if(today >= eta_check)
+    //     {
+    //
+    //       refresh(bus_stop_id, bus_route);
+    //     }
+    //   }
+    //
+    //
+    // }
 
     var t = setTimeout(startTime, 500);
 }
