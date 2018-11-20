@@ -148,7 +148,7 @@ function startTime() {
         {
           grace_time = 5 * 60000;
           eta_grace_check = today + grace_time;
-          document.getElementById(index_date).getAttribute("eta_grace_check") = eta_grace_check;
+          document.getElementById(index_date).setAttribute("eta_grace_check", eta_grace_check);
         }
         else
         {
@@ -156,7 +156,7 @@ function startTime() {
           if(grace_check >= today)
             {
               refresh(bus_stop_id, bus_route);
-              document.getElementById(index_date).getAttribute("eta_grace_check") = "NA";
+              document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
             }
         }
 
