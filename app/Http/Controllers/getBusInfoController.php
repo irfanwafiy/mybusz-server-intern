@@ -749,7 +749,7 @@ class getBusInfoController extends Controller
 
 	 function sort_bus_service($arr) {
 		 usort($arr, function ($a, $b) {
-				 return strcmp($a['bus_service_no']) - strcmp($b['bus_service_no']);
+				 return $a['bus_service_no'] - $b['bus_service_no'];
 		 });
 		 return $arr;
 	 }
