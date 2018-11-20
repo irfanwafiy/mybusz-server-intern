@@ -153,7 +153,7 @@ function startTime() {
         else
         {
           var grace_check = new Date(eta_grace_check);
-          if(grace_check >= today)
+          if(today >= grace_check)
             {
               refresh(bus_stop_id, bus_route);
               document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
