@@ -164,7 +164,7 @@ function startTime() {
       else
       {
         var eta_check = new Date(eta_date);
-
+        console.log(eta_check);
         if(today >= eta_check)
         {
 
