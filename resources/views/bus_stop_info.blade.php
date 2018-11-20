@@ -183,6 +183,7 @@ function checkTime(i) {
 }
 
 function refresh(bus_stop_id, bus_route) {
+    console.log("refresh, " + bus_stop_id + " , " + bus_route);
     const userAction = async () => {
     const response = await fetch('https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh', {
       method: 'POST',
