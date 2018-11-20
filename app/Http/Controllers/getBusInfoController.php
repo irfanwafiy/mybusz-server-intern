@@ -737,7 +737,7 @@ class getBusInfoController extends Controller
 		}
 
 
-		$getBusStopInfo_array_sorted = sort_bus_service($getBusStopInfo_array);
+		$getBusStopInfo_array_sorted = self::sort_bus_service($getBusStopInfo_array);
 
 		$data = array(
 		'stop_name' => $stop_name,
@@ -747,7 +747,7 @@ class getBusInfoController extends Controller
 		return view('bus_stop_info', ['data' => $data]);
 	 }
 
-	 fucntion sort_bus_service($arr) {
+	 function sort_bus_service($arr) {
 		 sort($arr, function ($a, $b) {
 				 return strtotime($a['bus_service_no']) - strtotime($b['bus_service_no']);
 		 });
