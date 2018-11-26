@@ -80,6 +80,7 @@ th {
         <tr>
            <th>Service</th>
            <th>Incoming</th>
+           <th>Next Bus</th>
            <th>Destination</th>
         </tr>
         @foreach($data['bus_data'] as $key=>$value)
@@ -89,6 +90,7 @@ th {
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
            <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA">{{$value['stop_eta']}}</td>
+           <td id="eta_b{{$key}}" eta_date="{{$value['eta_date2']}}" eta_grace_check="NA">{{$value['stop_eta2']}}</td>
 
            <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
         </tr>
@@ -175,10 +177,44 @@ function startTime() {
     }
 
     var t = setTimeout(startTime, 500);
+    var t2 = setTimeout(refresh_eta, 15000);
+    // var t2 = setTimeout(refresh_eta, 30000);
+
 }
+
+function refresh_eta() {
+  console.log("refresh_eta");
+  var refresh_map = new Map();
+  var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
+  for (var i=0; i < buses; i++)
+  {
+      var index_route = 'route' + i;
+      var key = 'key_' + i;
+      var bus_route = document.getElementById(index_route).getAttribute("route")
+      refresh_map.set(key, bus_route);
+  }
+  refresh_eta_post(bus_stop_id, refresh_map);
+}
+
 function checkTime(i) {
     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
     return i;
+}
+
+function refresh_eta_post(bus_stop_id, refresh_map)
+{
+  var req = new XMLHttpRequest();
+  req.open("POST", "https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh", true);
+  req.setRequestHeader('Content-Type', 'application/json');
+  req.send(JSON.stringify({
+      'bus_stop_id': bus_stop_id,
+      'route_map': refresh_map
+  }));
+  req.onload = function() {
+    var resp = this.responseText;
+    //var jsonResponse = JSON.parse(resp);
+    console.log("result " + resp);
+  }
 }
 
 function refresh(bus_stop_id, bus_route, index_date) {
@@ -195,15 +231,15 @@ function refresh(bus_stop_id, bus_route, index_date) {
       var resp = this.responseText;
       if (resp == "NA")
       {
-        var eat_date_text =  resp;
+        var eta_date_text =  resp;
       }
       else
       {
-        var n = resp.indexOf(" ");
-        var eat_date_text =  resp.substr(n,resp.length);
+        var n = resp.indexOf(",");
+        var eta_date_text =  resp.substr(n,resp.length);
       }
 
-      document.getElementById(index_date).innerHTML = eat_date_text;
+      document.getElementById(index_date).innerHTML = eta_date_text;
       document.getElementById(index_date).setAttribute("eta_date", resp);
       document.getElementById(index_date).setAttribute("eta_grace_check", "NA");
     }

@@ -617,22 +617,24 @@ class getBusInfoController extends Controller
 	public function getBusStopInfo_refresh(Request $request)
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
-		$route_id = $request->input('route_id');
-		$array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
-		$array_refresh_return = array();
-		if (count($array_refresh) > 0)
-		{
-			foreach ($array_refresh as $singleset) {
-
-					$array_refresh_return = self::array_sort_by_column($singleset->eta);
-
-
-			}
-			return $array_refresh_return[0]['time'];
-		}
-		else {
-			return "NA";
-		}
+		$route_map = $request->input('route_map');
+		$test_text = "";
+		return "".sizeof($route_map);
+		// $array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
+		// $array_refresh_return = array();
+		// if (count($array_refresh) > 0)
+		// {
+		// 	foreach ($array_refresh as $singleset) {
+		//
+		// 			$array_refresh_return = self::array_sort_by_column($singleset->eta);
+		//
+		//
+		// 	}
+		// 	return "".$array_refresh_return[0]['time'].",".$array_refresh_return[0]['relative_time'];
+		// }
+		// else {
+		// 	return "NA";
+		// }
 
 
 
@@ -713,12 +715,24 @@ class getBusInfoController extends Controller
 			{
 
 				$eta = self::array_sort_by_column($eta);
-				$stop_eta = self::getstring_Time($eta[0]['time']);
+				//$stop_eta = self::getstring_Time($eta[0]['time']);
+				if ($eta.length > 1)
+				{
+					$stop_eta2 = $eta[1]['relative_time'];
+					$eta_date2 = $eta[1]['time'];
+				}
+				else
+				{
+					$stop_eta2 = "NA";
+					$eta_date2 = "NA";
+				}
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => $stop_eta,
+					'stop_eta' => $eta[0]['relative_time'],
+					'stop_eta2' => $stop_eta2,
 					'Destination' => $getDestination_name->name,
 					'eta_date' => $eta[0]['time'],
+					'eta_date2' => $eta_date2,
 					'route' => $getDestination_route_id->route_id
 				];
 			}
@@ -727,8 +741,10 @@ class getBusInfoController extends Controller
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
 					'stop_eta' => "NA",
+					'stop_eta2' => "NA",
 					'Destination' => $getDestination_name->name,
 					'eta_date' => "NA",
+					'eta_date2' => "NA",
 					'route' => $getDestination_route_id->route_id
 				];
 			}
@@ -743,9 +759,9 @@ class getBusInfoController extends Controller
 		'stop_name' => $stop_name,
 		'bus_stop_id' => $bus_stop_id,
 		"bus_data" => $getBusStopInfo_array_sorted
-	);
+		);
 		return view('bus_stop_info', ['data' => $data]);
-	 }
+	}
 
 	 function sort_bus_service($arr) {
 		 usort($arr, function ($a, $b) {
