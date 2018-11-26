@@ -619,7 +619,7 @@ class getBusInfoController extends Controller
 		$bus_stop_id = $request->input('bus_stop_id');
 		$route_map = $request->input('route_map');
 		$test_text = "";
-		return "".sizeof($route_map);
+		return "".$route_map.length;
 		// $array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
 		// $array_refresh_return = array();
 		// if (count($array_refresh) > 0)
