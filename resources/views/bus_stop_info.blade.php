@@ -219,10 +219,10 @@ function refresh_eta_post(bus_stop_id, refresh_array)
   req.onload = function() {
     var resp = this.responseText;
     var jsonResponse = JSON.parse(resp);
-    jsonResponse.foreach(function (value)
+    for (var value in jsonResponse)
     {
-      console.log("result " + value);
-    });
+      console.log(value, jsonResponse[value]);
+    }
 
   }
 }
