@@ -193,7 +193,8 @@ function refresh_eta() {
       var bus_route = document.getElementById(index_route).getAttribute("route")
       refresh_map.set(key, bus_route);
   }
-  refresh_eta_post(bus_stop_id, refresh_map);
+  console.log("res " + refresh_map);
+  //refresh_eta_post(bus_stop_id, refresh_map);
 }
 
 function checkTime(i) {

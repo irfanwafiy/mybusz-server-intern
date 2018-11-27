@@ -617,7 +617,7 @@ class getBusInfoController extends Controller
 	public function getBusStopInfo_refresh(Request $request)
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
-		$route_map = $request->input('route_map.key_1');
+		$route_map = $request->input('route_map');
 		$test_text = "";
 		$count = 0;
 		foreach ($route_map as $key => $value) {
