@@ -90,14 +90,15 @@ th {
 
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
            <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA">
-             @if ($value['stop_eta'] != 'NA')
-              @if($value['stop_eta'] > 1) {{$value['stop_eta']}} mins
-              @else ARR
+            @if ($value['stop_eta'] != 'NA')
+              @if($value['stop_eta'] > 1)
+                {{$value['stop_eta']}} mins
+              @else
+                ARR
               @endif
-            @endif
-             @if($value['stop_eta'] === 'NA')
-             {{$value['stop_eta']}}
-              @endif</td>
+            @else
+              {{$value['stop_eta']}}
+            @endif</td>
            <td id="eta_b{{$key}}" eta_date="{{$value['eta_date2']}}" eta_grace_check="NA">{{$value['stop_eta2']}}</td>
 
            <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
