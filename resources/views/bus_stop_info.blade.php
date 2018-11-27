@@ -91,8 +91,7 @@ th {
            <!-- <td id="eta">{{$value['stop_eta']}}@if ($value['stop_eta'] != 'NA') @endif</td> -->
            <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA">
              @if ($value['stop_eta'] != 'NA')
-              @if(($value['stop_eta'] > 1) && ($value['stop_eta'] > 0)) {{$value['stop_eta']}} mins
-              @elseif($value['stop_eta'] < 2) ARR
+              @if($value['stop_eta'] > 1) {{$value['stop_eta']}} mins
               @else ARR
               @endif
             @endif
