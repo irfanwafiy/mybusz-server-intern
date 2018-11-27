@@ -197,7 +197,7 @@ function refresh_eta() {
   for (const entry of refresh_map.entries()) {
     refresh_array.push(entry);
   }
-  console.log("res " + refresh_array[0]);
+  console.log(refresh_array[0]);
   //refresh_eta_post(bus_stop_id, refresh_map);
 }
 
