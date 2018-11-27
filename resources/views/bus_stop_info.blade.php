@@ -221,7 +221,14 @@ function refresh_eta_post(bus_stop_id, refresh_array)
     var jsonResponse = JSON.parse(resp);
     for (var value in jsonResponse)
     {
-      console.log(value, jsonResponse[value]);
+      console.log(value, jsonResponse[value])
+      var n = jsonResponse[value].key.indexOf("_");
+      var get_id =  resp.substr(n,jsonResponse[value].key.length);
+      var index_eta = "eta" + get_id;
+      var index_eta2 = "eta_b" + get_id;
+      document.getElementById(index_eta).innerHTML = jsonResponse[value].stop_eta;
+      document.getElementById(index_eta2).innerHTML = jsonResponse[value].stop_eta2;
+
     }
 
   }
