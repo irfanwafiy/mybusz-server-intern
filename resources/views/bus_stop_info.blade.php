@@ -197,8 +197,8 @@ function refresh_eta() {
   for (const entry of refresh_map.entries()) {
     refresh_array.push(entry);
   }
-  console.log(refresh_array[0].length);
-  //refresh_eta_post(bus_stop_id, refresh_map);
+  //console.log(refresh_array[0].length);
+  refresh_eta_post(bus_stop_id, refresh_array);
 }
 
 function checkTime(i) {
@@ -206,7 +206,7 @@ function checkTime(i) {
     return i;
 }
 
-function refresh_eta_post(bus_stop_id, refresh_map)
+function refresh_eta_post(bus_stop_id, refresh_array)
 {
   console.log("size :" + refresh_map.size);
   var req = new XMLHttpRequest();
@@ -214,7 +214,7 @@ function refresh_eta_post(bus_stop_id, refresh_map)
   req.setRequestHeader('Content-Type', 'application/json');
   req.send(JSON.stringify({
       'bus_stop_id': bus_stop_id,
-      'route_map': refresh_map
+      'refresh_array': refresh_array
   }));
   req.onload = function() {
     var resp = this.responseText;
