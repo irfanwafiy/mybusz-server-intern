@@ -54,7 +54,7 @@ th, td {
     text-align: center;
     color: #005555;
     font-size: 180%;
-    width: 30%;
+    width: 20%;
     padding: 1%;
 }
 
