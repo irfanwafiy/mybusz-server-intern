@@ -623,7 +623,7 @@ class getBusInfoController extends Controller
 		foreach ($route_map as $key => $value) {
 			$count++;
 		}
-		return "size :".$count;
+		return $route_map;
 		// $array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
 		// $array_refresh_return = array();
 		// if (count($array_refresh) > 0)
