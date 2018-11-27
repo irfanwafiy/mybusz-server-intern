@@ -208,7 +208,7 @@ function checkTime(i) {
 
 function refresh_eta_post(bus_stop_id, refresh_array)
 {
-  console.log("size :" + refresh_map.size);
+  //console.log("size :" + refresh_map.size);
   var req = new XMLHttpRequest();
   req.open("POST", "https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh", true);
   req.setRequestHeader('Content-Type', 'application/json');
