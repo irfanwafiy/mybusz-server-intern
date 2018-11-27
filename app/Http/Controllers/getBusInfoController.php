@@ -727,7 +727,7 @@ class getBusInfoController extends Controller
 
 				$eta = self::array_sort_by_column($eta);
 				//$stop_eta = self::getstring_Time($eta[0]['time']);
-				if ($eta.length > 1)
+				if (count($eta) > 1)
 				{
 					$stop_eta2 = $eta[1]['relative_time'];
 					$eta_date2 = $eta[1]['time'];
