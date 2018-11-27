@@ -637,11 +637,11 @@ class getBusInfoController extends Controller
 						$stop_eta2 = $array_refresh_return[1]['relative_time'];
 				}
 			}
-			$refresh_return_dataset = {
+			$refresh_return_dataset = [
 				"key" => $value[0],
 				"stop_eta" => $stop_eta,
 				"stop_eta2" => $stop_eta2
-			};
+			];
 			array_push($refresh_return,$refresh_return_dataset);
 		}
 		return $refresh_return;
