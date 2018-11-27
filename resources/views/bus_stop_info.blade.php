@@ -222,10 +222,10 @@ function refresh_eta_post(bus_stop_id, refresh_array)
     for (var value in jsonResponse)
     {
       console.log(value, jsonResponse[value]);
-      console.log("id :" + jsonResponse[value].key);
+
       var n = jsonResponse[value].key.indexOf("_");
       var get_id =  jsonResponse[value].key.substr(n,jsonResponse[value].key.length);
-
+      console.log("id :" + get_id);
       var index_eta = "eta" + get_id;
       var index_eta2 = "eta_b" + get_id;
       document.getElementById(index_eta).innerHTML = jsonResponse[value].stop_eta;
