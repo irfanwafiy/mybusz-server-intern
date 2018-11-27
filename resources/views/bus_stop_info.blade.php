@@ -93,7 +93,7 @@ th {
              @if ($value['stop_eta'] != 'NA')
               @if(($value['stop_eta'] > 1) && ($value['stop_eta'] > 0)) {{$value['stop_eta']}} mins
               @elseif($value['stop_eta'] < 2) ARR
-              @else ($value['stop_eta'] = 0) ARR
+              @else ARR
               @endif
             @endif
              @if($value['stop_eta'] === 'NA')
