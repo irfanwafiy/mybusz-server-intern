@@ -618,28 +618,34 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$refresh_array = $request->input('refresh_array');
-		$test_text = "";
-		$count = 0;
+		$refresh_return = array();
 		foreach ($refresh_array as $value) {
-			$test_text = $test_text."key : ".$value[0];
-			$test_text = $test_text.",route : ".$value[1]."\n";
+			$array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $value[1]);
+			$array_refresh_return = array();
+			$stop_eta = "NA";
+			$stop_eta2 = "NA";
+			if (count($array_refresh) > 0)
+			{
+
+				foreach ($array_refresh as $singleset) {
+
+					$array_refresh_return = self::array_sort_by_column($singleset->eta);
+					$stop_eta = $array_refresh_return[0]['relative_time'];
+				}
+				if(count($array_refresh) > 1)
+				{
+						$stop_eta2 = $array_refresh_return[1]['relative_time'];
+				}
+			}
+			$refresh_return_dataset = {
+				"key" => $value[0],
+				"stop_eta" => $stop_eta,
+				"stop_eta2" => $stop_eta2
+			};
+			array_push($refresh_return,$refresh_return_dataset);
 		}
-		return $test_text;
-		// $array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $route_id);
-		// $array_refresh_return = array();
-		// if (count($array_refresh) > 0)
-		// {
-		// 	foreach ($array_refresh as $singleset) {
-		//
-		// 			$array_refresh_return = self::array_sort_by_column($singleset->eta);
-		//
-		//
-		// 	}
-		// 	return "".$array_refresh_return[0]['time'].",".$array_refresh_return[0]['relative_time'];
-		// }
-		// else {
-		// 	return "NA";
-		// }
+		return $refresh_return;
+
 
 
 
