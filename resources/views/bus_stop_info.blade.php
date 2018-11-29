@@ -237,8 +237,34 @@ function refresh_eta_post(bus_stop_id, refresh_array)
       console.log("id :" + get_id);
       var index_eta = "eta" + get_id;
       var index_eta2 = "eta_b" + get_id;
-      document.getElementById(index_eta).innerHTML = jsonResponse[value].stop_eta;
-      document.getElementById(index_eta2).innerHTML = jsonResponse[value].stop_eta2;
+      var eta_1 = "NA";
+      var eta_2 = "NA";
+
+      if (jsonResponse[value].stop_eta != 'NA')
+      {
+        if(jsonResponse[value].stop_eta > 1)
+        {
+          eta_1 = jsonResponse[value].stop_eta + " mins";
+        }
+        else
+        {
+            eta_1 = "ARR";
+        }
+      }
+
+      if (jsonResponse[value].stop_eta2 != 'NA')
+      {
+        if(jsonResponse[value].stop_eta2 > 1)
+        {
+          eta_2 = jsonResponse[value].stop_eta2 + " mins";
+        }
+        else
+        {
+            eta_2 = "ARR";
+        }
+      }
+      document.getElementById(index_eta).innerHTML = eta_1;
+      document.getElementById(index_eta2).innerHTML = eta_2;
 
     }
 

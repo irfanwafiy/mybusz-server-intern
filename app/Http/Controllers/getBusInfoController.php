@@ -729,17 +729,35 @@ class getBusInfoController extends Controller
 				//$stop_eta = self::getstring_Time($eta[0]['time']);
 				if (count($eta) > 1)
 				{
-					$stop_eta2 = $eta[1]['relative_time'];
+					if ($eta[1]['relative_time'] > 1)
+					{
+						$stop_eta2 = $eta[1]['relative_time'];
+
+					}
+					else
+					{
+						$stop_eta2 = "ARR";
+					}
 					$eta_date2 = $eta[1]['time'];
+
 				}
 				else
 				{
 					$stop_eta2 = "NA";
 					$eta_date2 = "NA";
 				}
+
+				if($eta[0]['relative_time'] > 1)
+				{
+					$stop_eta = $eta[0]['relative_time'];
+				}
+				else
+				{
+					$stop_eta = "ARR";
+				}
 				$dataset_busList = [
 					'bus_service_no' => $singleset[0]->bus_service_no,
-					'stop_eta' => $eta[0]['relative_time'],
+					'stop_eta' => $stop_eta,
 					'stop_eta2' => $stop_eta2,
 					'Destination' => $getDestination_name->name,
 					'eta_date' => $eta[0]['time'],
