@@ -731,7 +731,7 @@ class getBusInfoController extends Controller
 				{
 					if ($eta[1]['relative_time'] > 1)
 					{
-						$stop_eta2 = $eta[1]['relative_time'];
+						$stop_eta2 = $eta[1]['relative_time']." mins";
 
 					}
 					else
@@ -749,7 +749,7 @@ class getBusInfoController extends Controller
 
 				if($eta[0]['relative_time'] > 1)
 				{
-					$stop_eta = $eta[0]['relative_time'];
+					$stop_eta = $eta[0]['relative_time']." mins";
 				}
 				else
 				{
