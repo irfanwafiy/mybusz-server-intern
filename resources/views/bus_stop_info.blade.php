@@ -87,7 +87,7 @@ th {
 
         <tr>
            <td>{{$value['bus_service_no']}}</td>
-           <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA"></td>
+           <td id="eta{{$key}}" eta_date="{{$value['eta_date']}}" eta_grace_check="NA">{{$value['stop_eta']}}</td>
            <td id="eta_b{{$key}}" eta_date="{{$value['eta_date2']}}" eta_grace_check="NA">{{$value['stop_eta2']}}</td>
 
            <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
