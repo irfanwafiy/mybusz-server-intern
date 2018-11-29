@@ -93,8 +93,7 @@ th {
            <td id="route{{$key}}" route="{{$value['route']}}">{{$value['Destination']}}</td>
         </tr>
         @endforeach
-        <tr id="test">
-        <tr>
+
      </table>
 
 
