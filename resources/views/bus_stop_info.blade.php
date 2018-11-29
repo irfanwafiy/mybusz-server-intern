@@ -173,7 +173,7 @@ function startTime() {
     // }
 
     var t = setTimeout(startTime, 500);
-    var t2 = setTimeout(refresh_eta, 15000);
+    var t2 = setTimeout(refresh_eta, 30000);
     // var t2 = setTimeout(refresh_eta, 30000);
 
 }
