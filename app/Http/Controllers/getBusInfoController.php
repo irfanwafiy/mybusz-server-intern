@@ -937,7 +937,10 @@ class getBusInfoController extends Controller
 
 		foreach ($array_getmobile_nearbyStop as $singleset2) {
 				$array_mobileBusService = self::getBusService_method($singleset2->bus_stop_id);
-
+				if($array_mobileBusService!=NULL)
+				{
+					$array_mobileBusService = json_encode($array_mobileBusService);
+				}
 				$dataset_getmobile_nearbyStop = [
 					'stop_id' => $singleset2->bus_stop_id,
 					'bus_stop_name' => $singleset2->name,
