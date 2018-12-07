@@ -1738,7 +1738,13 @@ class userController extends Controller
                             $distance = self::Ian_distancebetweenpointsonroute($serviceno, $routeno,$point1,$point2);
 
                             $timediff = strtotime($lastPos->time) - strtotime($location_data[0]->time);
-
+														//Assuming Bus is stationary at Bus STOP
+														if ($distance == 0)
+														{
+															$avgSpeed = -1;
+															print("COND 2: use historical \r\n");
+															return $avgSpeed;
+														}
 
                             if ($timediff < 240 && $lastPos->speed <= 5)
                              {
