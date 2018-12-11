@@ -941,6 +941,16 @@ class getBusInfoController extends Controller
 				// {
 				// 	$array_mobileBusService = json_encode($array_mobileBusService);
 				// }
+				foreach($array_mobileBusService as $singleset3)
+				{
+					foreach($singleset3->eta as $eta_singleset)
+					{
+						if($eta_singleset->relative_time < 2)
+						{
+							$eta_singleset->relative_time = "ARR";
+						}
+					}
+				}
 				$dataset_getmobile_nearbyStop = [
 					'stop_id' => $singleset2->bus_stop_id,
 					'bus_stop_name' => $singleset2->name,
