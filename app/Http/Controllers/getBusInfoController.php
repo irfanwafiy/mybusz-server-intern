@@ -945,9 +945,9 @@ class getBusInfoController extends Controller
 				{
 					foreach($singleset3->eta as $eta_singleset)
 					{
-						if($eta_singleset->relative_time < 2)
+						if($eta_singleset['relative_time'] < 2)
 						{
-							$eta_singleset->relative_time = "ARR";
+							$eta_singleset['relative_time'] = "ARR";
 						}
 					}
 				}
