@@ -577,12 +577,107 @@ class getBusInfoController extends Controller
 		return $busServices_array;
 
 	}
+	public function getAllBus(Request $request)
+	{
+		$status = 0;
+		$bus_check=  $request->input('bus_check');
+		$bus_id_last = $request->input('bus_id_last');
+		$array_allBus = array();
+		$getAllBus_check_Query = DB:: table('bus')
+														->count();
+		if ($getAllBus_check_Query > $bus_check)
+		{
+			if ($bus_id_last > 0)
+			{
+				$status = $bus_id_last + 1;
+			}
+			$array_allBus = self::getAllBus_method($status);
+			if($array_allBus != NULL)
+				print(json_encode($array_allBus));
+			else
+				return response( "No bus registered")->setStatusCode(400);
 
-	public function getAllBusStop()
+		}
+		else
+		{
+			print(json_encode($array_allBus));
+		}
+	}
+
+	public function getAllBusStop(Request $request)
+	{
+		$status = 0;
+		$bus_stop_check =  $request->input('bus_stop_check');
+		$bus_stop_id_last = $request->input('bus_stop_id_last');
+		$getAllBusStop_check_Query = DB:: table('bus_stop')
+														->count();
+		$array_allBusStop = array();
+		if ($getAllBusStop_check_Query > $bus_stop_check)
+		{
+			if($bus_stop_id_last > 0)
+			{
+				$status = $bus_stop_id_last + 1;
+			}
+			$array_allBusStop = self::getAllBusStop_method($status);
+			if($array_allBusStop != NULL)
+				print(json_encode($array_allBusStop));
+			else
+				return response( "No bus stop registered")->setStatusCode(400);
+		}
+		else {
+			print(json_encode($array_allBusStop));
+		}
+
+
+
+	}
+
+	public function getAllBus_method($status)
+	{
+		$array_allBus = array();
+
+		if ($status > 0)
+		{
+			$getAllBus_Query = DB:: table('bus')
+															->where('bus_stop.bus_id' ,'>=', $status)
+															->get();
+		}
+		else{
+			$getAllBus_Query = DB:: table('bus')
+															->get();
+		}
+
+		foreach ($getAllBus_Query as $singleset) {
+
+			$dataset = [
+				'bus_id' => $singleset->bus_id,
+				'beacon_mac' => $singleset->beacon_mac
+			];
+			array_push($array_allBus, $dataset);
+		}
+
+		return $array_allBus;
+
+	}
+
+	public function getAllBusStop_method($status)
 	{
 		$array_allBusStop = array();
-		$getAllBusStop_Query = DB:: table('bus_stop')
-														->get();
+
+
+		if ($status > 0)
+		{
+			$getAllBusStop_Query = DB:: table('bus_stop')
+															->where('bus_stop.bus_stop_id' ,'>=', $status)
+															->get();
+		}
+		else{
+			$getAllBusStop_Query = DB:: table('bus_stop')
+															->get();
+		}
+
+
+
 
 		foreach($getAllBusStop_Query as $singleset)
 		{
@@ -605,10 +700,7 @@ class getBusInfoController extends Controller
 			array_push($array_allBusStop, $dataset);
 		}
 
-		if($array_allBusStop != NULL)
-			print(json_encode($array_allBusStop));
-		else
-			return response( "No bus stop registered")->setStatusCode(400);
+		return $array_allBusStop;
 
 
 	}
@@ -941,16 +1033,6 @@ class getBusInfoController extends Controller
 				// {
 				// 	$array_mobileBusService = json_encode($array_mobileBusService);
 				// }
-				foreach($array_mobileBusService as $singleset3)
-				{
-					foreach($singleset3->eta as $eta_singleset)
-					{
-						if($eta_singleset['relative_time'] < 2)
-						{
-							$eta_singleset['relative_time'] = "ARR";
-						}
-					}
-				}
 				$dataset_getmobile_nearbyStop = [
 					'stop_id' => $singleset2->bus_stop_id,
 					'bus_stop_name' => $singleset2->name,
