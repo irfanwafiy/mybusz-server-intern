@@ -639,7 +639,7 @@ class getBusInfoController extends Controller
 		if ($status > 0)
 		{
 			$getAllBus_Query = DB:: table('bus')
-															->where('bus_stop.bus_id' ,'>=', $status)
+															->where('bus.bus_id' ,'>=', $status)
 															->get();
 		}
 		else{
