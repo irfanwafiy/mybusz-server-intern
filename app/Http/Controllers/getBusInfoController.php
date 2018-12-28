@@ -717,19 +717,21 @@ class getBusInfoController extends Controller
 			$array_refresh_return = array();
 			$stop_eta = "NA";
 			$stop_eta2 = "NA";
-			if (count($array_refresh) > 0)
-			{
-				print_r($array_refresh);
 				foreach ($array_refresh as $singleset) {
-
 					$array_refresh_return = self::array_sort_by_column($singleset->eta);
-					$stop_eta = $array_refresh_return[0]['relative_time'];
+					if (count($array_refresh['eta']) > 0)
+					{
+
+						$stop_eta = $array_refresh_return[0]['relative_time'];
+					}
+					if(count($array_refresh['eta']) > 1)
+					{
+							$stop_eta2 = $array_refresh_return[1]['relative_time'];
+					}
+
 				}
-				if(count($array_refresh) > 1)
-				{
-						$stop_eta2 = $array_refresh_return[1]['relative_time'];
-				}
-			}
+
+
 			$refresh_return_dataset = [
 				"key" => $value[0],
 				"stop_eta" => $stop_eta,
@@ -773,7 +775,7 @@ class getBusInfoController extends Controller
 									)
 							->groupBy('e.route_id', 'bus_route.bus_service_no')
 							->orderBy('eta', 'desc')
-							->first();
+							->get();
 
 		$array_BusService = self::calculateEta($bus_service_Query);
 
