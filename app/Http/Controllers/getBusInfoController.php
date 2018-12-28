@@ -710,7 +710,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$refresh_array = $request->input('refresh_array');
-		print_r($refresh_array);
+
 		$refresh_return = array();
 		foreach ($refresh_array as $value) {
 			$array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $value[1]);
@@ -719,7 +719,7 @@ class getBusInfoController extends Controller
 			$stop_eta2 = "NA";
 			if (count($array_refresh) > 0)
 			{
-
+				print_r($array_refresh);
 				foreach ($array_refresh as $singleset) {
 
 					$array_refresh_return = self::array_sort_by_column($singleset->eta);
