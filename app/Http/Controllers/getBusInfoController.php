@@ -710,7 +710,7 @@ class getBusInfoController extends Controller
 	{
 		$bus_stop_id = $request->input('bus_stop_id');
 		$refresh_array = $request->input('refresh_array');
-		print_r('test :'.$refresh_array);
+		print_r($refresh_array);
 		$refresh_return = array();
 		foreach ($refresh_array as $value) {
 			$array_refresh = self::getETA_method_BusStopInfo_refresh($bus_stop_id, $value[1]);
