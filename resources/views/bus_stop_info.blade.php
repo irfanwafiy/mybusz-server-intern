@@ -71,7 +71,7 @@ th {
 
 </head>
 
-<body onload="startTime()">
+<body onload="startScript()">
   <div class="table-users">
     <p id="clock"></p>
      <div class="header" id="stop_id" stop_id="{{$data['bus_stop_id']}}" num_bus="{{count($data['bus_data'])}}">{{$data['stop_name']}}</div>
@@ -109,9 +109,8 @@ th {
 </body>
 <script>
 var buses = 0;
-function startScript(num_bus)
+function startScript()
 {
-  buses = num_bus;
   var t0 = setTimeout(refresh_eta, 30000);
   startTime();
 
