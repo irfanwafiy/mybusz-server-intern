@@ -269,7 +269,7 @@ function refresh(bus_stop_id, bus_route, index_date) {
         'route_id': bus_route
     }));
     req.onload = function() {
-      var resp = this.responseText;
+      var resp = JSON.parse(this.responseText);
       if (resp == "NA")
       {
         var eta_date_text =  resp;
