@@ -719,12 +719,12 @@ class getBusInfoController extends Controller
 			$stop_eta2 = "NA";
 				foreach ($array_refresh as $singleset) {
 					$array_refresh_return = self::array_sort_by_column($singleset->eta);
-					if (count($singleset['eta']) > 0)
+					if (count($singleset->eta) > 0)
 					{
 
 						$stop_eta = $array_refresh_return[0]['relative_time'];
 					}
-					if(count($singleset['eta']) > 1)
+					if(count($singleset->eta) > 1)
 					{
 							$stop_eta2 = $array_refresh_return[1]['relative_time'];
 					}
