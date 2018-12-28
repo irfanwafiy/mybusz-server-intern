@@ -210,7 +210,7 @@ function refresh_eta_post(bus_stop_id, refresh_array)
   req.setRequestHeader('Content-Type', 'application/json');
   req.send(JSON.stringify({
       'bus_stop_id': bus_stop_id,
-      'refresh_array': refresh_array
+      'refresh_array[]': refresh_array
   }));
   req.onload = function() {
     var resp = this.responseText;
