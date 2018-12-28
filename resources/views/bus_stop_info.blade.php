@@ -179,7 +179,7 @@ function startTime() {
 }
 
 function refresh_eta() {
-  console.log("refresh_eta");
+  console.log("refresh_eta: " + document.getElementById('clock').innerHTML);
   var refresh_map = new Map();
   var bus_stop_id = document.getElementById("stop_id").getAttribute("stop_id");
   for (var i=0; i < buses; i++)
