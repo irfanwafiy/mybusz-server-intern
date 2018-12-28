@@ -773,7 +773,7 @@ class getBusInfoController extends Controller
 									)
 							->groupBy('e.route_id', 'bus_route.bus_service_no')
 							->orderBy('eta', 'desc')
-							->get();
+							->first();
 
 		$array_BusService = self::calculateEta($bus_service_Query);
 
