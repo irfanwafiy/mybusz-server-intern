@@ -112,7 +112,9 @@ var buses = 0;
 function startScript(num_bus)
 {
   buses = num_bus;
+  var t0 = setTimeout(refresh_eta, 30000);
   startTime();
+
 }
 function startTime() {
     buses = parseInt(document.getElementById("stop_id").getAttribute("num_bus"));
@@ -173,7 +175,6 @@ function startTime() {
     // }
 
     var t = setTimeout(startTime, 500);
-    var t2 = setTimeout(refresh_eta, 30000);
     // var t2 = setTimeout(refresh_eta, 30000);
 
 }
@@ -252,7 +253,7 @@ function refresh_eta_post(bus_stop_id, refresh_array)
       }
       document.getElementById(index_eta).innerHTML = eta_1;
       document.getElementById(index_eta2).innerHTML = eta_2;
-
+      var t2 = setTimeout(refresh_eta, 30000);
     }
 
   }
