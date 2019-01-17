@@ -686,7 +686,7 @@ class getBusInfoController extends Controller
 			$busServices_array = array();
 			foreach ($getBusService as $busService) {
 				foreach ($busService as $bs) {
-					$bus_service_no_and_route = $bs->bus_service_no.'('.$bs->route_id.')';
+					$bus_service_no_and_route = $bs->bus_service_no.'_'.$bs->route_id;
 					array_push($busServices_array, $bus_service_no_and_route);
 				}
 
