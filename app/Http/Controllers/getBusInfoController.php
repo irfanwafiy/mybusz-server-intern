@@ -567,7 +567,8 @@ class getBusInfoController extends Controller
 
 		foreach ($getRoute_id as $singleset) {
 			$getBusServiceList = DB::table('bus_route')
-													->select('bus_route.bus_service_no','route_id')
+													->select('bus_route.bus_service_no','bus_route.route_id','route_bus_stop.route_order')
+													->join('route_bus_stop','route_bus_stop.route_id', '=', 'bus_route.route_id')
 													->where('route_id', $singleset->route_id)
 													->distinct()
 													->get();
@@ -686,7 +687,7 @@ class getBusInfoController extends Controller
 			$busServices_array = array();
 			foreach ($getBusService as $busService) {
 				foreach ($busService as $bs) {
-					$bus_service_no_and_route = $bs->bus_service_no.'_'.$bs->route_id;
+					$bus_service_no_and_route = $bs->bus_service_no.'_'.$bs->route_id.'-'.$bs->route_order;
 					array_push($busServices_array, $bus_service_no_and_route);
 				}
 
