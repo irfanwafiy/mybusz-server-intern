@@ -76,6 +76,7 @@ Route::post('/pi_insertlocation','userController@pi_insertlocation');
 Route::post('/getAllBeaconInfo','userController@getAllBeaconInfo');
 Route::post('/syd_Cal','userController@syd_Cal');
 Route::post('/getKM_syd','userController@getKM_syd');
+Route::post('/removephantomETA', 'userController@removephantomETA');
 
 
 
