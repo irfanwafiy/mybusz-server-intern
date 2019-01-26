@@ -961,7 +961,7 @@ class userController extends Controller
 							$getDatabaseClass = self::getDatabaseClass();
 							$delete_stats = $getDatabaseClass->rmPhantomETA($bus_id);
 
-							return $delete_stats;
+							return $delete_stats.' records removed';
 
 						}
 
