@@ -17,21 +17,21 @@ class DatabaseController
 		date_default_timezone_set('Asia/Singapore');
 		return date('Y-m-d H:i:s', time());
 	}
-	
+
 	//tested
 	public function insertLocationData($bus_id, $route_id, $imei, $newlocation, $newlocation1, $speedkmhr)
 	//public function insertLocationData(Request $request)
 	{
-		
+
 		/* $bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
 		$imei = $request->input('imei');
 		$newlocation = $request->input('newlocation');
 		$newlocation1 = $request->input('newlocation1');
 		$speedkmhr = $request->input('speedkmhr'); */
-		
+
 		$time = self::getTime();
-		
+
 		$insertLocationData_Query = DB::table('location_data')
 								->insert([
 								'bus_id'=>$bus_id,
@@ -41,16 +41,16 @@ class DatabaseController
 								'longitude'=>$newlocation1,
 								'speed'=>$speedkmhr,
 								'time'=>$time]);
-	
+
 	}
-	
-	
-	
+
+
+
 	public function uploadETA($bus_id,$route_id,$bus_stop_id,$eta,$time,$avgspeed)
 	//tested
 	//public function uploadETA(Request $request)
 	{
-			
+
 		/* $bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
 		$bus_stop_id = $request->input('bus_stop_id');
@@ -67,8 +67,8 @@ class DatabaseController
 						'time'=>$time,
 						'avgspeed'=>$avgspeed
 						]);
-		
-	}	
+
+	}
 	public function updateFlag($flag,$bus_id,$route_id,$time)
 	//tested
 	//public function updateFlag(Request $request)
@@ -77,26 +77,26 @@ class DatabaseController
 		$bus_id = $request->input('bus_id');
 		$route_id = $request->input('route_id');
 		$time = $request->input('time'); */
-		
+
 		$updateFlag_Query = DB::table('location_data')
 								->where('bus_id',$bus_id)
 								->where('route_id',$route_id)
 								->where('time',$time)
 								->update(['flag'=>$flag]);
 	}
-	
+
 	public function getLastRecord($bus_id,$routeno,$time)
 	//tested
 	//public function getLastRecord()
 	{
-		
+
 		/* $bus_id = 1;
 		$routeno = 1;
 		$time = '2015-09-06 15:33:53'; */
-		
+
 		$currTime = self::getTime();
 		$speed = 0;
-		
+
 		$getLastRecord_subQuery = DB::table('bus_route as br')
 										->select('l.bus_id', 'l.latitude', 'l.longitude', 'l.speed', 'br.bus_service_no', 'l.flag', 'l.route_id', 'l.time', 'l.imei')
 										->join('location_data as l', 'br.bus_id', '=', 'l.bus_id')
@@ -107,36 +107,36 @@ class DatabaseController
 										->where('l.time', '<',$currTime)
 										->where('l.speed', '>', $speed)
 										->orderBy('l.time', 'desc');
-		
+
 		$getLastRecord_Query = DB::table(DB::raw("({$getLastRecord_subQuery->toSql()}) as location") );
 		$getLastRecord_Query->mergeBindings( $getLastRecord_subQuery );
 		$getLastRecord_Query->groupBy('imei');
 		$getLastRecord_Query = $getLastRecord_Query->get();
-		
+
 		$data = array();
-		
+
 		foreach($getLastRecord_Query as $singleset)
 		{
-			
+
 			array_push($data,$singleset);
 		}
-		
+
 		return $data;
 	}
 
-	
+
 	public function getLastRecordV2($bus_id,$routeno,$time)
 	//tested
 	//public function getLastRecordV2()
 	{
-		
+
 		/* $bus_id = 1;
-		$routeno = 1; 
+		$routeno = 1;
 		$time = '2015-09-06 15:33:53'; */
-		
+
 		$currTime = self::getTime();
 		$speed = 0;
-		
+
 		$getLastRecordV2_subQuery = DB::table('bus_route as br')
 										->select('l.bus_id', 'l.latitude', 'l.longitude', 'l.speed', 'br.bus_service_no', 'l.flag', 'l.route_id', 'l.time', 'l.imei')
 										->join('location_datav2 as l', 'br.bus_id', '=', 'l.bus_id')
@@ -147,35 +147,35 @@ class DatabaseController
 										->where('l.time', '<',$currTime)
 										->where('l.speed', '>=', $speed)
 										->orderBy('l.time', 'desc');
-		
+
 		$getLastRecordV2_Query = DB::table(DB::raw("({$getLastRecordV2_subQuery->toSql()}) as location") );
 		$getLastRecordV2_Query->mergeBindings( $getLastRecordV2_subQuery);
 		$getLastRecordV2_Query->groupBy('imei');
 		$getLastRecordV2_Query = $getLastRecordV2_Query->get();
-		
-		
+
+
 		$data = array();
-		
+
 		foreach($getLastRecordV2_Query as $singleset)
 		{
 			array_push($data,$singleset);
 		}
-		
+
 		return $data;
 	}
-	
+
 	public function avgSpeed($routeno,$bus_id,$timehigh,$timelow)
 	//tested
 	//public function avgSpeed(Request $request)
 	{
-		
+
 		/* $routeno = $request->input('routeno');
 		$bus_id = $request->input('bus_id');
 		$timehigh = $request->input('timehigh');
 		$timelow = $request->input('timelow'); */
-		
+
 		$speed = 0.0;
-		
+
 		$avgSpeed_Query = DB::table('location_data')
 						->where('route_id',$routeno)
 						->where('bus_id',$bus_id)
@@ -183,8 +183,8 @@ class DatabaseController
 						->where('time', '>=', $timelow)
 						->where('speed','>', $speed)
 						->avg('speed');
-		
-		
+
+
 		/* $data = array();
 		foreach($avgSpeed_Query as $singleset)
 		{
@@ -193,7 +193,7 @@ class DatabaseController
 		return $avgSpeed_Query;
 		//return $data[0];
 	}
-	
+
 	public function checkHistoryExist($routeno,$bus_id)
 	//tested
 	//public function checkHistoryExist(Request $request)
@@ -201,7 +201,7 @@ class DatabaseController
 		/* $routeno = $request->input('routeno');
 		$bus_id = $request->input('bus_id'); */
 		$avgSpeed = -1;
-		
+
 		$checkHistoryExist_Query = DB::table('eta')
 										->select(DB::raw('count(*),time'))
 										->where('bus_id',$bus_id)
@@ -211,14 +211,14 @@ class DatabaseController
 										->orderBy('time', 'desc')
 										->limit(1)
 										->get();
-		/* 								
+		/*
 		$data = array();
-		
+
 		foreach($checkHistoryExist_Query as $singleset)
 		{
 			$data = $singleset;
 		} */
-		
+
 		return $checkHistoryExist_Query;
 		//return $data;
 	}
@@ -228,32 +228,32 @@ class DatabaseController
 	{
 		$getHistoryETAV1_Dataset = new Collection;
 		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
-		
-		
+
+
 		$route_order_next = DB::table('route_bus_stop')
 									->select('bus_stop_id')
 									->where('route_id',$route_id)
 									->where('route_order', '>=',$bus_stop_route_order)
 									->orderBy('route_order', 'asc')
 									->get();
-		
+
 		foreach($route_order_next as $bus_stop_id_next)
 		{
-		
+
 		 $getHistoryETAV1_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
 									->where('bus_stop_id_next',$bus_stop_id_next->bus_stop_id)
 									->first();
-			
+
 			if($getHistoryETAV1_Query != null)
 			{
-				
+
 				$getHistoryETA_Dataset->push($getHistoryETAV1_Query);
 			}
 		}
-									
+
 		if($keepTime != 0)
 		{
 			$time = $keepTime;
@@ -262,22 +262,22 @@ class DatabaseController
 		{
 			$time = 0;
 		}
-		
+
 		foreach($getHistoryETAV1_Dataset as $singleset)
 		{
-			
-			
+
+
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
 			self::uploadETA($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
-			
+
 		}
 	}
-	
-	
-	
+
+
+
 	public function retrieveLocationDataV2($routeno,$bus_id,$timehigh,$timelow)
 	//tested
 	//public function retrieveLocationData()
@@ -294,20 +294,20 @@ class DatabaseController
 											->where('time','>=',$timelow)
 											->orderBY('time', 'asc')
 											->get();
-		
-		$data = array();	
+
+		$data = array();
 		$i = 0;
-		
+
 		foreach($retrieveLocationData_Query as $singleset)
 		{
-			
+
 			$data[$i] = $singleset;
 			$i++;
 		}
-		
+
 		return $data;
 	}
-	
+
 	public function retrieveLocationData($routeno,$bus_id,$timehigh,$timelow)
 	//tested
 	//public function retrieveLocationData()
@@ -324,29 +324,29 @@ class DatabaseController
 											->where('time','>=',$timelow)
 											->orderBY('time', 'asc')
 											->get();
-		
-		$data = array();	
+
+		$data = array();
 		$i = 0;
-		
+
 		foreach($retrieveLocationData_Query as $singleset)
 		{
-			
+
 			$data[$i] = $singleset;
 			$i++;
 		}
-		
+
 		return $data;
 	}
-	
+
 	public function checkHistoryExistV2($routeno,$bus_id)
 	//tested
 	//public function checkHistoryExistV2()
 	{
-		
+
 		/* $routeno = 1;
 		$bus_id = 1; */
 		$avgSpeed = -1;
-		
+
 		$checkHistoryExistV2_Query = DB::table('etav2')
 										->select(DB::raw('count(*),time'))
 										->where('bus_id',$bus_id)
@@ -356,7 +356,7 @@ class DatabaseController
 										->orderBy('time', 'desc')
 										->limit(1)
 										->get();
-		
+
 		/* $data = array();
 		$i=0;
 		foreach($checkHistoryExistV2_Query as $singleset)
@@ -366,11 +366,11 @@ class DatabaseController
 			$data[$i] = $singleset;
 			$i++;
 		} */
-		
+
 		return $checkHistoryExistV2_Query;
 		//return $data;
 	}
-	
+
 	public function uploadETAV2($bus_id,$route_id,$bus_stop_id,$eta,$time,$avgspeed)
 	//tested
 	//public function uploadETAV2()
@@ -391,23 +391,23 @@ class DatabaseController
 						'time'=>$time,
 						'avgspeed'=>$avgspeed
 						]);
-						
-		
+
+
 	}
-	
+
 	public function insertLocationDataV2($bus_id, $route_id, $imei, $newlocation, $newlocation1, $speedkmhr)
 	//tested
 	//public function insertLocationDataV2()
 	{
-		/* $bus_id = 1; 
-		$route_id = 1; 
-		$imei = 358672054574474; 
-		$newlocation = 1.448880; 
-		$newlocation1 =103.820102; 
+		/* $bus_id = 1;
+		$route_id = 1;
+		$imei = 358672054574474;
+		$newlocation = 1.448880;
+		$newlocation1 =103.820102;
 		$speedkmhr = 20.0; */
-		
+
 		$time = self::getTime();
-	
+
 		$insertLocationDataV2_Query = DB::table('location_datav2')
 							->insert([
 							'bus_id'=>$bus_id,
@@ -426,7 +426,7 @@ class DatabaseController
 		$bus_id = 1;
 		$route_id = 1;
 		$time = '2016-09-06 15:33:53'; */
-		
+
 		$updateFlag_Query = DB::table('location_datav2')
 								->where('bus_id',$bus_id)
 								->where('route_id',$route_id)
@@ -437,36 +437,36 @@ class DatabaseController
 	//tested
 	//public function getHistoryETA()
 	{
-		
-		
+
+
 		$getHistoryETA_Dataset = new Collection;
 		$bus_stop_route_order = self::getroute_order_bybusstopid($busstop_id, $route_id);
-		
-		
+
+
 		$route_order_next = DB::table('route_bus_stop')
 									->select('bus_stop_id')
 									->where('route_id',$route_id)
 									->where('route_order', '>=',$bus_stop_route_order)
 									->orderBy('route_order', 'asc')
 									->get();
-		
+
 		foreach($route_order_next as $bus_stop_id_next)
 		{
-		
+
 		 $getHistoryETA_Query = DB::table('avg_speed_calculated')
 									->select('avg_time','bus_stop_id_next')
 									->where('route_id',$route_id)
 									->where('bus_service_no',$bus_service_no)
 									->where('bus_stop_id_next',$bus_stop_id_next->bus_stop_id)
 									->first();
-			
+
 			if($getHistoryETA_Query != null)
 			{
-				
+
 				$getHistoryETA_Dataset->push($getHistoryETA_Query);
 			}
 		}
-									
+
 		if($keepTime != 0)
 		{
 			$time = $keepTime;
@@ -475,22 +475,22 @@ class DatabaseController
 		{
 			$time = 0;
 		}
-		
+
 		foreach($getHistoryETA_Dataset as $singleset)
 		{
-			
-			
+
+
 			$time = $singleset->avg_time + $time;
 			$avgspeed = -1;
 			$calcTime = date("Y-m-d H:i:s", $time +strtotime("+0 seconds"));
 			$get_Time = self::getTime();
 			self::uploadETAV2($bus_id,$route_id,$singleset->bus_stop_id_next,$calcTime,$get_Time,$avgspeed);
-			
+
 		}
-		
-		
+
+
 	}
-	
+
 	public function getFirstBusstopIDFromRoute($bus_id,$route_id)
 	//tested
 	//public function getFirstBusstopIDFromRoute()
@@ -508,63 +508,63 @@ class DatabaseController
 		/* var_dump($getFirstBusstopIDFromRoute_Query);
 		die();
 		$totalbus = array();
-		
+
 		foreach($getFirstBusstopIDFromRoute_Query as $singleset)
 		{
 			$totalbus = $singleset;
 		} */
-		
+
 		//return $totalbus[0];
 		return $getFirstBusstopIDFromRoute_Query->bus_stop_id;
 	}
-	
+
 	public function getbusstopid_byroute_order($route_order,$route_id)
 	{
-		
+
 		$getbusstopid_byroute_order_Query = DB::table('route_bus_stop')
 												->select('bus_stop_id')
 												->where('route_id',$route_id)
 												->where('route_order',$route_order)
 												->first();
-		
-		
+
+
 		return $getbusstopid_byroute_order_Query->bus_stop_id;
 	}
 	public function getroute_order_bybusstopid($bus_stop_id,$route_id)
 	{
-		
+
 		$getroute_order_bybusstopid_Query = DB::table('route_bus_stop')
 												->select('route_order')
 												->where('route_id',$route_id)
 												->where('bus_stop_id',$bus_stop_id)
 												->first();
-		
-		
+
+
 		return $getroute_order_bybusstopid_Query->route_order;
 	}
-	
-	
-	
-	
+
+
+
+
 	//tested
 	public function getTotalBus()
 	{
 		$totalbus = array();
-		
+
 		$getTotalBus_Query = DB::table('bus')
 								->select('bus_id')
 								->get();
-								
+
 		foreach($getTotalBus_Query as $singleset)
 		{
 			array_push($totalbus,$singleset->bus_id);
 		}
-		
+
 		return $totalbus;
 	}
-	
-	
-	
+
+
+
 	public function getBusIDByBeacon($beacon_mac)
 	{
 		$getBusIDByBeacon_Query = DB::table('bus')
@@ -572,7 +572,7 @@ class DatabaseController
 										->where('beacon_mac',$beacon_mac)
 										->limit(1)
 										->first();
-		
+
 		if($getBusIDByBeacon_Query != null)
 		{
 			return $getBusIDByBeacon_Query->bus_id;
@@ -582,7 +582,7 @@ class DatabaseController
 			return null;
 		}
 	}
-	
+
 	public function getAllBusIDByBeacon($pi_id)
 	{
 		$getAllBusIDByBeacon_Query = DB::table('bus')
@@ -592,10 +592,25 @@ class DatabaseController
 									->join('route_pi','route_pi.route_id','=','route.route_id')
 									->where('route_pi.pi_id',$pi_id)
 									->get();
-									
+
 		return $getAllBusIDByBeacon_Query;
 	}
-	
+
+	public function rmPhantomETA($bus_id)
+	{
+		$time = self::getTime();
+		$rmPhantomETAV2_Query = DB::table('etav2')
+													->where('eta', '>', $time)
+													->where('bus_id', $bus_id)
+													->delete();
+		$rmPhantomETA_Query = DB::table('eta')
+													->where('eta', '>', $time)
+													->where('bus_id', $bus_id)
+													->delete();
+
+		return $rmPhantomETAV2_Query;
+	}
+
 	public function getBusServiceNo($route_id,$bus_id)
 	//tested
 	//public function getBusServiceNo()
@@ -609,47 +624,47 @@ class DatabaseController
 										->where('route.route_id',$route_id)
 										->where('bus_route.bus_id',$bus_id)
 										->get();
-		
+
 		$data = array();
-		
+
 		foreach($getBusServiceNo_Query as $singleset)
 		{
 			$data= $singleset->bus_service_no;
 		}
-		
+
 		if($data == null)
 		{
 			return null;
 		}
-		
+
 		return $data;
 	}
-	
+
 	public function getlatlongByPi($pi_id)
 	{
 		$getlatlongByPi_Query = DB::table('pi_info')
 										->where('pi_id',$pi_id)
 										->limit(1)
 										->first();
-		
+
 		return $getlatlongByPi_Query;
 	}
-	
+
 	public function getpi_routeid($pi_id)
 	{
 		$getpi_routeid_Query = DB::table('route_pi')
 									->where('pi_id',$pi_id)
 									->get();
 		$route_id = array();
-		
+
 		foreach($getpi_routeid_Query as $singleset)
 		{
 			array_push($route_id,$singleset->route_id);
 		}
-		
+
 		return $route_id;
 	}
-	
+
 	public function getRouteID($bus_id)
 	//tested
 	//public function getRouteID()
@@ -659,15 +674,15 @@ class DatabaseController
 								->select('route_id')
 								->where('bus_id',$bus_id)
 								->get();
-								
+
 		$route_id = array();
-		
+
 		foreach($getRouteID_Query as $singleset)
 		{
 			array_push($route_id,$singleset->route_id);
 		}
-		
+
 		return $route_id;
 	}
-	
+
 }

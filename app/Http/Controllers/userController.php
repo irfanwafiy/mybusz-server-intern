@@ -955,6 +955,16 @@ class userController extends Controller
 
                     }
 
+						public function removephantomETA(Request $request )
+						{
+							$bus_id = $request->input('bus_id');
+							$getDatabaseClass = self::getDatabaseClass();
+							$delete_stats = $getDatabaseClass->rmPhantomETA($bus_id);
+
+							return $delete_stats;
+
+						}
+
 					 public function getAllBeaconInfo(Request $request)
 					{
 						$pi_id = $request->input('pi_id');
