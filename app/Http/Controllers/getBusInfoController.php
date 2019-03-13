@@ -1026,6 +1026,15 @@ class getBusInfoController extends Controller
 				break;
 			}
 			else {
+				$bus_stop_route_order_query = DB::table('route_bus_stop')
+									->select('route_bus_stop.$route_order')
+									->where('bus_stop_id',$singleset->bus_stop_id)
+									->first();
+
+				$dataset_getstopROute_order = [
+					'singleset' => $singleset,
+					'route_order' => $bus_stop_route_order_query
+				];
 				array_push($array_getmobile_nearbyStop, $singleset);
 
 			}
@@ -1040,8 +1049,9 @@ class getBusInfoController extends Controller
 				// 	$array_mobileBusService = json_encode($array_mobileBusService);
 				// }
 				$dataset_getmobile_nearbyStop = [
-					'stop_id' => $singleset2->bus_stop_id,
+					'stop_id' => $singleset2->singleset->bus_stop_id,
 					'bus_stop_name' => $singleset2->name,
+					'route_order' => $singleset2->route_order,
 					'busService' => $array_mobileBusService
 				];
 				array_push($array_getmobile_nearbyStop_return, $dataset_getmobile_nearbyStop);
