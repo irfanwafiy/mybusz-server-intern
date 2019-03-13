@@ -1031,11 +1031,11 @@ class getBusInfoController extends Controller
 									->where('bus_stop_id',$singleset->bus_stop_id)
 									->first();
 
-				$dataset_getstopROute_order = [
+				$dataset_getstopRoute_order = [
 					'singleset' => $singleset,
 					'route_order' => $bus_stop_route_order_query
 				];
-				array_push($array_getmobile_nearbyStop, $singleset);
+				array_push($array_getmobile_nearbyStop, $dataset_getstopRoute_order);
 
 			}
 
