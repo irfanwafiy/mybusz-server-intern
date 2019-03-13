@@ -1050,7 +1050,7 @@ class getBusInfoController extends Controller
 				// }
 				$dataset_getmobile_nearbyStop = [
 					'stop_id' => $singleset2->singleset->bus_stop_id,
-					'bus_stop_name' => $singleset2->name,
+					'bus_stop_name' => $singleset2->singleset->name,
 					'route_order' => $singleset2->route_order,
 					'busService' => $array_mobileBusService
 				];
