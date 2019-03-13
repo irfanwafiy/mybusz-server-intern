@@ -1027,7 +1027,7 @@ class getBusInfoController extends Controller
 			}
 			else {
 				$bus_stop_route_order_query = DB::table('route_bus_stop')
-									->select('route_bus_stop.$route_order')
+									->select('route_bus_stop.route_order')
 									->where('bus_stop_id',$singleset->bus_stop_id)
 									->first();
 
