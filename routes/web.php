@@ -26,6 +26,10 @@ Route::get('/input_bus_stop_859A', function () {
     return view('syd_test_bus_stop');
 });
 
+Route::get('/privacy_policy_android', function () {
+    return view('privacy_policy_android');
+});
+
 Route::post('/getBusRoute', 'getBusInfoController@getBusRoute');
 Route::post('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
 Route::post('/getBusService', 'getBusInfoController@getBusService');
