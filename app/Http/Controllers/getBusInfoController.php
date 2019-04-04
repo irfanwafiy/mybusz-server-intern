@@ -792,7 +792,7 @@ class getBusInfoController extends Controller
 		return view('bus_stop_info', ['data' => $data]);
 	}
 
-	public getBusStopInfo_method($bus_stop_id)
+	public function getBusStopInfo_method($bus_stop_id)
 	{
 		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
 		$bus_service_available = self::getBusService_method($bus_stop_id);
