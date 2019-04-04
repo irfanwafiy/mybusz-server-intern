@@ -1802,10 +1802,10 @@ class userController extends Controller
                              if ($timediff > 120 && $location_data[0]->speed >= 4)
                              {
                                        print("NORMAL OPERATION_1 \r\n");
-									   print("Distance : ".$distance);
+									   							 		 print("Distance : ".$distance);
                                        $avgSpeed = $distance / ($timediff / 3600);
 
-							 }
+							 							 }
 
                              else if ($timediff > 120 && $location_data[$half_size]->speed >= 4)
                              {
@@ -2065,6 +2065,10 @@ class userController extends Controller
                                        }
                              }
                     }
+
+										public function checkconnection() {
+												print("Sucess"); 
+										}
 
                     public function calculateHistoricData()
                     {

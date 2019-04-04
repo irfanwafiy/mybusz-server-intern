@@ -32,6 +32,7 @@ Route::get('/privacy_policy_android', function () {
 
 Route::get('/bus_stop_info_pi/{bus_stop_id}', 'getBusInfoController@getBusStopInfo_pi');
 
+
 Route::post('/getBusRoute', 'getBusInfoController@getBusRoute');
 Route::post('/getBusRouteInfo', 'getBusInfoController@getBusRouteInfo');
 Route::post('/getBusService', 'getBusInfoController@getBusService');
@@ -57,6 +58,8 @@ Route::post('/getBusStopInfo_refresh','getBusInfoController@getBusStopInfo_refre
 Route::get('/viewETATableGet', 'userController@viewETATableGet');
 
 Route::get('/getHistoryETA', 'DatabaseController@getHistoryETA');
+
+Route::get('/checkconnection', 'userController@checkconnection');
 
 
 Route::post('/Ian_updateLocation','userController@Ian_updateLocation');
