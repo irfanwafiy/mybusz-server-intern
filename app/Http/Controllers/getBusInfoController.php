@@ -786,10 +786,14 @@ class getBusInfoController extends Controller
 
 	}
 
-	public function getBusStopInfo(Request $request)
+	public function getBusStopInfo_pi($bus_stop_id)
 	{
+		$data = self::getBusStopInfo_method($bus_stop_id);
+		return view('bus_stop_info', ['data' => $data]);
+	}
 
-		$bus_stop_id = $request->input('bus_stop_id');
+	public getBusStopInfo_method($bus_stop_id)
+	{
 		$bus_service_list = self::getBusStop_BusServices_method($bus_stop_id);
 		$bus_service_available = self::getBusService_method($bus_stop_id);
 		$getBusStopInfo_array = array();
@@ -887,6 +891,16 @@ class getBusInfoController extends Controller
 		'bus_stop_id' => $bus_stop_id,
 		"bus_data" => $getBusStopInfo_array_sorted
 		);
+
+		return $data;
+	}
+
+	public function getBusStopInfo(Request $request)
+	{
+
+		$bus_stop_id = $request->input('bus_stop_id');
+
+		$data = self::getBusStopInfo_method($bus_stop_id);
 		return view('bus_stop_info', ['data' => $data]);
 	}
 
