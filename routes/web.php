@@ -93,4 +93,6 @@ Route::post('/pushCurrentData','userController@pushCurrentData');
 //Route::post('/getETA','userController@getETA');
 Route::post('/getBusStopServices','userController@getBusStopServices');
 
+Route::post('/uploadData','CRUDController@uploadData');
+
 });
