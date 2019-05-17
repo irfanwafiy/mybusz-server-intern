@@ -44,7 +44,7 @@ class CRUDController extends Controller
        $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
        $file->move($destinationPath,$file->getClientOriginalName());
 
-       $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r")
+       $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
 
   }
 }
