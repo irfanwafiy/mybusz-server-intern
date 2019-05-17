@@ -14,6 +14,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 
 class CRUDController extends Controller
 {
@@ -41,21 +42,26 @@ class CRUDController extends Controller
       // echo 'File Mime Type: '.$file->getMimeType();
 
       //Move Uploaded File
-       // $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
+        $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
        // $file->move($destinationPath,$file->getClientOriginalName());
-
-       $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
-       while (!feof($myfile) )
-       {
-                 $data = fgets($myfile);
-
-                 if (!empty($data))
-                 {
-                          print($data);
-                 }
-       }
-
-       fclose($myfile);
+       Storage::putFileAs(
+               $destinationPath,
+               $file,
+               $file->getClientOriginalName()
+           );
+      
+       // $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
+       // while (!feof($myfile) )
+       // {
+       //           $data = fgets($myfile);
+       //
+       //           if (!empty($data))
+       //           {
+       //                    print($data);
+       //           }
+       // }
+       //
+       // fclose($myfile);
 
   }
 }
