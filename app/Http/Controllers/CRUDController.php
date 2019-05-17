@@ -42,15 +42,16 @@ class CRUDController extends Controller
       // echo 'File Mime Type: '.$file->getMimeType();
 
       //Move Uploaded File
-        $destinationPath = "../data/busstopPolylinePositions/".$serviceno;
-       // $file->move($destinationPath,$file->getClientOriginalName());
-       // Storage::putFileAs(
-       //         $destinationPath,
-       //         $file,
-       //         $file->getClientOriginalName()
-       //     );
-       $path = base_path();
-       print($path);
+        $path = base_path();
+        $destinationPath = $path."/data/busstopPolylinePositions/".$serviceno;
+        $file->move($destinationPath,$file->getClientOriginalName());
+       Storage::putFileAs(
+               $destinationPath,
+               $file,
+               $file->getClientOriginalName()
+           );
+
+       print("success?");
        $myfile = fopen($path."/data/busstopPolylinePositions/"."4.txt", "r");
        while (!feof($myfile) )
        {
