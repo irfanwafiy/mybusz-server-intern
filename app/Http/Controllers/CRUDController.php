@@ -17,7 +17,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CRUDController extends Controller
 {
-  public function showUploadFile(Request $request) {
+  public function uploadData(Request $request) {
       $file = $request->file('text');
       print($file->getRealPath());
       // //Display File Name
