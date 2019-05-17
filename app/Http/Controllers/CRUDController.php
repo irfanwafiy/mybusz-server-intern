@@ -41,8 +41,8 @@ class CRUDController extends Controller
       // echo 'File Mime Type: '.$file->getMimeType();
 
       //Move Uploaded File
-       $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
-       $file->move($destinationPath,$file->getClientOriginalName());
+       // $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
+       // $file->move($destinationPath,$file->getClientOriginalName());
 
        $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
        while (!feof($myfile) )
