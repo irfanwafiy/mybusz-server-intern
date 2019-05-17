@@ -44,12 +44,12 @@ class CRUDController extends Controller
       //Move Uploaded File
         $destinationPath = "../data/busstopPolylinePositions/".$serviceno;
        // $file->move($destinationPath,$file->getClientOriginalName());
-       Storage::putFileAs(
-               $destinationPath,
-               $file,
-               $file->getClientOriginalName()
-           );
-
+       // Storage::putFileAs(
+       //         $destinationPath,
+       //         $file,
+       //         $file->getClientOriginalName()
+       //     );
+       print(storage_path('app/public'));
        // $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
        // while (!feof($myfile) )
        // {
