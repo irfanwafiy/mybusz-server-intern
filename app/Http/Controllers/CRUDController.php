@@ -19,7 +19,8 @@ class CRUDController extends Controller
 {
   public function uploadData(Request $request) {
       $file = $request->file('text');
-      print($file->getRealPath());
+      $serviceno = $request->input('serviceno');
+      print('File Real Path: '.$file->getRealPath());
       // //Display File Name
       // echo 'File Name: '.$file->getClientOriginalName();
       // echo '<br>';
@@ -40,8 +41,8 @@ class CRUDController extends Controller
       // echo 'File Mime Type: '.$file->getMimeType();
 
       //Move Uploaded File
-      // $destinationPath = 'uploads';
-      // $file->move($destinationPath,$file->getClientOriginalName());
+       $destinationPath = "../data/busstopPolylinePositions/".$serviceno.'/';
+       $file->move($destinationPath,$file->getClientOriginalName());
 
   }
 }
