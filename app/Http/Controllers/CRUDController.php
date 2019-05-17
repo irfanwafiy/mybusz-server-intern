@@ -45,6 +45,17 @@ class CRUDController extends Controller
        $file->move($destinationPath,$file->getClientOriginalName());
 
        $myfile = fopen("../data/busstopPolylinePositions/".$serviceno.'/'."TestMinDistProximityFeatureDSM.txt", "r");
+       while (!feof($myfile) )
+       {
+                 $data = fgets($myfile);
+
+                 if (!empty($data))
+                 {
+                          print($data);
+                 }
+       }
+
+       fclose($myfile);
 
   }
 }
