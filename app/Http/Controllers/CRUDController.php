@@ -43,7 +43,7 @@ class CRUDController extends Controller
 
       //Move Uploaded File
         $path = base_path();
-        $destinationPath = $path."/data/busstopPolylinePositions/".$serviceno;
+        $destinationPath = $path."/data/busstopPolylinePositions";
         //$file->move($destinationPath,$file->getClientOriginalName());
        Storage::putFileAs(
                $destinationPath,
