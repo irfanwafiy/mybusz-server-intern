@@ -21,7 +21,7 @@ class CRUDController extends Controller
   public function uploadData(Request $request) {
       $file = $request->file('text');
       $serviceno = $request->input('serviceno');
-      print('File Real Path: '.$file->getRealPath());
+      //print('File Real Path: '.$file->getRealPath());
       // //Display File Name
       // echo 'File Name: '.$file->getClientOriginalName();
       // echo '<br>';
@@ -49,8 +49,8 @@ class CRUDController extends Controller
        //         $file,
        //         $file->getClientOriginalName()
        //     );
-       $path = storage_path('app/public');
-       //print();
+       $path = base_path();
+       print($path);
        $myfile = fopen($path."/data/busstopPolylinePositions/"."4.txt", "r");
        while (!feof($myfile) )
        {
