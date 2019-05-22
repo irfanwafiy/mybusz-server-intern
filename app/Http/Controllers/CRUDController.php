@@ -15,57 +15,18 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
+use JD\Cloudder\Facades\Cloudder;
 
 class CRUDController extends Controller
 {
   public function uploadData(Request $request) {
-      $file = $request->file('text');
-      $serviceno = $request->input('serviceno');
-      //print('File Real Path: '.$file->getRealPath());
-      // //Display File Name
-      // echo 'File Name: '.$file->getClientOriginalName();
-      // echo '<br>';
-      //
-      // //Display File Extension
-      // echo 'File Extension: '.$file->getClientOriginalExtension();
-      // echo '<br>';
-      //
-      // //Display File Real Path
-      // echo 'File Real Path: '.$file->getRealPath();
-      // echo '<br>';
-      //
-      // //Display File Size
-      // echo 'File Size: '.$file->getSize();
-      // echo '<br>';
-      //
-      // //Display File Mime Type
-      // echo 'File Mime Type: '.$file->getMimeType();
 
-      //Move Uploaded File
-        $file->storeAs('busstopPolylinePositions',$file->getClientOriginalName());
-        return 'success?';
-        $path = base_path();
-        $destinationPath = $path."/data/busstopPolylinePositions";
-        //$file->move($destinationPath,$file->getClientOriginalName());
-       Storage::putFileAs(
-               $destinationPath,
-               $file,
-               $file->getClientOriginalName()
-           );
+    $file = $request->file('file')->getRealPath();;
 
-       print("success?");
-       $myfile = fopen($path."/data/busstopPolylinePositions/"."4.txt", "r");
-       while (!feof($myfile) )
-       {
-                 $data = fgets($myfile);
+     Cloudder::upload($file, null);
 
-                 if (!empty($data))
-                 {
-                          print($data);
-                 }
-       }
+     return redirect()->back()->with('status', 'File Uploaded Successfully');
 
-       fclose($myfile);
 
   }
 }
