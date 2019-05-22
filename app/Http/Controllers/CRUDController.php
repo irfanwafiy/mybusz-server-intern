@@ -23,7 +23,7 @@ class CRUDController extends Controller
 
     $file = $request->file('file')->getRealPath();;
 
-     Cloudder::unsigned_upload($file, array("resource_type" => "raw"));
+     Cloudder::unsigned_upload($file, array("resource_type" => "auto"));
 
      return redirect()->back()->with('status', 'File Uploaded Successfully');
 
