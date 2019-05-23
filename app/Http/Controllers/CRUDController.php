@@ -27,7 +27,7 @@ class CRUDController extends Controller
      //Cloudder::unsignedUpload($file, array("resource_type" => "video", "upload_preset" => "zbvi7a6n"));
 
      //return redirect()->back()->with('status', 'File Uploaded Successfully');
-     $filecontent = file_get_contents('../data/busstopPolylinePositions/1.txt');
+     $filecontent = file_get_contents('http://www.mediafire.com/file/tocqwx059ua3hdg/testfileSyd_%25281%2529.txt/file');
      print($filecontent);
   }
 }
