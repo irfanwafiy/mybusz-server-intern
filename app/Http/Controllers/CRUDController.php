@@ -27,7 +27,7 @@ class CRUDController extends Controller
      //Cloudder::unsignedUpload($file, array("resource_type" => "video", "upload_preset" => "zbvi7a6n"));
 
      //return redirect()->back()->with('status', 'File Uploaded Successfully');
-     $filecontent = file_get_contents('https://drive.google.com/open?id=1D2RLDep8gbTxUHZUWKjRYtExZOAc_5bF');
+     $filecontent = file_get_contents('https://res.cloudinary.com/hsj2bliee/raw/upload/v1558607732/my_folder/atxrw88tfgdbxbku6emp.txt');
      print($filecontent);
   }
 }
