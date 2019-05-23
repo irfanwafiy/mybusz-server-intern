@@ -24,10 +24,10 @@ class CRUDController extends Controller
     $file = $request->file('file')->getRealPath();
 
     //array("resource_type" => "auto"
-     Cloudder::unsignedUpload($file, array("resource_type" => "video", "upload_preset" => "zbvi7a6n"));
+     //Cloudder::unsignedUpload($file, array("resource_type" => "video", "upload_preset" => "zbvi7a6n"));
 
-     return redirect()->back()->with('status', 'File Uploaded Successfully');
-
-
+     //return redirect()->back()->with('status', 'File Uploaded Successfully');
+     $filecontent = file_get_contents('../data/busstopPolylinePositions/1.txt');
+     print($filecontent);
   }
 }
