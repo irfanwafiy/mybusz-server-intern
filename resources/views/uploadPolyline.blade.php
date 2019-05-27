@@ -127,7 +127,7 @@ input[type=submit]:hover {
 
 <script type="text/javascript">
 var route = "";
-var path ="";
+var path ="testingSyd/7/";
 function getRoute() {
   console.log('btn click');
   route = document.getElementById("routeID").value;
