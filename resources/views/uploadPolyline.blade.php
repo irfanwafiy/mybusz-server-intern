@@ -129,6 +129,7 @@ input[type=submit]:hover {
 var route = "";
 var path ="";
 function getRoute() {
+  console.log('btn click');
   route = document.getElementById("routeID").value;
 }
 
