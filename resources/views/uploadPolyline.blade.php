@@ -154,7 +154,8 @@ document.getElementById("upload_widget").addEventListener("click", function(){
     document.getElementById("test").innerHTML = "route missing";
   }
   else {
-    path = "testingSyd/7/" +route + "/";
+    //path = "testingSyd/7/" +route + "/";
+    path = "testingSyd/7/";
     myWidget.open();
   }
 
