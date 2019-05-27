@@ -141,6 +141,7 @@ var myWidget = cloudinary.createUploadWidget({
   folder: path }, (error, result) => {
     if (!error && result && result.event === "success") {
       console.log('Done! Here is the image info: ', result.info);
+      console.log('path: ' + path);
       document.getElementById("test").innerHTML = "" + result.info.secure_url;
     }
   }
@@ -153,7 +154,7 @@ document.getElementById("upload_widget").addEventListener("click", function(){
     document.getElementById("test").innerHTML = "route missing";
   }
   else {
-    path = 'testingSyd/7/' +route + '/';
+    path = "testingSyd/7/" +route + "/";
     myWidget.open();
   }
 
