@@ -114,6 +114,8 @@ input[type=submit]:hover {
                     Upload json file
                 </div>
 
+          <label for="routeID">Bus id:</label>
+      		<input id="routeID" type="text" name="routeID" value="">
 				  <button id="upload_widget" class="cloudinary-button">Upload files</button>
 				  <br><br>
           <p id="test"></p>
@@ -124,10 +126,11 @@ input[type=submit]:hover {
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+var route = document.getElementById("routeID").innerHTML;
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'hsj2bliee',
   uploadPreset: 'k2xqd8id',
-  folder: 'testingSyd/'}, (error, result) => {
+  folder: 'testingSyd/7/' +route + '/' }, (error, result) => {
     if (!error && result && result.event === "success") {
       console.log('Done! Here is the image info: ', result.info);
       document.getElementById("test").innerHTML = "" + result.info.secure_url;
