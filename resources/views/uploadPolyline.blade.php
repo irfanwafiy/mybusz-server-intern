@@ -126,7 +126,8 @@ input[type=submit]:hover {
 <script type="text/javascript">
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'hsj2bliee',
-  uploadPreset: 'k2xqd8id'}, (error, result) => {
+  uploadPreset: 'k2xqd8id',
+  folder: 'testingSyd/'}, (error, result) => {
     if (!error && result && result.event === "success") {
       console.log('Done! Here is the image info: ', result.info);
       document.getElementById("test").innerHTML = "" + result.info.secure_url;
