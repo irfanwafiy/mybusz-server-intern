@@ -22,7 +22,7 @@ class CRUDController extends Controller
   public function uploadData(Request $request) {
 
     $file = $request->file('file')->getRealPath();
-
+    $url = $request->input('url');
     //array("resource_type" => "auto"
      //Cloudder::unsignedUpload($file, array("resource_type" => "video", "upload_preset" => "zbvi7a6n"));
 
