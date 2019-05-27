@@ -126,7 +126,7 @@ input[type=submit]:hover {
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-var route = document.getElementById("routeID").innerHTML;
+var route = document.getElementById("routeID").value;
 var path = 'testingSyd/7/' +route + '/';
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'hsj2bliee',
