@@ -116,7 +116,7 @@ input[type=submit]:hover {
 
           <label for="routeID">Bus id:</label>
       		<input id="routeID" type="text" name="routeID" value="">
-				  <button id="upload_widget" class="cloudinary-button" onclick=""="getRoute()">Upload files</button>
+				  <button id="upload_widget" class="cloudinary-button" onclick="getRoute()">Upload files</button>
 				  <br><br>
           <p id="test"></p>
 				</div>
