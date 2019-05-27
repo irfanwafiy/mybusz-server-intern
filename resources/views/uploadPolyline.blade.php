@@ -116,7 +116,7 @@ input[type=submit]:hover {
 
           <label for="routeID">Bus id:</label>
       		<input id="routeID" type="text" name="routeID" value="">
-				  <button id="upload_widget" class="cloudinary-button">Upload files</button>
+				  <button id="upload_widget" class="cloudinary-button" onclick=""="getRoute()">Upload files</button>
 				  <br><br>
           <p id="test"></p>
 				</div>
@@ -126,9 +126,14 @@ input[type=submit]:hover {
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-var route = document.getElementById("routeID").value;
-console.log('testing :' + route);
-var path = 'testingSyd/7/' +route + '/';
+var route = "";
+var path ="";
+function getRoute() {
+  route = document.getElementById("routeID").value;
+}
+
+
+
 var myWidget = cloudinary.createUploadWidget({
   cloudName: 'hsj2bliee',
   uploadPreset: 'k2xqd8id',
@@ -141,7 +146,17 @@ var myWidget = cloudinary.createUploadWidget({
 )
 
 document.getElementById("upload_widget").addEventListener("click", function(){
+  console.log('testing :' + route);
+  if(route == "")
+  {
+    document.getElementById("test").innerHTML = "route missing";
+  }
+  else {
+    path = 'testingSyd/7/' +route + '/';
     myWidget.open();
+  }
+
+
   }, false);
 </script>
 
