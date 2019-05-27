@@ -116,6 +116,7 @@ input[type=submit]:hover {
 
 				  <button id="upload_widget" class="cloudinary-button">Upload files</button>
 				  <br><br>
+          <p id="test"></p>
 				</div>
             </div>
 
@@ -128,6 +129,7 @@ var myWidget = cloudinary.createUploadWidget({
   uploadPreset: 'k2xqd8id'}, (error, result) => {
     if (!error && result && result.event === "success") {
       console.log('Done! Here is the image info: ', result.info);
+      document.getElementById("test").innerHTML = "" + result.info;
     }
   }
 )
