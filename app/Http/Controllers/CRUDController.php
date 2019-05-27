@@ -30,4 +30,8 @@ class CRUDController extends Controller
      $filecontent = file_get_contents('https://res.cloudinary.com/hsj2bliee/raw/upload/v1558607732/my_folder/atxrw88tfgdbxbku6emp.txt');
      print($filecontent);
   }
+
+  public function upload_json() {
+    return view('uploadPolyline');
+  }
 }

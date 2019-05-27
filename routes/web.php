@@ -87,7 +87,7 @@ Route::post('/syd_Cal','userController@syd_Cal');
 Route::post('/getKM_syd','userController@getKM_syd');
 Route::post('/removephantomETA', 'userController@removephantomETA');
 
-
+Route::get('/upload_json', 'CRUDController@upload_json');
 
 Route::post('/pushCurrentData','userController@pushCurrentData');
 //Route::post('/getETA','userController@getETA');
