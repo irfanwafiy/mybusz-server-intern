@@ -95,6 +95,6 @@ Route::post('/getBusStopServices','userController@getBusStopServices');
 
 Route::post('/uploadData','CRUDController@uploadData');
 
-Route::post('/testing','CRUDController@testing_files')
+Route::post('/testing','CRUDController@testing_files');
 
 });
