@@ -34,4 +34,12 @@ class CRUDController extends Controller
   public function upload_json() {
     return view('uploadPolyline');
   }
+
+  public function testing_files() {
+    $filecontent = file_get_contents('../data/'.$busserviceno.'.json');
+    $json1 = json_decode($filecontent, true);
+    $busroutecoords = $json1[$routeno]['route'];
+
+    print_r($busroutecoords);
+  }
 }
