@@ -29,7 +29,8 @@ class CRUDController extends Controller
      //return redirect()->back()->with('status', 'File Uploaded Successfully');
      $filecontent = file_get_contents($url);
      $result = explode(",",$filecontent);
-     print_r($filecontent);
+
+     print_r($result);
   }
 
   public function upload_json() {
