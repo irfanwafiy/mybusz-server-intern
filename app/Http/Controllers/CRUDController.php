@@ -37,7 +37,7 @@ class CRUDController extends Controller
     return view('uploadPolyline');
   }
 
-  public function testing_files() {
+  public function testing_files(Request $request) {
     $filecontent = file_get_contents('../data/'.'7'.'.json');
     $filecontent2 = file_get_contents($request->input('url'));
     $result = explode(PHP_EOL,$filecontent2);
