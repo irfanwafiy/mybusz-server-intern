@@ -28,7 +28,7 @@ class CRUDController extends Controller
 
      //return redirect()->back()->with('status', 'File Uploaded Successfully');
      $filecontent = file_get_contents($url);
-     $result = explode('\n',$filecontent);
+     $result = explode(PHP_EOL,$filecontent);
 
      print_r($result);
   }
