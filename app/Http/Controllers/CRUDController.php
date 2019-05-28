@@ -39,9 +39,11 @@ class CRUDController extends Controller
 
   public function testing_files() {
     $filecontent = file_get_contents('../data/'.'7'.'.json');
+    $filecontent2 = file_get_contents($request->input('url'));
+    $result = explode(PHP_EOL,$filecontent2);
     $json1 = json_decode($filecontent, true);
     $busroutecoords = $json1['1']['route'];
-
-    print_r($busroutecoords);
+    print('json: '.trim($busroutecoords[7]));
+    print(' myM: '.trim(result[7]));
   }
 }
