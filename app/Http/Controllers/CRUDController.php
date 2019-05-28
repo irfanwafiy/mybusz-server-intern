@@ -44,6 +44,6 @@ class CRUDController extends Controller
     $json1 = json_decode($filecontent, true);
     $busroutecoords = $json1['1']['route'];
     print('json: '.trim($busroutecoords[7]));
-    print(' myM: '.trim(result[7]));
+    print(' myM: '.trim($result[7]));
   }
 }
