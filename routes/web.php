@@ -30,6 +30,10 @@ Route::get('/privacy_policy_android', function () {
     return view('privacy_policy_android');
 });
 
+Route::get('/privacy_policy_ios', function () {
+    return view('privacy_policy_ios');
+});
+
 Route::get('/bus_stop_info_pi/{bus_stop_id}', 'getBusInfoController@getBusStopInfo_pi');
 
 
