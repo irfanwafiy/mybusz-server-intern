@@ -1,17 +1,17 @@
 <?php
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+//$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 
-	/* $host = 'localhost';
-	$username = 'root';
-	$password = 'Skyrelia07';
-	$database = 'mybusz'; */
+        $host = '127.0.0.1';
+	$username = 'homestead';
+	$password = 'secret';
+	$database = 'UOGSG'; 
 	
-	 $url = 'mysql://b21fb22053657c:b5826f74@us-cdbr-iron-east-05.cleardb.net/heroku_b44dfea05dd9713?reconnect=true';
+	/* $url = 'mysql://b21fb22053657c:b5826f74@us-cdbr-iron-east-05.cleardb.net/heroku_b44dfea05dd9713?reconnect=true';
 	$host = 'us-cdbr-iron-east-05.cleardb.net';
 	$username = 'b21fb22053657c';
 	$password = '20b247592fb7e55';
 	$database = 'heroku_b44dfea05dd9713';
-	
+	*/
 
 return [
 

@@ -206,7 +206,7 @@ function refresh_eta_post(bus_stop_id, refresh_array)
 {
   //console.log("size :" + refresh_map.size);
   var req = new XMLHttpRequest();
-  req.open("POST", "https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh", true);
+  req.open("POST", "getBusStopInfo_refresh", true);
   req.setRequestHeader('Content-Type', 'application/json');
   req.send(JSON.stringify({
       'bus_stop_id': bus_stop_id,
@@ -262,7 +262,7 @@ function refresh(bus_stop_id, bus_route, index_date) {
 
 
     var req = new XMLHttpRequest();
-    req.open("POST", "https://laravelsyd-fypfinalver.herokuapp.com/getBusStopInfo_refresh", true);
+    req.open("POST", "getBusStopInfo_refresh", true);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify({
         'bus_stop_id': bus_stop_id,
