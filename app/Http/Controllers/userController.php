@@ -1169,7 +1169,7 @@ class userController extends Controller
                                                 //print("Start : ".$g);
                                        }
 
-                                       if (utf8_encode(trim($arg2)) == utf8_encode(trim($busroutecoords[$g])))
+                                       if (trim($arg2) == trim($busroutecoords[$g]))
                                        {
                                                 //print(" End :   ".$g."\r\n");
 
