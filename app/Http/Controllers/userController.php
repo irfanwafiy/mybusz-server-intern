@@ -1162,16 +1162,16 @@ class userController extends Controller
                              $busroutecoords = $json1[$routeno]['route'];
 
                              for ($g=0; $g<sizeof($busroutecoords); $g++)
-                             {
-                                       if (trim($arg1)==trim($busroutecoords[$g]))
+                             {	
+                                       if (trim($arg1) == trim($busroutecoords[$g]))
                                        {
-                                                $busCMP1 =$g;
-                                                print("Start : ".$g);
+                                                $busCMP1 = $g;
+                                                //print("Start : ".$g);
                                        }
 
-                                       if (trim($arg2)==trim($busroutecoords[$g]))
+                                       if (utf8_encode(trim($arg2)) == utf8_encode(trim($busroutecoords[$g])))
                                        {
-                                                print(" End :   ".$g."\r\n");
+                                                //print(" End :   ".$g."\r\n");
 
                                                 $caltotaldistance = 0 ;
 
@@ -1181,17 +1181,19 @@ class userController extends Controller
                                                           $busstop2 = explode(",", trim($busroutecoords[$z+1]));
                                                           $caltotaldistance = $caltotaldistance + self::caldistance($busstop1,$busstop2);
 
-														  print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
-														  print("<br>");
-														  print("Dist : ".$caltotaldistance);
-														  print("<br>");
+														  //print($busroutecoords[$z]."\t".$busroutecoords[$z+1]."\r\n");
+														  //print("<br>");
+														  //print("Dist : ".$caltotaldistance);
+														  //print("<br>");
                                                 }
 
                                                 array_push($totaldistance,$caltotaldistance);
                                        }
                              }
 
-                             print_r($totaldistance);
+                             //print(json_encode($totaldistance));
+                             //print_r($totaldistance);
+                             return response(json_encode($totaldistance), 200);
 
                     }
 
