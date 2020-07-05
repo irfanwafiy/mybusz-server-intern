@@ -974,6 +974,29 @@ class userController extends Controller
 						return $getAllBeaconInfo;
 
 					}
+
+					/* 04-07-2020
+					   New function to return current locations of buses to the app/dashboard
+
+					*/
+					public function getBusLocations(Request $request)
+				  {
+							$busCurrentLocation = array();
+
+					 		$getDatabaseClass = self::getDatabaseClass();
+					 		$busCurrentLocation = $getDatabaseClass->getBusCurrentLocations();
+
+							//Do we need to return as a HTTP response?
+					 		return $busCurrentLocation;
+
+							//$pi_id = $request->input('pi_id');
+							//$getDatabaseClass = self::getDatabaseClass();
+							//$getAllBeaconInfo = $getDatabaseClass->getAllBusIDByBeacon(5);
+
+							//return $getAllBeaconInfo;
+				 	}
+
+
                     public function convertBustoptoNearestPolyLine(Request $request)
                     {
                              $routeno = $request->input('routeno');
@@ -1162,7 +1185,7 @@ class userController extends Controller
                              $busroutecoords = $json1[$routeno]['route'];
 
                              for ($g=0; $g<sizeof($busroutecoords); $g++)
-                             {	
+                             {
                                        if (trim($arg1) == trim($busroutecoords[$g]))
                                        {
                                                 $busCMP1 = $g;
@@ -2069,7 +2092,7 @@ class userController extends Controller
                     }
 
 										public function checkconnection() {
-												print("Sucess"); 
+												print("Sucess");
 										}
 
                     public function calculateHistoricData()

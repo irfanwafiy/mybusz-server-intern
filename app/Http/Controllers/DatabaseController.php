@@ -685,4 +685,123 @@ class DatabaseController
 		return $route_id;
 	}
 
+  /*04-07-2020
+	  Function to retrieve the bus location currently operating on the day. It looks into the location_datav2 table to get real-time locations
+		as well as the estimated arrial time at the bus stop if the current location is not updated.
+
+		outputs: bus_id, plate_no, time, latitude, longitude, estimated (0=real bus location, 1=estimated location).
+	*/
+	public function getBusCurrentLocations()
+	{
+
+			//getcurrent time
+			$currentTime = self::getTime();
+			//get time five hours ago
+			$fiveHoursAgo = date("Y-m-d H:i:s", strtotime("-18000 seconds"));
+
+			//retrieve the bus stop coordinates, and put them into a collection.
+			//Can possibility load just one time, rather than keep querying the database.
+			$getBusStop_Query = DB::table('bus_stop')
+										->select('bus_stop.bus_stop_id', 'bus_stop.latitude', 'bus_stop.longitude')
+										->get();
+
+			$busStopCoordinates = collect();
+			foreach($getBusStop_Query as $singleset)
+			{
+					$latlong = strval($singleset->latitude) .",". strval($singleset->longitude);
+					$busStopCoordinates->put($singleset->bus_stop_id, $latlong);
+			}
+			//End retrieval of bus coordinates.
+
+
+			/* Equivalent SQL for getting the location from etav2 table
+
+			select a.bus_id, bus_stop_id, a.eta from etav2 as a
+				inner join (
+						select bus_id, max(eta) as eta from etav2
+						where eta <= '2020-07-05 21:40:00' and eta > '2020-07-05 10:35:00'
+						group by bus_id) as b
+				on b.eta = a.eta
+				group by bus_id, a.eta
+			*/
+			$sub = DB::table('etav2 as e')
+							->select('bus_id', DB::raw('MAX(eta) as eta'))
+							->where('e.eta', '<=', $currentTime)
+							->where('e.eta', '>', $fiveHoursAgo)
+							->groupBy('e.bus_id');
+
+			$estimatedBusLocation_Query = DB::table('etav2 as e')
+																		  ->select('e.bus_id', 'b.plate_no', 'e.route_id', DB::raw('MAX(e.bus_stop_id) as bus_stop_id'), 'e.eta as time')
+																			->join('bus as b', 'b.bus_id', '=', 'e.bus_id')
+																			->join(DB::raw("({$sub->toSql()}) as sub"), 'e.eta', '=', 'sub.eta')
+																			->mergeBindings($sub)
+																			->groupby('e.bus_id', 'e.route_id', 'e.eta')
+																			->get();
+
+			$data = collect();
+			foreach($estimatedBusLocation_Query as $singleset)
+			{
+					$latlong = $busStopCoordinates->get($singleset->bus_stop_id);
+					$location = explode(",", $latlong);
+					$singleset->latitude = $location[0];
+					$singleset->longitude = $location[1];
+					$singleset->estimated = 1;
+					unset($singleset->bus_stop_id);
+					$data->put($singleset->bus_id, $singleset);
+					// array_push($data,$singleset);
+			}
+
+			//print(json_encode($data));
+
+			/* Get the bus location reported by drivers or raspberry_pi in real-time if available:
+			 subquery to get last record update of location per bus_id
+
+			 select a.bus_id, a.route_id, a.latitude, a.longitude, a.time from location_datav2 as a
+			 inner join (
+			 			select bus_id, max(time) as time from location_datav2
+						where time <= '2020-07-05 21:16:00' and time > '2020-07-05 10:35:00'
+						group by bus_id) as b
+			 on a.time = b.time
+			 group by a.bus_id, a.route_id, a.latitude, a.longitude, a.time;
+			*/
+			$sub = DB::table('location_datav2 as l')
+							->select('bus_id', DB::raw('MAX(time) as time'))
+							->where('l.time', '<=', $currentTime)
+							->where('l.time', '>', $fiveHoursAgo)
+							->groupBy('l.bus_id');
+
+			$realBusLocation_Query = DB::table('location_datav2 as l')
+																->select('l.bus_id', 'b.plate_no', 'l.route_id', 'l.time', 'l.latitude', 'l.longitude')
+																->join('bus as b', 'b.bus_id', '=', 'l.bus_id')
+																->join(DB::raw("({$sub->toSql()}) as sub"), 'l.time', '=', 'sub.time')
+																->mergeBindings($sub)
+																->groupby('l.bus_id', 'l.route_id', 'l.time')
+																->get();
+
+			foreach($realBusLocation_Query as $singleset)
+			{
+						$singleset->estimated = 0;
+					  //retrieve estimated location data and compare the time
+						$row = $data->get($singleset->bus_id);
+
+						if (!is_null($row))
+						{
+								//estimated time from ETA is older than present time, then replace the row with real time
+								if ((strtotime($row->time) < strtotime($singleset->time)) and ($row->route_id == $singleset->route_id))
+								{
+										$row->time = $singleset->time;
+										$row->latitude = $singleset->latitude;
+										$row->longitude = $singleset->longitude;
+										$row->estimated = 0;
+										$data->put($row->bus_id, $row);
+								}
+						}
+						else {
+								$data->put($singleset->bus_id, $singleset);
+						}
+			}
+			//print(json_encode($data));
+			return $data;
+
+	}
 }

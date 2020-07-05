@@ -34,6 +34,18 @@ Route::get('/privacy_policy_ios', function () {
     return view('privacy_policy_ios');
 });
 
+
+/* Experiment with routes */
+Route::match(['get', 'post'], '/testRoute', function()
+{
+    return 'Hello World';
+});
+
+Route::get('/user/{id}', function($id)
+{
+    return 'User '.$id;
+});
+
 Route::get('/bus_stop_info_pi/{bus_stop_id}', 'getBusInfoController@getBusStopInfo_pi');
 
 
@@ -50,6 +62,7 @@ Route::post('/updateLocation', 'getBusInfoController@updateLocation');
 Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test')->middleware('cors');
 Route::post('/getAllBusStop', 'getBusInfoController@getAllBusStop');
 Route::post('/getAllBus', 'getBusInfoController@getAllBus');
+Route::post('/getBusLocations', 'userController@getBusLocations');
 
 Route::post('/getListBus', 'getBusInfoController@getListBus');
 Route::post('/getmobile_nearbyStop', 'getBusInfoController@getmobile_nearbyStop');
