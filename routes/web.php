@@ -34,18 +34,6 @@ Route::get('/privacy_policy_ios', function () {
     return view('privacy_policy_ios');
 });
 
-
-/* Experiment with routes */
-Route::match(['get', 'post'], '/testRoute', function()
-{
-    return 'Hello World';
-});
-
-Route::get('/user/{id}', function($id)
-{
-    return 'User '.$id;
-});
-
 Route::get('/bus_stop_info_pi/{bus_stop_id}', 'getBusInfoController@getBusStopInfo_pi');
 
 
