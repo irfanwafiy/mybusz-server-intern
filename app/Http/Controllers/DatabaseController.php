@@ -696,8 +696,8 @@ class DatabaseController
 
 			//getcurrent time
 			$currentTime = self::getTime();
-			//get time five hours ago
-			$fiveHoursAgo = date("Y-m-d H:i:s", strtotime("-18000 seconds"));
+			//get time two hours ago
+			$twoHoursAgo = date("Y-m-d H:i:s", strtotime("-7200 seconds"));
 
 			//retrieve the bus stop coordinates, and put them into a collection.
 			//Can possibility load just one time, rather than keep querying the database.
@@ -727,7 +727,7 @@ class DatabaseController
 			$sub = DB::table('etav2 as e')
 							->select('bus_id', DB::raw('MAX(eta) as eta'))
 							->where('e.eta', '<=', $currentTime)
-							->where('e.eta', '>', $fiveHoursAgo)
+							->where('e.eta', '>', $twoHoursAgo)
 							->groupBy('e.bus_id');
 
 			$estimatedBusLocation_Query = DB::table('etav2 as e')
@@ -767,7 +767,7 @@ class DatabaseController
 			$sub = DB::table('location_datav2 as l')
 							->select('bus_id', DB::raw('MAX(time) as time'))
 							->where('l.time', '<=', $currentTime)
-							->where('l.time', '>', $fiveHoursAgo)
+							->where('l.time', '>', $twoHoursAgo)
 							->groupBy('l.bus_id');
 
 			$realBusLocation_Query = DB::table('location_datav2 as l')
