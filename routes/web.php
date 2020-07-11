@@ -51,6 +51,7 @@ Route::post('/getBusstopRoute_Test', 'getBusInfoController@getBusstopRoute_Test'
 Route::post('/getAllBusStop', 'getBusInfoController@getAllBusStop');
 Route::post('/getAllBus', 'getBusInfoController@getAllBus');
 Route::post('/getBusLocations', 'userController@getBusLocations');
+Route::post('/getBusInfo', 'getBusInfoController@getBusInfo');
 
 Route::post('/getListBus', 'getBusInfoController@getListBus');
 Route::post('/getmobile_nearbyStop', 'getBusInfoController@getmobile_nearbyStop');

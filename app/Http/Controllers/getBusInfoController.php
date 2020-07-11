@@ -17,6 +17,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class getBusInfoController extends Controller
 {
+	/* 11 July 2020
+	   Remove this test function
+
 	public function getBusInfo()
 	{
 
@@ -24,6 +27,7 @@ class getBusInfoController extends Controller
 	//$getBus = "HEllo My World";
 	return view('welcometest');
 	}
+	*/
 
 	public function getTime()
 	{
@@ -1074,5 +1078,29 @@ class getBusInfoController extends Controller
 		return $array_getmobile_nearbyStop_return;
 
 	}
+
+	/* 11 July 2020
+ 	   Function to obtain the bus plate number, bus_id, and beacon_mac, as the driver app will detect the beacon in the bus.
+	*/
+	public function getBusInfo()
+	{
+
+		$getBusInfo_Query = DB::table('bus')
+				    ->select ('bus_id', 'plate_no', 'beacon_mac')
+				    -> get();
+
+
+		$data = array();
+
+		foreach($getBusInfo_Query as $singleset)
+		{
+			array_push($data, $singleset);
+
+		}
+
+		return response(json_encode($data), 200);
+
+	}
+
 
 }
