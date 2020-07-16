@@ -1080,13 +1080,14 @@ class getBusInfoController extends Controller
 	}
 
 	/* 11 July 2020
- 	   Function to obtain the bus plate number, bus_id, and beacon_mac, as the driver app will detect the beacon in the bus.
+ 	   Function to obtain the bus plate number, bus_id, beacon_mac, and bus_service_no, as the driver app will detect the beacon in the bus.
 	*/
 	public function getBusInfo()
 	{
 
-		$getBusInfo_Query = DB::table('bus')
-				    ->select ('bus_id', 'plate_no', 'beacon_mac')
+		$getBusInfo_Query = DB::table('bus as b')
+				    ->select ('b.bus_id', 'plate_no', 'beacon_mac', 'bus_service_no')
+						->join('bus_route as br', 'br.bus_id', 'b.bus_id')
 				    -> get();
 
 
@@ -1102,5 +1103,107 @@ class getBusInfoController extends Controller
 
 	}
 
+	/* 16 July 2020
+		 Function to provide daily trip analysis
+		 Return a a collection Key:{bus_id}
+		 											 Values []: [{Plate_no, route_id, Departure_time, Duration}]
+	*/
+	public function getBusDailyTrips()
+	{
+
+			//get Today's date - for testing purposes, use a specific date 2020 Jan 1.
+			//$date = date('Y-m-d', time());
+			$date = "2020-01-01";
+			$today = $date . " 00:00:00";
+			$endDay = $date . " 09:59:59";
+
+			$getBusDailyTrips_Query = DB::table('location_datav2 as l')
+																->select('l.bus_id', 'route_id', 'latitude', 'longitude', 'time', 'b.plate_no')
+																->join('bus as b', 'l.bus_id', 'b.bus_id')
+																//->whereraw("time > '2020-01-01 00:00:00' and time < '2020-01-01 23:59:59'")
+																->whereraw("time > '{$today}' and time < '{$endDay}'")
+																->orderby('bus_id', 'time', 'asc')
+																->get();
+
+			$data = array();
+			$output = array();
+			$previousSet = null;
+			$response = collect();
+
+			foreach($getBusDailyTrips_Query as $singleset)
+			{
+					//this is the first record
+					if (is_null($previousSet))
+					{
+							$previousSet = $singleset;
+							//Assign the departure_time
+							// $output->put('plate_no', $singleset->plate_no);
+							// $output->put('route_id', $singleset->route_id);
+							// $output->put('departure_time', $singleset->time);
+
+							print_r($singleset->plate_no);
+							print_r(" ");
+							print_r($singleset->route_id);
+							print_r(" ");
+							print_r($singleset->time);
+							print_r(" \n");
+
+							$output = array();
+							array_push($output, $singleset->plate_no);
+							array_push($output, $singleset->route_id);
+							array_push($output, $singleset->time);
+					}
+					else {
+							//find the last last record of the journey.
+							if (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id != $singleset->route_id))
+							{
+									//calculate the journey duration $singleset->time - $output->departure_time
+									//if the current location is very close to the destination, then use the current record.
+									$duration = strtotime($singleset->time) - strtotime($output[2]);
+									//$output->put('duration', $duration);
+									array_push($output, $duration);
+									print_r($duration);
+									print_r(" \n");
+
+									//add to the output
+									if (!is_null($output))
+											array_push($data, $output);
+									$previousSet = $singleset;
+
+									$output = array();
+									array_push($output, $singleset->plate_no);
+									array_push($output, $singleset->route_id);
+									array_push($output, $singleset->time);
+
+							}
+							elseif (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id == $previousSet->route_id))
+							{
+									//just go to next record
+							}
+							elseif ($previousSet->bus_id != $singleset->bus_id)
+							{
+									//add the data to Collection
+									//also need to calculate the duration..
+									$response->put($previousSet->bus_id, $data);
+
+									$output = array();
+									//reset the output object with a new departure posix_time
+									// $output->put('plate_no', $singleset->plate_no);
+									// $output->put('route_id', $singleset->route_id);
+									// $output->put('departure_time', $singleset->time);
+									//reset the $data variable
+									array_push($output, $singleset->plate_no);
+									array_push($output, $singleset->route_id);
+									array_push($output, $singleset->time);
+									$data = array();
+									$previousSet = null;
+							}
+					}
+					//array_push($data, $singleset);
+			}
+
+			return response(json_encode($response), 200);
+
+	}
 
 }
