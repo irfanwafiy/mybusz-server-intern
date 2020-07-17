@@ -1088,6 +1088,7 @@ class getBusInfoController extends Controller
 		$getBusInfo_Query = DB::table('bus as b')
 				    ->select ('b.bus_id', 'plate_no', 'beacon_mac', 'bus_service_no')
 						->join('bus_route as br', 'br.bus_id', 'b.bus_id')
+						->groupby('b.bus_id', 'plate_no', 'beacon_mac', 'bus_service_no')
 				    -> get();
 
 
@@ -1126,7 +1127,7 @@ class getBusInfoController extends Controller
 																->get();
 
 			$data = array();
-			$output = array();
+			$output = json_decode('{"plate_no": "0000", "route_id": "0", "departure_time":"0", "duration": 0}');
 			$previousSet = null;
 			$response = collect();
 
@@ -1143,58 +1144,94 @@ class getBusInfoController extends Controller
 
 							print_r($singleset->plate_no);
 							print_r(" ");
+							print_r($singleset->bus_id);
+							print_r(" ");
 							print_r($singleset->route_id);
 							print_r(" ");
 							print_r($singleset->time);
 							print_r(" \n");
 
-							$output = array();
-							array_push($output, $singleset->plate_no);
-							array_push($output, $singleset->route_id);
-							array_push($output, $singleset->time);
+							$output->plate_no = $singleset->plate_no;
+							$output->route_id = $singleset->route_id;
+							$output->departure_time = $singleset->time;
 					}
 					else {
 							//find the last last record of the journey.
 							if (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id != $singleset->route_id))
 							{
 									//calculate the journey duration $singleset->time - $output->departure_time
-									//if the current location is very close to the destination, then use the current record.
-									$duration = strtotime($singleset->time) - strtotime($output[2]);
+									//Route 1, there is no data record inserted into the DB at JB Sentral Terminal
+									if ($previousSet->route_id == 1)
+											$duration = strtotime($singleset->time) - strtotime($output->departure_time);
+									//Route 2, Kulai Mara Arked will update the DB record when the bus arrives at Pekan Kulai.
+									elseif ($previousSet->route_id == 2)
+											$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
+
 									//$output->put('duration', $duration);
-									array_push($output, $duration);
-									print_r($duration);
-									print_r(" \n");
+									//array_push($output, $duration);
+									$output->duration = $duration;
+									// print_r("previous: " . $previousSet->time . " ");
+									// print_r("curent: " . $singleset->time . " ");
+									// print_r("Departure_time: " . $output->departure_time . " ");
+									// print_r($duration);
+									// print_r(" \n");
 
 									//add to the output
 									if (!is_null($output))
-											array_push($data, $output);
+									{
+											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "departure_time":"0", "duration": 0}');
+											$tripInfo->plate_no = $output->plate_no;
+											$tripInfo->route_id = $output->route_id;
+											$tripInfo->departure_time = $output->departure_time;
+											$tripInfo->duration = $output->duration;
+											// print_r($tripInfo->departure_time);
+											// print_r(" " . $tripInfo->duration);
+											// print_r(" " . $tripInfo->plate_no);
+											// print_r(" " . $tripInfo->route_id);
+											// print_r("\n");
+											// print_r(json_encode($tripInfo));
+											array_push($data, $tripInfo);
+											print_r("\n");
+											print_r($data);
+									}
 									$previousSet = $singleset;
 
-									$output = array();
-									array_push($output, $singleset->plate_no);
-									array_push($output, $singleset->route_id);
-									array_push($output, $singleset->time);
+									//$output = array();
+									// array_push($output, $singleset->plate_no);
+									// array_push($output, $singleset->route_id);
+									// array_push($output, $singleset->time);
+									// Reset output with the next journey
+									$output->plate_no = $singleset->plate_no;
+									$output->route_id = $singleset->route_id;
+									$output->departure_time = $singleset->time;
+									$output->duration = 0;
 
 							}
 							elseif (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id == $previousSet->route_id))
 							{
 									//just go to next record
+									$previousSet = $singleset;
 							}
 							elseif ($previousSet->bus_id != $singleset->bus_id)
 							{
 									//add the data to Collection
-									//also need to calculate the duration..
+									//also need to calculate the duration
 									$response->put($previousSet->bus_id, $data);
 
-									$output = array();
-									//reset the output object with a new departure posix_time
+									// $output = array();
+									//reset the output object with a new departure_time
+									$output->plate_no = $singleset->plate_no;
+									$output->route_id = $singleset->route_id;
+									$output->departure_time = $singleset->time;
+									$output->duration = 0;
 									// $output->put('plate_no', $singleset->plate_no);
 									// $output->put('route_id', $singleset->route_id);
 									// $output->put('departure_time', $singleset->time);
 									//reset the $data variable
-									array_push($output, $singleset->plate_no);
-									array_push($output, $singleset->route_id);
-									array_push($output, $singleset->time);
+									// array_push($output, $singleset->plate_no);
+									// array_push($output, $singleset->route_id);
+									// array_push($output, $singleset->time);
+									//$data = null;
 									$data = array();
 									$previousSet = null;
 							}
