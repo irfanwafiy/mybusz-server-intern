@@ -1116,20 +1116,36 @@ class getBusInfoController extends Controller
 			//$date = date('Y-m-d', time());
 			$date = "2020-01-01";
 			$today = $date . " 00:00:00";
-			$endDay = $date . " 09:59:59";
+			$endDay = $date . " 23:59:59";
 
+			$userController = new userController();
+
+			/* Query to get the bus location_datav2, sort by bus_id, location time.
+
+			select bus_id, route_id, latitude, longitude, time from location_datav2
+			where time > '2020-01-01 00:00:00' and time < '2020-01-01 10:00:00'
+			order by bus_id, time asc
+			*/
 			$getBusDailyTrips_Query = DB::table('location_datav2 as l')
 																->select('l.bus_id', 'route_id', 'latitude', 'longitude', 'time', 'b.plate_no')
 																->join('bus as b', 'l.bus_id', 'b.bus_id')
-																//->whereraw("time > '2020-01-01 00:00:00' and time < '2020-01-01 23:59:59'")
 																->whereraw("time > '{$today}' and time < '{$endDay}'")
 																->orderby('bus_id', 'time', 'asc')
 																->get();
 
 			$data = array();
+			//Initialize an object for each trip made.
 			$output = json_decode('{"plate_no": "0000", "route_id": "0", "departure_time":"0", "duration": 0}');
 			$previousSet = null;
 			$response = collect();
+
+			// foreach($getBusDailyTrips_Query as $test)
+			// {
+			// 		array_push($data, $test);
+			// }
+			//
+			// print_r($data);
+			// return;
 
 			foreach($getBusDailyTrips_Query as $singleset)
 			{
@@ -1137,106 +1153,185 @@ class getBusInfoController extends Controller
 					if (is_null($previousSet))
 					{
 							$previousSet = $singleset;
+
 							//Assign the departure_time
-							// $output->put('plate_no', $singleset->plate_no);
-							// $output->put('route_id', $singleset->route_id);
-							// $output->put('departure_time', $singleset->time);
-
-							print_r($singleset->plate_no);
-							print_r(" ");
-							print_r($singleset->bus_id);
-							print_r(" ");
-							print_r($singleset->route_id);
-							print_r(" ");
-							print_r($singleset->time);
-							print_r(" \n");
-
 							$output->plate_no = $singleset->plate_no;
 							$output->route_id = $singleset->route_id;
+							$output->bus_id = $singleset->bus_id;
 							$output->departure_time = $singleset->time;
 					}
 					else {
 							//find the last last record of the journey.
 							if (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id != $singleset->route_id))
 							{
+
+									//check whether the lat and lng is close to the terminal station? if yes, then calculate duration,.
+									$previousLocation = array($previousSet->latitude, $previousSet->longitude);
 									//calculate the journey duration $singleset->time - $output->departure_time
 									//Route 1, there is no data record inserted into the DB at JB Sentral Terminal
 									if ($previousSet->route_id == 1)
-											$duration = strtotime($singleset->time) - strtotime($output->departure_time);
+									{
+											//map the lat,long to the closest point on the polyline route
+											$pointOnPolyline = $userController->closepointonroute("7", "1", $previousLocation, 0.1);
+											//get the destination bus stop polyline  (JB Terminal location - 1.463400,103.764932)
+											$destinationPoint = $userController->closepointonroute("7", "1", array(1.463400,103.764932), 0.06);
+											//calculate distance to the final destination
+											$source = explode(',', $pointOnPolyline);
+											$terminal = explode(',', $destinationPoint);
+											$distance = $userController->caldistance($source, $terminal);
+											// print_r("Point on Polyline: " . $pointOnPolyline . "\n");
+											// print_r("JB Sentral point: " . $destinationPoint . "\n");
+											// print_r("Distance calculated: " . $distance . "\n");
+
+											//very close to terminal JB, then use the last record of route 1
+											if ($distance < 0.7)
+													$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
+										  //else use the departure time from JB Sentral
+											else
+													$duration = strtotime($singleset->time) - strtotime($output->departure_time);
+									}
 									//Route 2, Kulai Mara Arked will update the DB record when the bus arrives at Pekan Kulai.
 									elseif ($previousSet->route_id == 2)
-											$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
+									{
+											//map the lat,long to the closest point on the polyline route
+											$pointOnPolyline = $userController->closepointonroute("7", "2", $previousLocation, 0.1);
+											//get the destination bus stop polyline  (Kulai Terminal - 1.662585,103.598608)
+											$destinationPoint = $userController->closepointonroute("7", "2", array(1.662585,103.598608), 0.06);
 
-									//$output->put('duration', $duration);
-									//array_push($output, $duration);
+											//calculate distance to the final destination
+											$source = explode(',', $pointOnPolyline);
+											$terminal = explode(',', $destinationPoint);
+											$distance = $userController->caldistance($source, $terminal);
+											// print_r("Point on Polyline: " . $pointOnPolyline . "\n");
+											// print_r("Kulai Terminal point: " . $destinationPoint . "\n");
+											// print_r("Distance calculated: " . $distance . "\n");
+
+										  if ($distance < 0.7)
+													$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
+											elseif ($distance > 0.7)
+													$duration = -1;
+								  }
 									$output->duration = $duration;
-									// print_r("previous: " . $previousSet->time . " ");
-									// print_r("curent: " . $singleset->time . " ");
-									// print_r("Departure_time: " . $output->departure_time . " ");
-									// print_r($duration);
-									// print_r(" \n");
 
 									//add to the output
 									if (!is_null($output))
 									{
-											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "departure_time":"0", "duration": 0}');
+											//copy trip info in output to tripInfo object to be inserted into $data
+											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
 											$tripInfo->plate_no = $output->plate_no;
 											$tripInfo->route_id = $output->route_id;
+											$tripInfo->bus_id = $output->bus_id;
 											$tripInfo->departure_time = $output->departure_time;
 											$tripInfo->duration = $output->duration;
-											// print_r($tripInfo->departure_time);
-											// print_r(" " . $tripInfo->duration);
-											// print_r(" " . $tripInfo->plate_no);
-											// print_r(" " . $tripInfo->route_id);
-											// print_r("\n");
-											// print_r(json_encode($tripInfo));
+
+											//Trip identified, and insert into data[]
 											array_push($data, $tripInfo);
-											print_r("\n");
-											print_r($data);
 									}
 									$previousSet = $singleset;
 
-									//$output = array();
-									// array_push($output, $singleset->plate_no);
-									// array_push($output, $singleset->route_id);
-									// array_push($output, $singleset->time);
 									// Reset output with the next journey
 									$output->plate_no = $singleset->plate_no;
 									$output->route_id = $singleset->route_id;
 									$output->departure_time = $singleset->time;
+									$output->bus_id = $singleset->bus_id;
 									$output->duration = 0;
 
 							}
 							elseif (($previousSet->bus_id == $singleset->bus_id) && ($previousSet->route_id == $previousSet->route_id))
 							{
-									//just go to next record
+									//In JB Bus Terminal, it could be detected twice thinking that the bus already departed, but it was not.
+									//check if location is the same and duration > 1 mins?
+									if (($previousSet->latitude == $singleset->latitude) && ($previousSet->longitude == $singleset->longitude))
+									{
+											//check the difference in departure time
+											if ($previousSet->route_id == 2)
+											{
+													$differenceInTime = strtotime($singleset->time) - strtotime($previousSet->time);
+													if ($differenceInTime > 60)
+															$output->departure_time = $singleset->time;
+											}
+											/* if the location is the same and timing is greater than 1 hour, then there must be two trips made.
+											   to deal with mis-detection of the beacon on the return route..
+												 Example records:
+
+												 bus_id, route_id, lat, lng, time
+												 1, 1, 1.66, 103.603, 7:40  (previousSet)
+												 1, 1, 1.66, 103.603, 8:03  (singleset)
+												 1, 1, 1.66, 103.603, 8:03
+
+											*/
+											elseif ($previousSet->route_id == 1)
+											{
+													$differenceInTime = strtotime($previousSet->time) - strtotime($output->departure_time) ;
+													if ($differenceInTime > 3600)
+													{
+															//insert the previous trip with -1 as the Duration
+															$output->duration = -1;
+															//add to the output
+															if (!is_null($output))
+															{
+																	//copy trip info in output to tripInfo object to be inserted into $data
+																	$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
+																	$tripInfo->plate_no = $output->plate_no;
+																	$tripInfo->route_id = $output->route_id;
+																	$tripInfo->bus_id = $output->bus_id;
+																	$tripInfo->departure_time = $output->departure_time;
+																	$tripInfo->duration = $output->duration;
+
+																	//Trip identified, and insert into data[]
+																	array_push($data, $tripInfo);
+															}
+
+															// Reset output with the next journey starting with singleset
+															$output->plate_no = $singleset->plate_no;
+															$output->route_id = $singleset->route_id;
+															$output->departure_time = $singleset->time;
+															$output->bus_id = $singleset->bus_id;
+															$output->duration = 0;
+													}
+											}
+									}
+									//go to next record
 									$previousSet = $singleset;
+
 							}
 							elseif ($previousSet->bus_id != $singleset->bus_id)
 							{
 									//add the data to Collection
-									//also need to calculate the duration
-									$response->put($previousSet->bus_id, $data);
+									/**************
+									also need to calculate the duration
+									***************/
+									$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
+									$output->duration = $duration;
 
-									// $output = array();
+									if (!is_null($output))
+									{
+											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
+											$tripInfo->plate_no = $output->plate_no;
+											$tripInfo->route_id = $output->route_id;
+											$tripInfo->bus_id = $output->bus_id;
+											$tripInfo->departure_time = $output->departure_time;
+											$tripInfo->duration = $output->duration;
+											array_push($data, $tripInfo);
+									}
+									$response->put($previousSet->bus_id, $data);
+									//print_r("bus_id " . $previousSet->bus_id . "\n");
+									//print_r($data);
+									$previousSet = $singleset;
+
 									//reset the output object with a new departure_time
 									$output->plate_no = $singleset->plate_no;
 									$output->route_id = $singleset->route_id;
 									$output->departure_time = $singleset->time;
+									$output->bus_id = $singleset->bus_id;
 									$output->duration = 0;
-									// $output->put('plate_no', $singleset->plate_no);
-									// $output->put('route_id', $singleset->route_id);
-									// $output->put('departure_time', $singleset->time);
-									//reset the $data variable
-									// array_push($output, $singleset->plate_no);
-									// array_push($output, $singleset->route_id);
-									// array_push($output, $singleset->time);
-									//$data = null;
+
+									//reinitialize the $data for the next bus_id
 									$data = array();
-									$previousSet = null;
 							}
 					}
-					//array_push($data, $singleset);
+					//put the last bus_id to be returned.
+					$response->put($previousSet->bus_id, $data);
 			}
 
 			return response(json_encode($response), 200);
