@@ -1168,14 +1168,34 @@ class userController extends Controller
                     }
 
 
+										/* 	21 Jul 2020
+												new function testgetKM(Request $request)
+												$arg1 = first point in string format "1.66,103.45"
+												$arg2 = second point in string format "1.66,103.45"
+										*/
+										public function testgetKM(Request $request)
+										{
+														$busserviceno = $request->input('busserviceno');
+														$routeno = $request->input('routeno');
+														$arg1 = $request->input('arg1');
+														$arg2 = $request->input('arg2');
 
+														$totaldistance = self::getDistanceOnRoute($busserviceno, $routeno, $arg1, $arg2);
 
-                    public function testgetKM(Request $request)
+														return response(json_encode($totaldistance), 200);
+										}
+
+										/* 	21 Jul 2020
+												Change from testgetKM(Request $request) to getDistanceOnRoute($busserviceno, $routeno, $arg1, $arg2)
+												$arg1 = first point in string format "1.66,103.45"
+												$arg2 = second point in string format "1.66,103.45"
+										*/
+                    public function getDistanceOnRoute($busserviceno, $routeno, $arg1, $arg2)
                     {
-                             $busserviceno = $request->input('busserviceno');
-                             $routeno = $request->input('routeno');
-                             $arg1 = $request->input('arg1');
-                             $arg2 = $request->input('arg2');
+                             // $busserviceno = $request->input('busserviceno');
+                             // $routeno = $request->input('routeno');
+                             // $arg1 = $request->input('arg1');
+                             // $arg2 = $request->input('arg2');
 
                              $totaldistance = array();
                              $busstop = self::getRoute($routeno,1);
@@ -1183,18 +1203,23 @@ class userController extends Controller
                              $filecontent = file_get_contents('../data/'.$busserviceno.'.json');
                              $json1 = json_decode($filecontent, true);
                              $busroutecoords = $json1[$routeno]['route'];
+														 $busCMP1 = -1;
 
                              for ($g=0; $g<sizeof($busroutecoords); $g++)
                              {
                                        if (trim($arg1) == trim($busroutecoords[$g]))
                                        {
                                                 $busCMP1 = $g;
-                                                //print("Start : ".$g);
+                                                // print("Start : ".$g);
                                        }
 
                                        if (trim($arg2) == trim($busroutecoords[$g]))
                                        {
-                                                //print(" End :   ".$g."\r\n");
+                                                // print(" End :   ".$g."\r\n");
+
+																								//This means that the first point was not found.
+																								if ($busCMP1 == -1)
+																										return -1;
 
                                                 $caltotaldistance = 0 ;
 
@@ -1216,7 +1241,8 @@ class userController extends Controller
 
                              //print(json_encode($totaldistance));
                              //print_r($totaldistance);
-                             return response(json_encode($totaldistance), 200);
+                             //return response(json_encode($totaldistance), 200);
+														 return $totaldistance;
 
                     }
 
@@ -1646,6 +1672,7 @@ class userController extends Controller
                              $dist = rad2deg($dist);
                              $km = ($dist * 60 * 1.1515) * 1.609344;
 
+														 //print_r($dist);
                              if (is_nan($km))
                              {
                                        $km = 0;
