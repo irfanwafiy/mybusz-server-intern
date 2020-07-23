@@ -1109,12 +1109,14 @@ class getBusInfoController extends Controller
 		 Return a a collection Key:{bus_id}
 		 											 Values []: [{Plate_no, route_id, Departure_time, Duration}]
 	*/
-	public function getBusDailyTrips()
+	public function getBusDailyTrips(Request $request)
 	{
-
 			//get Today's date - for testing purposes, use a specific date 2020 Jan 1.
-			//$date = date('Y-m-d', time());
-			$date = "2020-01-01";
+			if ($request->input("today") == 1)
+					$date = date('Y-m-d', time());
+			else
+					$date = "2020-01-01";
+
 			$today = $date . " 00:00:00";
 			$endDay = $date . " 23:59:59";
 
@@ -1159,6 +1161,7 @@ class getBusInfoController extends Controller
 							$output->route_id = $singleset->route_id;
 							$output->bus_id = $singleset->bus_id;
 							$output->departure_time = $singleset->time;
+							$output->duration = -1;
 					}
 					else {
 							//find the last last record of the journey.
@@ -1217,7 +1220,7 @@ class getBusInfoController extends Controller
 									if (!is_null($output))
 									{
 											//copy trip info in output to tripInfo object to be inserted into $data
-											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
+											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": -1}');
 											$tripInfo->plate_no = $output->plate_no;
 											$tripInfo->route_id = $output->route_id;
 											$tripInfo->bus_id = $output->bus_id;
@@ -1271,7 +1274,7 @@ class getBusInfoController extends Controller
 															if (!is_null($output))
 															{
 																	//copy trip info in output to tripInfo object to be inserted into $data
-																	$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
+																	$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": -1}');
 																	$tripInfo->plate_no = $output->plate_no;
 																	$tripInfo->route_id = $output->route_id;
 																	$tripInfo->bus_id = $output->bus_id;
@@ -1302,11 +1305,16 @@ class getBusInfoController extends Controller
 									also need to calculate the duration
 									***************/
 									$duration = strtotime($previousSet->time) - strtotime($output->departure_time);
-									$output->duration = $duration;
+									//this means that the previousset's departure time is the same.
+									if ($duration == 0)
+											$output->duration = -1;
+									else {
+											$output->duration = $duration;
+									}
 
 									if (!is_null($output))
 									{
-											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": 0}');
+											$tripInfo = json_decode('{"plate_no": "0000", "route_id": "0", "bus_id":0, "departure_time":"0", "duration": -1}');
 											$tripInfo->plate_no = $output->plate_no;
 											$tripInfo->route_id = $output->route_id;
 											$tripInfo->bus_id = $output->bus_id;
@@ -1324,18 +1332,71 @@ class getBusInfoController extends Controller
 									$output->route_id = $singleset->route_id;
 									$output->departure_time = $singleset->time;
 									$output->bus_id = $singleset->bus_id;
-									$output->duration = 0;
+									$output->duration = -1;
 
 									//reinitialize the $data for the next bus_id
 									$data = array();
 							}
 					}
-					//put the last bus_id to be returned.
 					$response->put($previousSet->bus_id, $data);
 			}
 
-			return response(json_encode($response), 200);
+			print_r($data);
+			/* 23 Jul 2020
+				 When the first bus departed, there is no other buses en route, therefore this departure needs to be added.
+			*/
+			if (empty($data)) {
+					array_push($data, $output);
+					$response->put($previousSet->bus_id, $data);
+			}
+			print_r($response);
+			// END 23 Jul 2020
 
+			/*  22 Jul 2020
+			    Added a section to return JSON file in a format accepted by react-vis graph / bar chart.
+			*/
+			//convert response to a format to be displayed using React JS
+			$graph_1 = array();
+			$graph_2 = array();
+			$tripInformation = array();
+			foreach ($response as $key => $value) {
+				foreach ($value as $trip) {
+
+					//$graph=json_decode('{"label": "0000", "route_id"="0", "bus_id":"0", "x0":"0", "x":"0", "y":"0", "rotation"=-90}');
+					$graph = json_decode('{"label": "0000", "route_id": "0", "bus_id":0, "x0":0, "x":"0", "y": 0, "rotation":-90}');
+					$graph->label = $trip->plate_no;
+					$graph->route_id = $trip->route_id;
+					$graph->bus_id = $trip->bus_id;
+					$graph->x = strtotime($trip->departure_time)*1000;
+					$graph->x0 = $graph->x - 250000;
+					if ($trip->duration > 0)
+						$graph->y = $trip->duration / 60;
+					else {
+						$graph->y = $trip->duration;
+					}
+
+					//print_r(strtotime($trip->departure_time) . "\n");
+					if ($trip->route_id == 1)
+					{
+							array_push($graph_1, $graph);
+					}
+					elseif ($trip->route_id == 2)
+					{
+							array_push($graph_2, $graph);
+					}
+				}
+			}
+			array_push($tripInformation, $graph_1);
+			array_push($tripInformation, $graph_2);
+			return response(json_encode($tripInformation), 200);
+			/* END 22 Jul 2020 */
+
+			// print_r("graph 2: " . "\n");
+			// print_r($graph_2);
+			/* 22 Jul 2020
+				 Originally returning a collection.
+			//return response(json_encode($response), 200);
+			   END 22 Jul 2020 */
 	}
 
 	/*  21 July 2020
