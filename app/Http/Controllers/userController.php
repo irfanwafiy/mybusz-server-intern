@@ -1257,16 +1257,16 @@ class userController extends Controller
 
                              list($lat1, $lon1) = $a;
                              list($lat2, $lon2) = $b;
-                             print("Lat :".$lat1." Lon :".$lon1."\r\n");
-                             print("Lat :".$lat2." Lon :".$lon2."\r\n");
+                             //print("Lat :".$lat1." Lon :".$lon1."\r\n");
+                             //print("Lat :".$lat2." Lon :".$lon2."\r\n");
 
                              $theta = $lon1 - $lon2;
                              $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
                              $dist = acos($dist);
                              $dist = rad2deg($dist);
                              $km = ($dist * 60 * 1.1515) * 1.609344;
-                             print($dist."\n");
-							 print($km);
+                             //print($dist."\n");
+							 						 	 print($km);
 
                     }
 
