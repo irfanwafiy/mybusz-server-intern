@@ -1180,6 +1180,12 @@ class userController extends Controller
 														$arg1 = $request->input('arg1');
 														$arg2 = $request->input('arg2');
 
+														//13 Aug 2020
+														//map the coordinate to a location on the polyline
+														$sourcePolyLine = self::closepointonroute($busserviceno, $routeno, explode(',', $arg1), 0.06);
+														$destinationPolyLine = self::closepointonroute($busserviceno, $routeno, explode(',', $arg2), 0.06);
+														//end
+														
 														$totaldistance = self::getDistanceOnRoute($busserviceno, $routeno, $arg1, $arg2);
 
 														return response(json_encode($totaldistance), 200);
