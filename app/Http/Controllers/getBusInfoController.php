@@ -269,6 +269,7 @@ class getBusInfoController extends Controller
 		$getNearbyBusStop_Query = DB::table('bus_stop')
 										->select('*')
 										->selectraw('(6371 * acos(cos(radians(?)) * cos(radians(latitude)) * cos(radians(longitude) - radians(?)) + sin(radians(?)) * sin(radians(latitude)))) AS distance',[$lat,$lng,$lat])
+										->join('route_bus_stop', 'bus_stop.bus_stop_id', '=', 'route_bus_stop.bus_stop_id')
 										->having('distance', '<', 1)
 										->orderBy('distance')
 										->get();
